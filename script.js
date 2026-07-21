@@ -2,6 +2,16 @@
   "use strict";
   console.log("running script.js");
 
+  var hero = document.querySelector('.hero');
+  if (hero && 'IntersectionObserver' in window) {
+    var heroObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        hero.classList.toggle('is-visible', entry.isIntersecting);
+      });
+    }, { threshold: 0.3 });
+    heroObserver.observe(hero);
+  }
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var COLORS = ['var(--pink-deep)', 'var(--green-deep)', 'var(--blue-deep)', 'var(--yellow-deep)'];
