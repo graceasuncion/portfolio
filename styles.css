@@ -103,8 +103,7 @@ a { color: inherit; }
   transition: border-color 0.15s ease;
 }
 
-.site-nav a.nav-link:hover,
-.site-nav a.nav-link.is-active {
+.site-nav a.nav-link:hover {
   border-color: var(--pink-deep);
 }
 
