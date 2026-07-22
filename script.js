@@ -3,10 +3,12 @@
   console.log("running script.js");
 
   var hero = document.querySelector('.hero');
+  var nav = document.querySelector('.site-nav');
   if (hero && 'IntersectionObserver' in window) {
     var heroObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         hero.classList.toggle('is-visible', entry.isIntersecting);
+        if (nav) nav.classList.toggle('is-visible', !entry.isIntersecting);
       });
     }, { threshold: 0.3 });
     heroObserver.observe(hero);
