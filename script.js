@@ -12,6 +12,8 @@
       });
     }, { threshold: 0.3 });
     heroObserver.observe(hero);
+  } else if (nav) {
+    nav.classList.add('is-visible');
   }
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
