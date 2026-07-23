@@ -587,29 +587,35 @@ a { color: inherit; }
   color: rgba(255,255,255,0.4);
 }
 
+.work-card .impact-line {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0 0 0.7rem;
+}
+
 .work-card .card-top {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.6rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.7rem;
 }
 
 .work-card h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
   margin: 0;
 }
 
 .work-card .year {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--ink-soft);
-}
-
-.work-card .summary {
-  margin: 0 0 0.8rem;
-  font-size: 0.9rem;
   color: var(--ink-soft);
 }
 
@@ -699,6 +705,14 @@ a { color: inherit; }
   color: rgba(255,255,255,0.4);
 }
 
+.card-body .impact-line {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0 0 1rem;
+}
+
 .card-top {
   display: flex;
   align-items: baseline;
@@ -707,8 +721,12 @@ a { color: inherit; }
 }
 
 .card-top h3 {
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
   margin: 0;
 }
 
@@ -718,21 +736,23 @@ a { color: inherit; }
   color: var(--ink-soft);
 }
 
-.card-body .summary {
-  margin: 1rem 0 1.4rem;
-  font-size: 1.05rem;
-  color: var(--ink-soft);
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0 1.2rem;
 }
 
-.meta-row {
-  display: flex;
-  gap: 1.4rem;
+.tag {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.66rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--ink-soft);
-  margin: 0 0 1.2rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
 }
 
 .card-body .view-link {
