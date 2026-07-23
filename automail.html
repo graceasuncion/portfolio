@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automail — Grace Asuncion</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script src="script.js" defer></script>
+</head>
+<body class="is-page-enter">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="portfolio.html" class="brand">
+      <img src="media/logo.png" alt="Grace Asuncion" class="brand-logo">
+    </a>
+    <ul>
+      <li><a href="work.html" class="nav-link is-active">Work</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="portfolio.html#contact" class="nav-link">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="project-hero doodle-field wrap">
+  <div class="doodle" style="top:0%; right:4%; width:26px; height:26px; --r:10deg;">
+    <svg viewBox="0 0 20 20" fill="none" stroke="var(--pink-deep)" stroke-width="1.6" stroke-linecap="round"><path d="M10 2v16M2 10h16M4.5 4.5l11 11M15.5 4.5l-11 11"/></svg>
+  </div>
+
+  <a href="portfolio.html#work" class="back-link">&larr; Back to work</a>
+
+  <h1 class="project-title">Automail</h1>
+
+  <p class="hero-tagline">A scalable email automation tool built around CodeLab's real workflow.</p>
+
+  <div class="project-meta">
+    <span><strong>Role</strong>Lead Product Designer</span>
+    <span><strong>Timeline</strong>22 weeks &middot; 2024</span>
+    <span><strong>Team</strong>3 Designers, 6 Developers, PM, Mentor</span>
+    <span><strong>Tools</strong>Figma, FigJam, Google Forms, Zoom, Notion</span>
+  </div>
+</header>
+
+<main class="wrap project-layout">
+  <nav class="toc">
+    <p class="toc-title">On this page</p>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#impact">My Impact</a></li>
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#design-challenge">Design Challenge</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#design-exploration">Design Exploration</a></li>
+      <li><a href="#ideation">Ideation</a></li>
+      <li><a href="#finalized-solution">Finalized Solution</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+      <li><a href="#future-exploration">Future Exploration</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-content">
+    <div class="placeholder-media">Dashboard mockup</div>
+
+    <div class="process-steps">
+      <div class="step" id="overview">
+        <span class="step-index">01</span>
+        <div>
+          <h3>Overview</h3>
+          <p>CodeLab, a student-run software and design agency at UC Davis, relies on personalized, high-volume email outreach to run recruitment and marketing &mdash; but as their audience grew, that workflow fragmented across Airtable, Mailchimp, and Gmail. Simple sends became slow, manual, and easy to get wrong, right at the moments (recruitment cycles) where timing and consistency mattered most.</p>
+          <p>CodeLab challenged our team of 3 designers and 6 developers to build a tool that could replace that fragmented process, but the team started with no prior experience in automation tools and no clear initial direction from the client.</p>
+        </div>
+      </div>
+
+      <div class="step" id="impact">
+        <span class="step-index">02</span>
+        <div>
+          <h3>My Impact</h3>
+          <p>I led the team's early direction-setting and owned the Contact Groups page, the core screen for managing large-scale recipient data.</p>
+          <p>My contributions included:</p>
+          <ul>
+            <li>Setting the project's direction and scope in the absence of a clear client brief, drawing on my own firsthand experience with CodeLab's broken Airtable/Mailchimp/Gmail workflow</li>
+            <li>Framing our research and ideation around the specific workflow failures I'd personally experienced &mdash; manual re-syncing, lost send history, hitting Mailchimp's audience caps &mdash; rather than treating this as a generic email-tool redesign</li>
+            <li>Designing the Contact Groups page, the screen responsible for turning large, dynamic Airtable datasets into organized, selectable recipient groups</li>
+            <li>Synthesizing survey and stakeholder research into a findings-to-decisions map that grounded every major feature in a specific user pain point, keeping the team's ideation traceable to research rather than aesthetic-first</li>
+          </ul>
+          <p class="editor-note">If you have one: a concrete outcome line here, e.g. "After launch, CodeLab's recruitment team cut list-prep time from X to Y" or "The tool now handles CodeLab's full 10k+ contact recruitment cycles."</p>
+        </div>
+      </div>
+
+      <div class="step" id="problem">
+        <span class="step-index">03</span>
+        <div>
+          <h3>The Problem</h3>
+          <p>CodeLab's communication workflow required manually juggling three disconnected tools:</p>
+          <ul>
+            <li>Manual, time-consuming personalization &mdash; no way to send personalized emails at scale without doing it by hand</li>
+            <li>Repetitive syncing between Airtable and Mailchimp every time contact data changed</li>
+            <li>Limited collaboration across the team members involved in outreach</li>
+            <li>Overwhelming, cluttered interfaces in the existing tools</li>
+            <li>Audience size restrictions that broke down during CodeLab's largest recruitment pushes</li>
+          </ul>
+          <div class="sticky-card">
+            <p style="margin:0;"><strong>Problem Statement:</strong> How might we help CodeLab send personalized, large-scale emails efficiently without relying on restrictive third-party tools?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="design-challenge">
+        <span class="step-index">04</span>
+        <div>
+          <h3>The Design Challenge</h3>
+          <div class="sticky-card">
+            <p style="margin:0;">How might we replace a fragmented, three-tool workflow with a single system that's flexible enough for power users but still simple enough for non-technical team members?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="research">
+        <span class="step-index">05</span>
+        <div>
+          <h3>Research</h3>
+          <h4>Understanding how people actually send large-scale emails</h4>
+          <p>With no team experience in automation tools, I pushed us toward research grounded in curiosity rather than assumption. I contributed directly to gathering insights, spotting patterns, and translating findings into design direction &mdash; informed in part by my own prior experience with CodeLab's broken process.</p>
+          <p>We used two methods:</p>
+          <ul>
+            <li><strong>User Survey (10 participants)</strong> &mdash; compared expectations across Mailchimp users, other automation-tool users, and manual Gmail workflows</li>
+            <li><strong>Stakeholder Interview</strong> &mdash; spoke with CodeLab's President to understand the real recruitment communication process</li>
+          </ul>
+          <p>Key findings, and how each one shaped the design:</p>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Finding</th>
+                  <th>Design decision</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Users need simple, flexible tools</td>
+                  <td>Built two editing paths &mdash; a full HTML editor for advanced users and a simplified builder for everyone else &mdash; instead of one-size-fits-all</td>
+                </tr>
+                <tr>
+                  <td>Existing tools feel limiting</td>
+                  <td>Built a custom Airtable-native tool rather than working within Mailchimp's constraints</td>
+                </tr>
+                <tr>
+                  <td>Manual emailing doesn't scale</td>
+                  <td>Introduced one-click Airtable Sync, replacing manual re-export/re-upload</td>
+                </tr>
+                <tr>
+                  <td>Workflows are inconsistent across platforms</td>
+                  <td>Consolidated list management, templating, and sending into one workflow</td>
+                </tr>
+                <tr>
+                  <td>Users want more control over templates and personalization</td>
+                  <td>Added variable insertion and real-time preview to the HTML editor</td>
+                </tr>
+                <tr>
+                  <td>Large lists (10k+) are common and need high-volume support</td>
+                  <td>Directly shaped my approach to the Contact Groups page &mdash; organizing large datasets into selectable, manageable groups</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>These findings confirmed what my own experience had already flagged: the core issue wasn't the tools themselves; it was the fragmented workflow and lack of structure. This table became the throughline connecting research to every major feature in the final product.</p>
+        </div>
+      </div>
+
+      <div class="step" id="design-exploration">
+        <span class="step-index">06</span>
+        <div>
+          <h3>Design Exploration</h3>
+          <h4>Designing a structure that could hold thousands of contacts without feeling overwhelming</h4>
+          <p>Early in mid-fidelity, the team had to decide how recipient data should be structured and browsed. I pushed for evaluating this decision directly against the &ldquo;large lists are common&rdquo; finding rather than defaulting to a familiar pattern.</p>
+
+          <div class="compare-grid">
+            <div class="compare-card is-con">
+              <h4>&#10005; Single Long List</h4>
+              <ul>
+                <li>Simple to build, but became unmanageable once lists reached hundreds or thousands of contacts</li>
+                <li>Gave users no way to segment recipients for different sends</li>
+                <li>Contradicted the research finding that large-scale, high-volume support was a core need</li>
+              </ul>
+            </div>
+            <div class="compare-card is-pro">
+              <h4>&#10003; Selectable Contact Groups (my design)</h4>
+              <ul>
+                <li>Let users organize synced Airtable data into named, reusable groups</li>
+                <li><em>Add your specific reasoning here &mdash; e.g., "groups could be built once and reused across recruitment cycles without re-syncing," swap in the actual logic</em></li>
+                <li>Directly grounded in the research finding that large lists (10k+) are common and need dedicated structure</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>I designed the Contact Groups page around this decision, since it was the screen most directly responsible for making CodeLab's large-scale outreach feel manageable rather than overwhelming.</p>
+          <div class="placeholder-media">Contact Groups page mockup</div>
+        </div>
+      </div>
+
+      <div class="step" id="ideation">
+        <span class="step-index">07</span>
+        <div>
+          <h3>Ideation</h3>
+          <p>Turning research insights into early concepts:</p>
+          <ul>
+            <li><strong>Low-fidelity exploration</strong> &mdash; each designer, myself included, sketched navigation, personalization, and sending-flow ideas, responding directly to the &ldquo;manual emailing doesn't scale&rdquo; and &ldquo;workflows are inconsistent&rdquo; findings</li>
+            <li><strong>Mid-fidelity wireframes</strong> &mdash; the team aligned on structure (including the Contact Groups decision above), sidebar organization, and page content</li>
+            <li><strong>High-fidelity iteration</strong> &mdash; focus shifted to component patterns, typography, and extending CodeLab's design system, translating the &ldquo;personalization control&rdquo; finding into concrete patterns like variable tags and live previews</li>
+          </ul>
+          <p>Throughout, I made a point of pulling the group back to the research whenever a direction started to drift toward &ldquo;clever&rdquo; over &ldquo;clear&rdquo; &mdash; if an idea didn't map to a specific pain point from the survey or stakeholder interview, I pushed the team to justify it against the research or drop it.</p>
+        </div>
+      </div>
+
+      <div class="step" id="finalized-solution">
+        <span class="step-index">08</span>
+        <div>
+          <h3>Finalized Solution &amp; Impact</h3>
+          <p>A polished interface supporting Airtable-powered email workflows, with every core feature traceable to a research finding.</p>
+
+          <h4>Design System</h4>
+          <div class="placeholder-media">Design system</div>
+
+          <h4>Contact Groups Page &mdash; designed by me</h4>
+          <p>Organizes large, dynamic Airtable datasets into selectable recipient groups.</p>
+          <p class="editor-note">Insert your specific outcome or reasoning here if available.</p>
+          <div class="placeholder-media">Contact Groups Page mockup</div>
+
+          <h4>HTML Template Editor</h4>
+          <p>Custom HTML, variable insertion, and real-time previews &mdash; responding to users' need for more control over templates and personalization.</p>
+          <div class="placeholder-media">HTML Template Editor GIF</div>
+
+          <h4>Airtable Sync</h4>
+          <p>One-click sync that replaced the manual re-export/re-upload cycle users identified as a major time sink.</p>
+          <div class="placeholder-media">Airtable Sync GIF or static image</div>
+
+          <h4>Regular Email Template Builder</h4>
+          <p>A simplified editor for non-technical users, ensuring flexibility didn't come at the cost of accessibility.</p>
+          <div class="placeholder-media">Regular Template GIF</div>
+
+          <p class="editor-note">If available: a summary metric here, e.g. "Across X rounds of feedback, the redesigned workflow cut list-prep time by Y%" or adoption numbers from CodeLab.</p>
+        </div>
+      </div>
+
+      <div class="step" id="reflection">
+        <span class="step-index">09</span>
+        <div>
+          <h3>Reflection &amp; Takeaways</h3>
+          <p>I learned that leading direction means anchoring decisions in evidence, not intuition.</p>
+          <p>Automail was my first time working cross-functionally with developers and a project mentor in a lead design capacity, and my first time steering project direction without a clear client brief. Having firsthand experience with the problem gave me a head start, but the bigger lesson was learning to translate that personal insight into research-backed decisions the whole team could stand behind &mdash; rather than relying on my own instincts alone.</p>
+          <p>Takeaways:</p>
+          <ul>
+            <li>Designing for technical workflows requires clarity and thoughtful hierarchy</li>
+            <li>Cross-functional collaboration was essential to aligning UI with system behavior</li>
+            <li>Firsthand user experience can be as valuable as formal research for identifying where a workflow breaks down &mdash; but it still needs to be validated against real data</li>
+            <li>This project strengthened my ability to both lead design direction and design tools that appear simple on the surface but support complex workflows underneath</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" id="future-exploration">
+        <span class="step-index">10</span>
+        <div>
+          <h3>If I Had More Time to Explore Further&hellip;</h3>
+          <ul>
+            <li>Additional interviews with CodeLab board members to better understand edge cases in the sending workflow</li>
+            <li>Microinteractions confirming key actions (successful Airtable syncs, sent emails) to increase user confidence</li>
+            <li>Lightweight status indicators for large sends to help users track progress during high-volume outreach</li>
+            <li>Clearer error states and inline guidance for new users</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<nav class="project-nav wrap">
+  <a href="thread-it.html">&larr; Thread.It</a>
+  <a href="paul-hom.html">Paul Hom Asian Clinic &rarr;</a>
+</nav>
+
+<footer class="site-footer doodle-field" id="contact">
+  <div class="doodle" style="top:10%; right:10%; width:24px; height:24px; --r:-6deg;">
+    <svg viewBox="0 0 20 20" fill="none" stroke="var(--green-deep)" stroke-width="1.6"><circle cx="10" cy="10" r="7"/></svg>
+  </div>
+  <div class="doodle" style="top:30%; right:22%; width:22px; height:22px; --r:8deg; animation-delay:0.6s;">
+    <svg viewBox="0 0 20 20" fill="none" stroke="var(--pink-deep)" stroke-width="1.6" stroke-linecap="round"><path d="M10 2v16M2 10h16M4.5 4.5l11 11M15.5 4.5l-11 11"/></svg>
+  </div>
+  <div class="doodle" style="bottom:34%; right:6%; width:26px; height:26px; --r:4deg; animation-delay:1.1s;">
+    <svg viewBox="0 0 40 40" fill="var(--yellow-deep)"><path d="M20 2 C21 14 26 19 38 20 C26 21 21 26 20 38 C19 26 14 21 2 20 C14 19 19 14 20 2 Z"/></svg>
+  </div>
+  <div class="doodle" style="bottom:14%; right:16%; width:20px; height:20px; --r:-4deg; animation-delay:1.6s;">
+    <svg viewBox="0 0 20 20" fill="none" stroke="var(--ink)" stroke-width="1.6"><rect x="6" y="6" width="8" height="8" transform="rotate(45 10 10)"/></svg>
+  </div>
+  <div class="doodle" style="bottom:10%; left:6%; width:22px; height:22px; --r:6deg; animation-delay:0.3s;">
+    <svg viewBox="0 0 40 40" fill="var(--blue-deep)"><path d="M20 2 C21 14 26 19 38 20 C26 21 21 26 20 38 C19 26 14 21 2 20 C14 19 19 14 20 2 Z"/></svg>
+  </div>
+
+  <div class="wrap footer-inner">
+    <div class="footer-lead">
+      <h2 class="footer-headline">Let&rsquo;s chat!</h2>
+
+      <div class="footer-contact-list">
+        <a href="mailto:gracehasuncion@gmail.com">gracehasuncion@gmail.com</a>
+        <a href="https://www.linkedin.com/in/gracehasuncion/">linkedin.com/in/gracehasuncion/</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom-row">
+      <img src="media/logo.png" alt="Grace Asuncion" class="footer-logo">
+      <p class="footer-signature">Grace Asuncion &nbsp;&nbsp; &copy; 2026</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
