@@ -445,6 +445,18 @@ a { color: inherit; }
   50% { transform: translateX(-50%) translateY(6px); }
 }
 
+.last-updated {
+  position: absolute;
+  bottom: 2rem;
+  right: 1.5rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue { animation: none; }
 }
