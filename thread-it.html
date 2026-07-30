@@ -36,61 +36,191 @@
 
   <h1 class="project-title">Thread.It</h1>
 
-  <p class="hero-tagline">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.</p>
+  <p class="hero-tagline">Turning Decision Fatigue Into a Structured 4-Step Planning Flow</p>
 
   <div class="project-meta">
-    <span><strong>Role</strong>Lorem, Ipsum</span>
-    <span><strong>Timeline</strong>Lorem &ndash; Ipsum 2026</span>
-    <span><strong>Tools</strong>Lorem, Ipsum, Dolor</span>
+    <span><strong>Role</strong>UX Researcher &amp; Product Designer</span>
+    <span><strong>Timeline</strong>6 Weeks</span>
+    <span><strong>Team</strong>4 Designers, 1 PM</span>
+    <span><strong>Tools</strong>Figma, FigJam</span>
   </div>
 </header>
 
 <main class="wrap project-layout">
   <nav class="toc">
-    <p class="toc-title">On this page</p>
     <ul>
+      <li><a href="#context">Context</a></li>
       <li><a href="#problem">Problem</a></li>
-      <li><a href="#approach">Approach</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#define">Define</a></li>
+      <li><a href="#usability-testing">Usability Testing</a></li>
+      <li><a href="#ideate">Ideate</a></li>
       <li><a href="#solution">Solution</a></li>
       <li><a href="#outcome">Outcome</a></li>
+      <li><a href="#next-steps">Next Steps</a></li>
+      <li><a href="#reflection">Reflection</a></li>
     </ul>
   </nav>
 
   <div class="project-content">
+    <div class="tldr-card sticky-card">
+      <p class="section-eyebrow">TL;DR</p>
+      <p style="margin:0;">72% of users feel they have nothing to wear despite owning full wardrobes. I led the research that explained why, then designed two features that close that gap: a planning quiz that removes decision fatigue at the moment of getting dressed, and a calendar that gives users a reason to come back. Thread.It was recognized as Best Overall project at our cohort&rsquo;s final presentations.</p>
+    </div>
+
     <div class="placeholder-media">Cover image</div>
 
     <div class="process-steps">
-      <div class="step" id="problem">
+      <div class="step" id="context">
         <span class="step-index">01</span>
         <div>
-          <h3>Problem</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+          <h3>Context</h3>
+          <p>Thread.It is a mobile app that helps users build confidence and discover their own sense of style by planning outfits from clothes they already own.</p>
         </div>
       </div>
 
-      <div class="step" id="approach">
+      <div class="step" id="problem">
         <span class="step-index">02</span>
         <div>
-          <h3>Approach</h3>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
-          <div class="placeholder-media">Process image</div>
+          <h3>Problem</h3>
+          <p>72% of users feel they have nothing to wear despite owning full wardrobes. We called it the Translation Gap: the space between the outfits people admire and what they can actually put together.</p>
+        </div>
+      </div>
+
+      <div class="step" id="impact">
+        <span class="step-index">03</span>
+        <div>
+          <h3>Impact</h3>
+          <ul>
+            <li>Designed and prototyped two features end-to-end: a planning quiz that cuts decision fatigue, and a calendar that gives users a reason to come back</li>
+            <li>Led the research (interviews plus a 74-person survey) that identified the Translation Gap and grounded both features in real user behavior</li>
+            <li>Helped shape the team&rsquo;s core design philosophy that confidence is user-defined rather than measured against a standard, which guided decisions like cutting AR try-on and choosing streaks over ratings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" id="research">
+        <span class="step-index">04</span>
+        <div>
+          <h3>Research</h3>
+          <h4>It&rsquo;s a Structure Problem, Not a Motivation Problem</h4>
+          <p>Given a strict 6-week timeline for the full project, the team needed to move from research into design and prototyping quickly. I prioritized depth over breadth in the time available: two in-depth interviews with users representing our target personas, backed by a 74-person survey for scale. Rather than asking what features people wanted, I focused on their actual behavior around getting dressed: what decisions they made, where they got stuck, and how they felt afterward.</p>
+          <p>Three findings shaped everything that followed.</p>
+          <ul>
+            <li><strong>Finding 1: Decision fatigue was the daily barrier.</strong> Users spent too long deciding what to wear each morning, often defaulting to the wrong outfit for the weather or occasion simply because the decision felt overwhelming. The problem wasn&rsquo;t a lack of inspiration; it was a lack of structure at the moment of decision.</li>
+            <li><strong>Finding 2: No outfit memory meant no learning.</strong> Users couldn&rsquo;t recall what they&rsquo;d worn to past events, worried about repeating looks, and had no record of what actually worked for them. Every outfit existed in isolation, with no way to build on past successes.</li>
+            <li><strong>Finding 3: Users struggled to articulate their own style.</strong> Without a record of what they wore or how it made them feel, users had no way to develop a sense of their own style identity. They relied entirely on external inspiration, often unattainable or irrelevant to their real life.</li>
+          </ul>
+          <p>Findings 1 and 2 each pointed to a specific feature. Finding 3 reinforced why both mattered together: users needed a structured way to act on their style, and a personal record to learn from it.</p>
+        </div>
+      </div>
+
+      <div class="step" id="define">
+        <span class="step-index">05</span>
+        <div>
+          <h3>Define</h3>
+          <h4>Confidence Should Be the User&rsquo;s to Define, Not Ours</h4>
+          <p>The research made the direction clear: this wasn&rsquo;t a motivation problem, it was a structure problem. We named it the Translation Gap and set out to close it from two sides: action and memory.</p>
+          <p>That focus got tested early. The team originally explored an AR try-on feature, a virtual body model that would visualize clothes on yourself. But as we kept building, the team kept coming back to a shared concern: a visual model doesn&rsquo;t build confidence. It hinders it.</p>
+          <p>We didn&rsquo;t want users feeling they had to match a screen, or a certain beauty standard, to feel okay about what they wear. The feature was cut.</p>
+          <p>That question led to a harder one: how do we even measure confidence, and what would make a user want to come back? We didn&rsquo;t want to impose a definition of confidence onto users; we believed confidence is relative, and it&rsquo;s the user&rsquo;s to define, not ours. So instead of scoring or rating confidence directly, we looked for a proxy: consistency. If someone kept coming back to plan and log outfits, that repetition was itself a signal that the product was working for them. That thinking became the wear streak feature, not a measure of &ldquo;good&rdquo; style, just a visible record of a habit staying alive.</p>
+          <p>I was the one who first brought this concern to the team, and we collectively agreed it should guide the rest of the project. It became the principle that defined everything after it: sizing and fit over numbers, style preferences over rigid categories, confidence built from a user&rsquo;s own identity rather than an idealized image. That decision kept the product focused on what actually mattered to users, helping them trust their own choices, instead of chasing a flashier but less meaningful feature.</p>
+        </div>
+      </div>
+
+      <div class="step" id="usability-testing">
+        <span class="step-index">06</span>
+        <div>
+          <h3>Usability Testing</h3>
+          <h4>Small Friction Points, Big Flow Changes</h4>
+          <p>Before the calendar moved into my feature, I ran a usability test on the planning quiz prototype: three participants were given the task &ldquo;plan an outfit for today&rdquo; and walked through the flow while thinking aloud.</p>
+          <div class="placeholder-media">Old mid-fi flow</div>
+          <div class="placeholder-media">New mid-fi flow, after changes</div>
+          <p>Three friction points came out of testing, and each led to a specific change:</p>
+          <ul>
+            <li><strong>Confirm-date friction:</strong> The old flow used separate full-screen steps, a date-confirmation screen, then a standalone weather-forecast screen, before a user could even get to occasion selection. Users expected to move forward faster and got stuck on the extra steps. I collapsed both into persistent, always-visible context instead: a calendar strip and weather chip live at the top of every screen, so the flow moves straight into planning without extra confirmation steps in the way.</li>
+            <li><strong>Closet browsing:</strong> Users expected to scroll and filter by clothing type, and got stuck on a &ldquo;+&rdquo; icon they didn&rsquo;t recognize as the way to add an item. I replaced the abstract add icon with simple tap-to-select photo tiles, and added a search bar plus filter pills (All, Tops, Bottoms, Shoes, Outerwear) so users can narrow the closet the way they expected to.</li>
+            <li><strong>Selection clarity:</strong> Users wanted a way to specify occasions beyond the four presets, and clearer confirmation of what they&rsquo;d actually selected. I replaced the plain &ldquo;Skip&rdquo; option with an &ldquo;Other&rdquo; category, and replaced the old one-item-at-a-time preview with a full assembled outfit preview, top, bottom, and shoes shown together, so the selection reads as an actual outfit rather than an abstract carousel.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" id="ideate">
+        <span class="step-index">07</span>
+        <div>
+          <h3>Ideate</h3>
+          <h4>The Calendar Belonged With Planning, Not the Closet</h4>
+          <p>Our team had 4 designers, including me, plus a project manager, and each designer owned a specific part of the product. The calendar wasn&rsquo;t originally mine; it started as another designer&rsquo;s feature. Early on, the team placed it inside the Closet feature, as a place to browse past outfits alongside the wardrobe itself.</p>
+          <p>During a team crit at mid-fidelity, after wireframes and flows were already taking shape, it became clear the calendar fit better with planning than with the closet. Users needed to see outfits they&rsquo;d already planned, not just outfits they&rsquo;d already worn, and that view only made sense next to the tool where planning actually happened. The calendar moved into my feature at that point, mid-fi flows and all, and from there I owned reworking it to fit the planning experience rather than stand alone as a browsing log.</p>
         </div>
       </div>
 
       <div class="step" id="solution">
-        <span class="step-index">03</span>
+        <span class="step-index">08</span>
         <div>
           <h3>Solution</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae.</p>
-          <div class="placeholder-media">Solution image</div>
+
+          <h4>Planning Quiz</h4>
+          <p>The entry point into outfit planning, and the direct fix for decision fatigue. I designed a 4-step flow that breaks the choice down before it becomes paralyzing.</p>
+          <ul>
+            <li>Users pick a date: today, tomorrow, or a future occasion</li>
+            <li>Then an occasion: Everyday, Night Out, Workout, Work, or Other</li>
+            <li>Today&rsquo;s weather auto-filters the wardrobe to relevant items only</li>
+            <li>Saved looks surface outfits that already worked, so users aren&rsquo;t starting from zero</li>
+          </ul>
+          <p>The same flow serves both reactive planning (getting dressed this morning) and proactive planning (an event weeks out), so it fits how users actually behave rather than forcing one use case.</p>
+          <p>At the hi-fi stage, I added drag-to-arrange to the outfit preview: instead of a fixed layout, users can move pieces around to see how the full outfit actually looks together, the same way they&rsquo;d lay clothes out on a bed before getting dressed.</p>
+          <div class="placeholder-media">Planning quiz flow (animated walkthrough, including drag-to-arrange)</div>
+
+          <h4>Calendar &amp; Outfit Log</h4>
+          <p>The feature I felt most personally responsible for getting right after it moved into my hands. Research showed users needed more than a planning tool; they needed memory.</p>
+          <ul>
+            <li>A home-screen week strip shows at a glance which days have outfits planned, making the habit visible and achievable</li>
+            <li>Tapping a past day opens the full outfit log: location, occasion, event, personal note</li>
+            <li>A Week/Month toggle lets users zoom out from a single day to see planned outfits across a full week or month at once</li>
+            <li>Wear streaks surface planning consistency over time</li>
+            <li>Never-worn indicators reveal overlooked items</li>
+          </ul>
+          <p>Together, these give users a reason to open the app beyond the moment of getting dressed, which is what turns a utility into a habit.</p>
+          <div class="placeholder-media">Calendar &amp; outfit log</div>
         </div>
       </div>
 
       <div class="step" id="outcome">
-        <span class="step-index">04</span>
+        <span class="step-index">09</span>
         <div>
           <h3>Outcome</h3>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+          <h4>Recognized as Best Overall</h4>
+          <p>At our cohort&rsquo;s final presentations, Thread.It was recognized as Best Overall, the team&rsquo;s validation that the Translation Gap framing and the research behind it actually held up in front of an audience beyond our own team.</p>
+          <p class="editor-note">Mention who the judges were and what was said about our project.</p>
+        </div>
+      </div>
+
+      <div class="step" id="next-steps">
+        <span class="step-index">10</span>
+        <div>
+          <h3>Next Steps</h3>
+          <h4>What I&rsquo;d Validate With More Time</h4>
+          <p>A 6-week deadline meant real tradeoffs, including only two in-depth interviews instead of a larger research pool, since most of the time needed to go toward design and prototyping. With more time, I&rsquo;d want to:</p>
+          <ul>
+            <li>Usability test both features with a larger group to validate the design against actual use, not just stated intent</li>
+            <li>Check whether the never-worn indicator changes behavior over time, or just adds guilt without action</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" id="reflection">
+        <span class="step-index">11</span>
+        <div>
+          <h3>Reflection</h3>
+          <h4>Challenges and Takeaways</h4>
+          <h4>01 &mdash; Designing with intentionality for users</h4>
+          <p>Every feature in this project needed to trace back to something a real user actually said or did, not just an idea that seemed good on its own. That discipline showed up in small decisions throughout the project, sizing and fit over numbers, streaks over ratings, weather auto-filtering over manual toggles, and pushed me to keep asking whether a choice served how users actually behaved, or just looked good in a wireframe.</p>
+          <h4>02 &mdash; Advocating for a stance before there was consensus</h4>
+          <p>Raising the concern about AR try-on meant pushing back on a direction the team had already started building, without data yet to prove I was right. It pushed me to get comfortable navigating ambiguity, and to make the case for a stance before the rest of the team had fully agreed on it.</p>
+          <h4>03 &mdash; Understanding B2C design</h4>
+          <p>This was the first project where I designed for a true consumer product, one where success isn&rsquo;t measured by whether a flow works, but by whether someone wants to open the app again tomorrow. It reframed how I thought about features like wear streaks and the outfit log: not as add-ons, but as the actual mechanism for retention, since a B2C product lives or dies on habit and emotional connection, not just task completion.</p>
         </div>
       </div>
     </div>
