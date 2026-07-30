@@ -95,4 +95,30 @@
 
     setTimeout(function () { star.remove(); }, LIFETIME_MS);
   });
+
+  var BURST_COUNT = 6;
+  var BURST_LIFETIME_MS = 500;
+
+  document.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+
+    for (var i = 0; i < BURST_COUNT; i++) {
+      var angle = (Math.PI * 2 * i) / BURST_COUNT + Math.random() * 0.4;
+      var dist = 22 + Math.random() * 16;
+
+      var spark = document.createElement('div');
+      spark.className = 'click-burst';
+      spark.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+      spark.style.left = e.clientX + 'px';
+      spark.style.top = e.clientY + 'px';
+      spark.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      document.body.appendChild(spark);
+
+      (function (el) {
+        setTimeout(function () { el.remove(); }, BURST_LIFETIME_MS);
+      })(spark);
+    }
+  });
 })();
