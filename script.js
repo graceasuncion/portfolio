@@ -121,4 +121,28 @@
       })(spark);
     }
   });
+
+  var caseStudyCards = document.querySelectorAll('.project-card, .work-card');
+  if (caseStudyCards.length) {
+    var readMeBadge = document.createElement('div');
+    readMeBadge.className = 'read-me-follow';
+    readMeBadge.textContent = 'Read Me';
+    document.body.appendChild(readMeBadge);
+
+    caseStudyCards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        readMeBadge.textContent = card.dataset.status === 'coming-soon'
+          ? 'Coming Soon'
+          : 'Read Me';
+        readMeBadge.classList.add('is-visible');
+      });
+      card.addEventListener('mousemove', function (e) {
+        readMeBadge.style.left = (e.clientX + 18) + 'px';
+        readMeBadge.style.top = e.clientY + 'px';
+      });
+      card.addEventListener('mouseleave', function () {
+        readMeBadge.classList.remove('is-visible');
+      });
+    });
+  }
 })();

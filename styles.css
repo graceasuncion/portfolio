@@ -53,7 +53,6 @@ img { max-width: 100%; display: block; }
 
 a {
   color: inherit;
-  cursor: url("media/cursor-hover.svg") 20 20, pointer;
 }
 
 .wrap {
@@ -71,6 +70,12 @@ a {
 @media (max-width: 480px) {
   .wrap {
     padding: 0 2.25rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .wrap {
+    max-width: 1320px;
   }
 }
 
@@ -107,6 +112,7 @@ a {
   font-size: 2rem;
   text-decoration: none;
   color: var(--ink);
+  cursor: url("media/cursor.svg") 16 16, auto;
 }
 
 .site-nav .brand span { color: var(--green-deep); }
@@ -151,6 +157,7 @@ a {
   border: var(--border);
   border-radius: var(--radius);
   padding: 0.5rem 0.9rem;
+  cursor: url("media/cursor.svg") 16 16, auto;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
@@ -328,10 +335,10 @@ a {
 
 .hero-tape {
   position: absolute;
-  top: -0.6rem;
+  top: -0.9rem;
   left: 50%;
-  width: 6rem;
-  height: 1.4rem;
+  width: 9rem;
+  height: 2.1rem;
   background: var(--pink);
   border-radius: 3px;
   transform: translateX(-50%) rotate(-2deg);
@@ -633,6 +640,17 @@ a {
   color: var(--ink);
 }
 
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-card .thumb,
+.project-card .thumb {
+  border: 1.5px solid var(--ink);
+}
+
 .work-card .thumb {
   aspect-ratio: 16 / 10;
   border-radius: 18px;
@@ -648,6 +666,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   position: relative;
+  overflow: hidden;
   margin-bottom: 1.2rem;
   transition: transform 0.2s ease;
 }
@@ -720,7 +739,7 @@ a {
   border: var(--border);
   border-radius: 999px;
   padding: 0.7rem 1.6rem;
-  cursor: pointer;
+  cursor: url("media/cursor.svg") 16 16, auto;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   box-shadow: 4px 4px 0 var(--shadow);
 }
@@ -739,6 +758,17 @@ a {
   color: var(--ink);
 }
 
+@media (min-width: 1400px) {
+  .project-card {
+    gap: 3.5rem;
+  }
+}
+
+.project-card,
+.work-card {
+  cursor: url("media/cursor-big.svg") 26 26, pointer;
+}
+
 @media (max-width: 760px) {
   .project-card {
     flex-direction: column;
@@ -747,7 +777,7 @@ a {
 }
 
 .project-card .thumb {
-  flex: 1 1 55%;
+  flex: 1 1 64%;
   aspect-ratio: 16 / 10;
   border-radius: 18px;
   background:
@@ -762,11 +792,12 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease;
 }
 
 .project-card .card-body {
-  flex: 1 1 55%;
+  flex: 1 1 40%;
   min-width: 0;
 }
 
@@ -783,8 +814,34 @@ a {
   color: rgba(255,255,255,0.4);
 }
 
+.read-me-follow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(0, -50%) scale(0.9);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--border);
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.read-me-follow.is-visible {
+  opacity: 1;
+  transform: translate(0, -50%) scale(1);
+}
+
 .card-body .impact-line {
-  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
   font-weight: 700;
   color: var(--ink);
   line-height: 1.3;
@@ -1189,6 +1246,7 @@ a {
 .toc {
   position: sticky;
   top: 17.5rem;
+  padding-bottom: 4rem;
 }
 
 .toc ul {
@@ -1208,6 +1266,7 @@ a {
   color: var(--ink-soft);
   border-left: 2.5px solid transparent;
   padding-left: 0.8rem;
+  cursor: url("media/cursor-medium.svg") 20 20, auto;
   transition: color 0.15s ease, border-color 0.15s ease, font-weight 0.15s ease;
 }
 
@@ -1306,14 +1365,36 @@ a {
 
 .findings-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  margin: 0 0 1.5rem;
+}
+
+.friction-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  margin: 0 0 1.5rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1.6rem 1.4rem;
   margin: 0 0 1.5rem;
 }
 
+.overview-card-full {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 760px) {
-  .findings-grid {
+  .overview-grid {
     grid-template-columns: 1fr;
+  }
+
+  .overview-card-full {
+    grid-column: 1;
   }
 }
 
@@ -1321,18 +1402,19 @@ a {
   margin: 0;
 }
 
-.finding-label {
+.finding-card .finding-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--pink-deep);
   margin: 0 0 0.5rem;
 }
 
+
 .finding-card h5 {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 0.6rem;
@@ -1341,6 +1423,10 @@ a {
 .finding-card p {
   font-size: 0.88rem;
   margin: 0;
+}
+
+.finding-card .placeholder-media {
+  margin-top: 0.9rem;
 }
 
 .editor-note {
@@ -1353,6 +1439,15 @@ a {
 
 .tldr-card {
   margin: 0 0 2rem;
+}
+
+.project-content .sticky-card {
+  transform: none;
+}
+
+.project-content .sticky-card:hover {
+  transform: none;
+  box-shadow: 6px 6px 0 var(--shadow);
 }
 
 .data-table-wrap {
@@ -1395,6 +1490,7 @@ a {
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin: 0 0 1.5rem;
+  align-items: start;
 }
 
 @media (max-width: 620px) {
@@ -1408,16 +1504,139 @@ a {
   background: var(--paper);
 }
 
-.compare-card.is-con { border-left: 3px solid var(--pink-deep); }
+.compare-card.is-con {
+  border-left: 3px solid var(--pink-deep);
+  padding-bottom: 3.9rem;
+}
 .compare-card.is-pro { border-left: 3px solid var(--green-deep); }
+
+.compare-label {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.6rem;
+}
+
+.compare-label.con { color: var(--pink-deep); }
+.compare-label.pro { color: var(--green-deep); }
+
+.compare-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
 
 .compare-card h4 {
   margin: 0 0 0.8rem;
+  font-size: 1.15rem;
+}
+
+.compare-card-head h4 {
+  margin: 0;
+}
+
+.compare-badge {
+  font-family: var(--font-mono);
   font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.compare-card.is-con .compare-badge { color: var(--pink-deep); }
+.compare-card.is-pro .compare-badge { color: var(--green-deep); }
+
+.compare-card p {
+  color: var(--ink-soft);
+  margin: 0.8rem 0 0;
+}
+
+.compare-card .tag-row {
+  margin: 1rem 0 0;
 }
 
 .compare-card ul {
   margin: 0;
+}
+
+.move-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  margin: 1.6rem 0;
+}
+
+.move-card {
+  flex: 1 1 14rem;
+  max-width: 18rem;
+  border: var(--border);
+  border-left: 3px solid var(--pink-deep);
+  border-radius: var(--radius);
+  background: var(--paper);
+  padding: 1.4rem 1.6rem;
+  text-align: center;
+}
+
+.move-card-after {
+  border-left-color: var(--green-deep);
+}
+
+.move-card .move-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
+.move-card .move-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.move-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--yellow-deep);
+}
+
+.move-arrow-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.move-arrow-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .move-compare {
+    flex-direction: column;
+  }
+
+  .move-card {
+    max-width: none;
+    width: 100%;
+  }
+
+  .move-arrow-icon {
+    transform: rotate(90deg);
+  }
 }
 
 .placeholder-media {
@@ -1435,6 +1654,26 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--ink-soft);
+  overflow: hidden;
+}
+
+.placeholder-media.has-image {
+  background: var(--paper);
+}
+
+.placeholder-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.top-cover-media {
+  padding-top: 7rem;
+}
+
+.top-cover-media .placeholder-media {
+  max-width: 100rem;
+  margin: 0 auto;
 }
 
 .project-nav {
