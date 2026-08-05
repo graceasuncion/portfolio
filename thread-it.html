@@ -12,7 +12,7 @@
 
 <script src="script.js" defer></script>
 </head>
-<body class="is-page-enter">
+<body class="is-page-enter thread-it-page">
 
 <nav class="site-nav">
   <div class="nav-inner">
@@ -188,23 +188,103 @@
           <h4>Small Friction Points, Big Flow Changes</h4>
           <p>Before the calendar moved into my feature, I ran a usability test on the planning quiz prototype: three participants were given the task &ldquo;plan an outfit for today&rdquo; and walked through the flow while thinking aloud.</p>
           <p>Three friction points came out of testing, and each led to a specific change:</p>
-          <div class="friction-grid">
-            <div class="finding-card sticky-card">
-              <p class="finding-label">Confirm-date friction</p>
-              <p>The old flow used separate full-screen steps, a date-confirmation screen, then a standalone weather-forecast screen, before a user could even get to occasion selection. Users expected to move forward faster and got stuck on the extra steps. I collapsed both into persistent, always-visible context instead: a calendar strip and weather chip live at the top of every screen, so the flow moves straight into planning without extra confirmation steps in the way.</p>
-              <div class="placeholder-media">Before / after visual</div>
+          <div class="usability-list">
+            <div class="usability-card">
+              <p class="usability-card-title"><span class="usability-num">01</span> Confirm-Date Friction</p>
+              <div class="old-new-grid old-new-grid-wide">
+                <div class="old-new-col">
+                  <p class="old-new-label">Old</p>
+                  <div class="old-new-pair">
+                    <div class="placeholder-media has-image is-portrait">
+                      <img src="media/date%20+%20weather%20(old%20midf).png" alt="Old mid-fi date confirmation screen">
+                    </div>
+                    <div class="placeholder-media has-image is-portrait">
+                      <img src="media/forecast%20page%20(old%20midfi).png" alt="Old mid-fi weather forecast screen">
+                    </div>
+                  </div>
+                </div>
+                <div class="old-new-col">
+                  <p class="old-new-label">New</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/landing%20page%20(new%20midfi).png" alt="New mid-fi landing screen with persistent calendar and weather chip">
+                  </div>
+                </div>
+              </div>
+              <ul class="usability-notes">
+                <li><span class="note-dot old">1</span>In the old mid-fi, date confirmation was its own full screen before users could move on.</li>
+                <li><span class="note-dot old">2</span>The weather forecast was a separate screen too, adding another step before reaching the quiz.</li>
+                <li><span class="note-dot new">1</span>The date now defaults automatically, with no confirmation screen needed before the quiz starts.</li>
+                <li><span class="note-dot new">2</span>The weather chip pulls today&rsquo;s real-time conditions automatically, so users see accurate, up-to-date weather without checking a separate app.</li>
+              </ul>
             </div>
 
-            <div class="finding-card sticky-card">
-              <p class="finding-label">Closet browsing</p>
-              <p>Users expected to scroll and filter by clothing type, and got stuck on a &ldquo;+&rdquo; icon they didn&rsquo;t recognize as the way to add an item. I replaced the abstract add icon with simple tap-to-select photo tiles, and added a search bar plus filter pills (All, Tops, Bottoms, Shoes, Outerwear) so users can narrow the closet the way they expected to.</p>
-              <div class="placeholder-media">Before / after visual</div>
+            <div class="usability-card">
+              <p class="usability-card-title"><span class="usability-num">02</span> Closet Browsing</p>
+              <div class="old-new-grid">
+                <div class="old-new-col">
+                  <p class="old-new-label">Old</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/my%20closet%20(old%20midfi).png" alt="Old mid-fi closet screen with abstract add icon">
+                  </div>
+                </div>
+                <div class="old-new-col">
+                  <p class="old-new-label">New</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/my%20closet%20(new%20midfi).png" alt="New mid-fi closet screen with photo tiles, search, and filter pills">
+                  </div>
+                </div>
+              </div>
+              <ul class="usability-notes">
+                <li><span class="note-dot old">1</span>The &ldquo;+&rdquo; icon wasn&rsquo;t recognized as the way to add an item.</li>
+                <li><span class="note-dot new">1</span>Replaced the abstract icon with simple tap-to-select photo tiles.</li>
+                <li><span class="note-dot new">2</span>Added a search bar so users can look up items by name or brand.</li>
+                <li><span class="note-dot new">3</span>Added filter pills (All, Tops, Bottoms, Shoes, Outerwear) so users can narrow the closet the way they expected to.</li>
+              </ul>
             </div>
 
-            <div class="finding-card sticky-card">
-              <p class="finding-label">Selection clarity</p>
-              <p>Users wanted a way to specify occasions beyond the four presets, and clearer confirmation of what they&rsquo;d actually selected. I replaced the plain &ldquo;Skip&rdquo; option with an &ldquo;Other&rdquo; category, and replaced the old one-item-at-a-time preview with a full assembled outfit preview, top, bottom, and shoes shown together, so the selection reads as an actual outfit rather than an abstract carousel.</p>
-              <div class="placeholder-media">Before / after visual</div>
+            <div class="usability-card">
+              <p class="usability-card-title"><span class="usability-num">03</span> Occasion Clarity</p>
+              <div class="old-new-grid">
+                <div class="old-new-col">
+                  <p class="old-new-label">Old</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/occasion%20page%20(old%20midfi).png" alt="Old mid-fi occasion screen with Skip option">
+                  </div>
+                </div>
+                <div class="old-new-col">
+                  <p class="old-new-label">New</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/occasion%20page%20(new%20midfi).png" alt="New mid-fi occasion screen with Other category">
+                  </div>
+                </div>
+              </div>
+              <ul class="usability-notes">
+                <li><span class="note-dot old">1</span>Users wanted occasions beyond the four presets: in the original mid-fi, the &ldquo;Skip&rdquo; button sat at the bottom of the screen and didn&rsquo;t let users add their own.</li>
+                <li><span class="note-dot new">1</span>In the new mid-fi, an &ldquo;Other&rdquo; category lets users type in their own occasion alongside the four presets.</li>
+                <li><span class="note-dot new">2</span>Moved the option to the top of the screen so it&rsquo;s visible right away instead of requiring users to scroll down.</li>
+              </ul>
+            </div>
+
+            <div class="usability-card">
+              <p class="usability-card-title"><span class="usability-num">04</span> Outfit Selection Clarity</p>
+              <div class="old-new-grid">
+                <div class="old-new-col">
+                  <p class="old-new-label">Old</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/preview%20page%20(old%20midfi).png" alt="Old mid-fi one-item-at-a-time outfit preview">
+                  </div>
+                </div>
+                <div class="old-new-col">
+                  <p class="old-new-label">New</p>
+                  <div class="placeholder-media has-image is-portrait">
+                    <img src="media/preview%20page%20(new%20midfi).png" alt="New mid-fi full assembled outfit preview">
+                  </div>
+                </div>
+              </div>
+              <ul class="usability-notes">
+                <li><span class="note-dot old">1</span>Users saw only one item at a time when reviewing their selection, making it hard to picture the full outfit.</li>
+                <li><span class="note-dot new">1</span>A full assembled outfit preview (top, bottom, shoes) shown together lets users see the whole look before confirming.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -234,7 +314,7 @@
           </div>
 
           <p>Our team had 4 designers, including me, plus a project manager, and each designer owned a specific part of the product. The calendar wasn&rsquo;t originally mine; it started as another designer&rsquo;s feature. Early on, the team placed it inside the Closet feature, as a place to browse past outfits alongside the wardrobe itself.</p>
-          <p>During a team crit at mid-fidelity, after wireframes and flows were already taking shape, it became clear the calendar fit better with planning than with the closet. Users needed to see outfits they&rsquo;d already planned, not just outfits they&rsquo;d already worn, and that view only made sense next to the tool where planning actually happened. The calendar moved into my feature at that point, mid-fi flows and all, and from there I owned reworking it to fit the planning experience rather than stand alone as a browsing log.</p>
+          <p>At a mid-fidelity crit, it became clear the calendar fit better with planning: users needed to see outfits they&rsquo;d already planned, not just worn. The calendar moved into my feature at that point, wireframes and all, and I owned reworking it to fit the planning flow rather than stand alone as a browsing log.</p>
         </div>
       </div>
 
@@ -243,29 +323,40 @@
         <div>
           <h3>Solution</h3>
 
-          <h4>Planning Quiz</h4>
-          <p>The entry point into outfit planning, and the direct fix for decision fatigue. I designed a 4-step flow that breaks the choice down before it becomes paralyzing.</p>
-          <ul>
-            <li>Users pick a date: today, tomorrow, or a future occasion</li>
-            <li>Then an occasion: Everyday, Night Out, Workout, Work, or Other</li>
-            <li>Today&rsquo;s weather auto-filters the wardrobe to relevant items only</li>
-            <li>Saved looks surface outfits that already worked, so users aren&rsquo;t starting from zero</li>
-          </ul>
-          <p>The same flow serves both reactive planning (getting dressed this morning) and proactive planning (an event weeks out), so it fits how users actually behave rather than forcing one use case.</p>
-          <p>At the hi-fi stage, I added drag-to-arrange to the outfit preview: instead of a fixed layout, users can move pieces around to see how the full outfit actually looks together, the same way they&rsquo;d lay clothes out on a bed before getting dressed.</p>
-          <div class="placeholder-media">Planning quiz flow (animated walkthrough, including drag-to-arrange)</div>
+          <div class="usability-list">
+            <div class="usability-card usability-card-split">
+              <div class="usability-card-text">
+                <p class="usability-card-title"><span class="usability-num">01</span> Planning Quiz</p>
+                <p>The entry point into outfit planning, and the direct fix for decision fatigue.</p>
+                <ul>
+                  <li>Users pick a date: today, tomorrow, or a future occasion</li>
+                  <li>Then an occasion: Everyday, Night Out, Workout, Work, or Other</li>
+                  <li>Today&rsquo;s weather auto-filters the wardrobe to relevant items only</li>
+                  <li>Saved looks surface outfits that already worked, so users aren&rsquo;t starting from zero</li>
+                  <li>Drag-to-arrange lets users rearrange pieces in the outfit preview</li>
+                </ul>
+              </div>
+              <div class="placeholder-media has-image is-portrait quiz-media">
+                <img src="media/planning-quiz-prototype.gif" alt="Planning quiz prototype walkthrough, including drag-to-arrange">
+              </div>
+            </div>
 
-          <h4>Calendar &amp; Outfit Log</h4>
-          <p>The feature I felt most personally responsible for getting right after it moved into my hands. Research showed users needed more than a planning tool; they needed memory.</p>
-          <ul>
-            <li>A home-screen week strip shows at a glance which days have outfits planned, making the habit visible and achievable</li>
-            <li>Tapping a past day opens the full outfit log: location, occasion, event, personal note</li>
-            <li>A Week/Month toggle lets users zoom out from a single day to see planned outfits across a full week or month at once</li>
-            <li>Wear streaks surface planning consistency over time</li>
-            <li>Never-worn indicators reveal overlooked items</li>
-          </ul>
-          <p>Together, these give users a reason to open the app beyond the moment of getting dressed, which is what turns a utility into a habit.</p>
-          <div class="placeholder-media">Calendar &amp; outfit log</div>
+            <div class="usability-card usability-card-split">
+              <div class="usability-card-text">
+                <p class="usability-card-title"><span class="usability-num">02</span> Calendar &amp; Outfit Log</p>
+                <p>Research showed users needed more than a planning tool &mdash; they needed memory.</p>
+                <ul>
+                  <li>A home-screen week strip shows at a glance which days have outfits planned</li>
+                  <li>Tapping a past day opens the full outfit log: location, occasion, event, personal note</li>
+                  <li>A Week/Month toggle zooms out to see planned outfits across a full week or month</li>
+                  <li>Wear streaks surface planning consistency over time</li>
+                </ul>
+              </div>
+              <div class="placeholder-media has-image is-portrait calendar-media">
+                <img src="media/calendar.gif" alt="Calendar and outfit log walkthrough">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -275,8 +366,21 @@
           <h3>Outcome</h3>
           <h4>Recognized as Best Overall</h4>
           <p>At our cohort&rsquo;s final presentations, Thread.It was recognized as Best Overall, the team&rsquo;s validation that the Translation Gap framing and the research behind it actually held up in front of an audience beyond our own team.</p>
-          <div class="placeholder-media">Team photo &mdash; winning Best Overall</div>
-          <p class="editor-note">Mention who the judges were and what was said about our project.</p>
+          <div class="placeholder-media has-image">
+            <img src="media/DSC04282.jpg" alt="The Thread.It team holding their Best Overall certificates">
+          </div>
+          <div class="judges-card sticky-card">
+            <p class="section-eyebrow">Judged By</p>
+            <ul class="judges-list">
+              <li><strong>Chris Ota</strong> &mdash; Staff Product Designer, LinkedIn</li>
+              <li><strong>Ken Skistimas</strong> &mdash; Director of UX, ServiceNow</li>
+              <li><strong>Aditi Jain</strong> &mdash; UI Designer, Computrition</li>
+            </ul>
+          </div>
+
+          <p>Our final presentation was judged by three industry professionals. Their feedback centered on storytelling: they noted that anchoring the presentation in a real user&rsquo;s story, rather than presenting the Translation Gap as an abstract framework, made the problem tangible and relatable. That approach, they said, made Thread.It read as a solution to a real problem, not a feature-driven product.</p>
+
+          <a href="https://lnkd.in/g8X8eRDs" class="btn-outline outcome-cta" target="_blank" rel="noopener">View project slide deck &rarr;</a>
         </div>
       </div>
 

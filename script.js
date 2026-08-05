@@ -126,14 +126,14 @@
   if (caseStudyCards.length) {
     var readMeBadge = document.createElement('div');
     readMeBadge.className = 'read-me-follow';
-    readMeBadge.textContent = 'Read Me';
+    readMeBadge.textContent = 'View Project';
     document.body.appendChild(readMeBadge);
 
     caseStudyCards.forEach(function (card) {
       card.addEventListener('mouseenter', function () {
         readMeBadge.textContent = card.dataset.status === 'coming-soon'
           ? 'Coming Soon'
-          : 'Read Me';
+          : 'View Project';
         readMeBadge.classList.add('is-visible');
       });
       card.addEventListener('mousemove', function (e) {
