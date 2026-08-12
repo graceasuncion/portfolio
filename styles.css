@@ -1021,9 +1021,15 @@ a {
   align-items: flex-start;
   justify-content: center;
   gap: 2.4rem 2rem;
-  padding: 1.5rem 0 5rem;
+  padding: 2rem 1.5rem 3rem;
   position: relative;
   z-index: 1;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(42, 42, 40, 0.1) 1.5px, transparent 0);
+  background-size: 22px 22px;
+  border: var(--border);
+  border-radius: var(--radius);
 }
 
 .scrapbook-photo,
@@ -1031,6 +1037,31 @@ a {
 .scrapbook-card {
   width: 100%;
   max-width: 19rem;
+}
+
+.scrapbook-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.4rem 2rem;
+  width: 100%;
+}
+
+.scrapbook-row .scrapbook-photo {
+  flex: 0 0 19rem;
+}
+
+.scrapbook-row .scrapbook-note-lg {
+  flex: 1 1 20rem;
+}
+
+.scrapbook-note-lg {
+  max-width: 34rem;
+}
+
+.scrapbook-photo-sm {
+  max-width: 16rem;
 }
 
 .scrapbook-photo .placeholder-media {
@@ -1041,6 +1072,33 @@ a {
   color: var(--ink-soft);
   margin: 0;
   font-size: 1rem;
+}
+
+.scrapbook-note-lg p {
+  font-size: 1.15rem;
+}
+
+p.scrapbook-row-label {
+  width: fit-content;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 0.4rem 1.2rem;
+  box-shadow: 3px 3px 0 var(--shadow);
+  transform: rotate(-1.5deg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+p.scrapbook-greeting {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: var(--ink);
+  margin: 0 0 0.6rem;
 }
 
 .scrapbook-tape {
@@ -1054,6 +1112,26 @@ a {
   transform: translateX(-50%) rotate(-2deg);
 }
 
+.scrapbook-pin {
+  position: absolute;
+  top: -0.65rem;
+  left: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow:
+    0 3px 3px rgba(0, 0, 0, 0.35),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.25),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.55);
+  z-index: 2;
+}
+
+.scrapbook-pin.pin-blue { background: var(--blue-deep); }
+.scrapbook-pin.pin-yellow { background: var(--yellow-deep); }
+.scrapbook-pin.pin-green { background: var(--green-deep); }
+.scrapbook-pin.pin-pink { background: var(--pink-deep); }
+
 .scrapbook-card .contact-list {
   margin-top: 0.6rem;
 }
@@ -1061,6 +1139,7 @@ a {
 @media (max-width: 640px) {
   .scrapbook-board {
     gap: 1.8rem;
+    padding: 2.4rem 1.2rem 3rem;
   }
 
   .scrapbook-photo,
@@ -1783,6 +1862,51 @@ ul.usability-notes {
   line-height: 1;
 }
 
+p.media-row-label {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pink-deep);
+  margin: 1.2rem 0 0.5rem;
+}
+
+p.media-row-label.label-spaced {
+  padding-bottom: 0.5rem;
+}
+
+.media-row {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.media-row.row-spaced {
+  margin-bottom: 1.5rem;
+}
+
+.media-row .media-figure {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 620px) {
+  .media-row {
+    flex-direction: column;
+  }
+}
+
+.media-figure {
+  margin: 0;
+}
+
+.media-caption {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
 .move-arrow-caption {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -1848,6 +1972,17 @@ ul.usability-notes {
   aspect-ratio: 394 / 804;
 }
 
+.placeholder-media.natural-media {
+  aspect-ratio: auto;
+  height: auto;
+}
+
+.placeholder-media.natural-media img {
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+}
+
 .placeholder-media img {
   width: 100%;
   height: 100%;
@@ -1900,6 +2035,10 @@ ul.judges-list {
   display: flex;
   width: fit-content;
   margin: 0.5rem auto 0;
+}
+
+.outcome-cta.cta-spaced {
+  margin-bottom: 1.5rem;
 }
 
 .project-nav {

@@ -22,7 +22,7 @@
     <ul>
       <li><a href="work.html" class="nav-link is-active">Work()</a></li>
       <li><a href="about.html" class="nav-link">About()</a></li>
-      <li><a href="portfolio.html#contact" class="nav-link">Resume</a></li>
+      <li><a href="https://drive.google.com/file/d/1K_HJotdUg1z6g8yD9l8IKnLuTWoCQVoi/view?usp=sharing" class="nav-link" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </div>
 </nav>
@@ -60,6 +60,7 @@
       <li><a href="#define">Define</a></li>
       <li><a href="#ideation">Ideation</a></li>
       <li><a href="#solution">Solution</a></li>
+      <li><a href="#outcome">Outcome</a></li>
       <li><a href="#next-steps">Next Steps</a></li>
       <li><a href="#reflection">Reflection</a></li>
     </ul>
@@ -68,7 +69,7 @@
   <div class="project-content">
     <div class="tldr-card sticky-card">
       <p class="section-eyebrow">TL;DR</p>
-      <p style="margin:0;">CodeLab&rsquo;s recruitment outreach was fragmented across three disconnected tools, with no clear brief for how to fix it. I helped set the project&rsquo;s direction, helped conduct our key stakeholder research, and owned the Contact Groups page &mdash; the core screen that turns large, messy datasets into something a non-technical team member can use.</p>
+      <p style="margin:0;">CodeLab&rsquo;s President was pulling all-nighters personalizing and double-checking recruitment emails one by one, anxious about getting sensitive information wrong, and wishing for a central place where other board members could help without communication breaking down. That&rsquo;s the workflow our team of 3 designers and 6 developers was asked to fix, with no client brief for how. I designed and built two of Automail&rsquo;s core screens solo (the Contact Groups page and the main landing page) and helped set the project&rsquo;s direction and lead its research when the team had no brief to work from.</p>
     </div>
 
     <div class="process-steps">
@@ -84,21 +85,19 @@
 
             <div class="finding-card sticky-card">
               <p class="finding-label">Problem</p>
-              <p>CodeLab&rsquo;s outreach was split across three disconnected tools. Simple sends became slow and error-prone, right when recruitment cycles needed consistency most.</p>
+              <p>CodeLab&rsquo;s outreach was split across Airtable, Mailchimp, and Gmail. Simple sends became slow and error-prone, right when recruitment cycles needed consistency most. Our team of 3 designers and 6 developers had no prior automation experience and no clear brief.</p>
             </div>
 
             <div class="finding-card sticky-card overview-card-full">
               <p class="finding-label">Impact</p>
               <ul>
+                <li>Designed and solely owned two of Automail&rsquo;s core screens &mdash; the Contact Groups page and the main landing page &mdash; building the shared component pattern and assembling both end-to-end</li>
+                <li>Built the landing page mid-fi myself, and shaped the visual pivot away from CodeLab&rsquo;s orange branding after raising the concern that it didn&rsquo;t fit a developer-focused tool</li>
                 <li>Helped set the project&rsquo;s direction and scope with no client brief, drawing on my own experience with CodeLab&rsquo;s broken workflow</li>
-                <li>Helped conduct our stakeholder interview with CodeLab&rsquo;s President, grounding our features in a real account of the problem</li>
-                <li>Designed the Contact Groups page solo &mdash; the screen that turns large Airtable datasets into organized, selectable recipient groups</li>
-                <li>Kept ideation traceable to research, pulling the team back whenever a direction drifted toward aesthetic-first</li>
+                <li>Helped conduct our stakeholder interview with CodeLab&rsquo;s President &mdash; the research that grounded every feature the team shipped, including three I didn&rsquo;t personally design</li>
               </ul>
             </div>
           </div>
-
-          <p>Our team of 3 designers and 6 developers took this on with no prior automation experience and no clear brief from the client.</p>
         </div>
       </div>
 
@@ -106,7 +105,7 @@
         <span class="step-index">02</span>
         <div>
           <h3>Research</h3>
-          <p>Methods: a 10-person survey across Mailchimp, other automation tools, and manual Gmail users; a stakeholder interview with CodeLab&rsquo;s President, which I helped conduct.</p>
+          <p>Methods: a 10-person survey across Mailchimp, other automation tools, and manual Gmail users; a 45-minute stakeholder interview with CodeLab&rsquo;s President, which I helped conduct and which surfaced the all-nighter workflow described above, plus the wish for &ldquo;a central place&rdquo; where other board members could help without communication breaking down.</p>
           <div class="findings-grid">
             <div class="finding-card sticky-card">
               <p class="finding-label">Finding 1</p>
@@ -142,7 +141,7 @@
         <span class="step-index">03</span>
         <div>
           <h3>Define</h3>
-          <h4>How Should Recipient Data Be Structured at Scale?</h4>
+          <p>Decision: how should recipient data be structured at scale?</p>
 
           <div class="compare-grid">
             <div>
@@ -152,7 +151,8 @@
                   <h4>Single Long List</h4>
                   <span class="compare-badge">&times; Cut</span>
                 </div>
-                <p>Unmanageable past a few hundred contacts, no segmentation, contradicted our scale finding.</p>
+                <p>Unmanageable past a few hundred contacts, no segmentation.</p>
+                <p>&rarr; Contradicted Finding 2 (large lists need dedicated structure).</p>
               </div>
             </div>
 
@@ -163,14 +163,13 @@
                   <h4>Selectable Contact Groups</h4>
                   <span class="compare-badge">&#10003; Kept</span>
                 </div>
-                <p>My design. Users organize synced Airtable data into named, reusable groups, directly grounded in Finding 2.</p>
-                <p class="editor-note">Add your reasoning here &mdash; e.g., &ldquo;built once, reused across recruitment cycles.&rdquo;</p>
+                <p>My design. Users organize synced Airtable data into named, reusable groups.</p>
+                <p>&rarr; Grounded in Finding 2.</p>
               </div>
             </div>
           </div>
 
-          <p>I designed this page &mdash; the screen most responsible for making CodeLab&rsquo;s large-scale outreach feel manageable, not overwhelming.</p>
-          <div class="placeholder-media">Mid-fi wireframe &mdash; Contact Groups structure</div>
+          <p>I designed and built this page solo, the screen most responsible for making CodeLab&rsquo;s large-scale outreach feel manageable, not overwhelming. I also used the same email-type component to design and assemble Automail&rsquo;s main landing page, which lists users&rsquo; sent and drafted emails. (See the first mid-fi version of this page in Ideation, below.)</p>
         </div>
       </div>
 
@@ -179,11 +178,40 @@
         <div>
           <h3>Ideation</h3>
           <ul>
-            <li>Low-fi: sketched navigation, personalization, and sending flows, tied to Findings 1 and 2</li>
-            <li>Mid-fi: aligned on structure (Contact Groups), sidebar, page content</li>
-            <li>High-fi (first pass): built out full screens in an orange, Mailchimp-inspired style matching CodeLab&rsquo;s branding</li>
+            <li>Low-fi: sketched navigation, personalization, and sending flows. &rarr; Grounded in Findings 1 and 3.</li>
+            <li>Mid-fi (old system): the team aligned on structure and sidebar organization, using an orange color scheme carried over from CodeLab&rsquo;s branding. I built the landing page mid-fi myself; Contact Groups mid-fi was built by another designer on the team. &rarr; Grounded in Finding 2.</li>
+            <li>High-fi (old system): built out full screens in the same orange, Mailchimp-inspired style</li>
           </ul>
-          <div class="placeholder-media">Original high-fidelity screens &mdash; orange, Mailchimp-inspired</div>
+          <p class="media-row-label">Old mid-fi</p>
+          <div class="media-row">
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/codelab-contact group - (old) midfi.png" alt="Old mid-fi Contact Groups page, orange Mailchimp-inspired style">
+              </div>
+              <figcaption class="media-caption">Contact Groups page</figcaption>
+            </figure>
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/template page - old (midfi).png" alt="Old mid-fi HTML template editor page, orange Mailchimp-inspired style">
+              </div>
+              <figcaption class="media-caption">Template editor page</figcaption>
+            </figure>
+          </div>
+          <p class="media-row-label label-spaced">Old high-fi</p>
+          <div class="media-row row-spaced">
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/home page (old hifi).png" alt="Old high-fidelity landing page, orange Mailchimp-inspired style">
+              </div>
+              <figcaption class="media-caption">Landing page</figcaption>
+            </figure>
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/saved templates pop up (old hifi).png" alt="Old high-fidelity saved templates popup, orange Mailchimp-inspired style">
+              </div>
+              <figcaption class="media-caption">Saved templates popup</figcaption>
+            </figure>
+          </div>
           <p>Once high-fi existed, the mismatch was clear. I was one of the voices who raised the concern: the creative, brand-forward style didn&rsquo;t fit a developer-focused, high-volume internal tool.</p>
 
           <div class="compare-grid">
@@ -194,7 +222,7 @@
                   <h4>Orange, Brand-Matched Interface</h4>
                   <span class="compare-badge">&times; Cut</span>
                 </div>
-                <p>Cut after already being built out in high-fidelity, once the mismatch with the tool&rsquo;s actual use became clear.</p>
+                <p>Cut after already being built through mid-fi and high-fi.</p>
               </div>
             </div>
 
@@ -205,13 +233,75 @@
                   <h4>Cleaner, Simpler Interface</h4>
                   <span class="compare-badge">&#10003; Kept</span>
                 </div>
-                <p>Reworked toward a neutral visual direction, same functionality, better fit for how the team actually used the tool.</p>
+                <p>The team went back through mid-fi and high-fi again toward a neutral visual direction, same functionality, better fit for how the team actually used the tool. I rebuilt the landing page mid-fi for this second round myself.</p>
               </div>
             </div>
           </div>
 
-          <div class="placeholder-media">Reworked high-fidelity screens &mdash; cleaner, simplified</div>
-          <a href="https://codelabdavis.medium.com/automail-2a3cd3d8b868" class="btn-outline outcome-cta" target="_blank" rel="noopener">Read the design process on Medium &rarr;</a>
+          <p class="media-row-label">New mid-fi</p>
+          <div class="media-row">
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/mailing group (new midfi).png" alt="New mid-fi mailing group page, cleaner and simplified">
+              </div>
+              <figcaption class="media-caption">Mailing group page</figcaption>
+            </figure>
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/home page - new midfi.png" alt="New mid-fi home page, cleaner and simplified, built by me">
+              </div>
+              <figcaption class="media-caption">Home page</figcaption>
+            </figure>
+          </div>
+          <p class="media-row-label">New high-fi</p>
+          <div class="media-row">
+            <figure class="media-figure">
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/Home Page - automail (hifi).png" alt="New high-fidelity home page, cleaner and simplified">
+              </div>
+              <figcaption class="media-caption">Home page</figcaption>
+            </figure>
+          </div>
+
+          <h4>Simplifying the Landing Page Flow</h4>
+          <p>The old landing page, called &ldquo;My Projects,&rdquo; sent users to a new screen every time they created an email. Rebuilding the landing page mid-fi for the new design system, I simplified that flow into a popup instead of a full screen navigation.</p>
+
+          <div class="compare-grid">
+            <div>
+              <p class="compare-label con">Explored</p>
+              <div class="compare-card is-con">
+                <div class="compare-card-head">
+                  <h4>&ldquo;My Projects,&rdquo; New-Screen Flow</h4>
+                  <span class="compare-badge">&times; Cut</span>
+                </div>
+                <p>Every new email pulled users away from their landing page context, adding an extra navigation step to a task users did constantly.</p>
+              </div>
+            </div>
+
+            <div>
+              <p class="compare-label pro">Adopted</p>
+              <div class="compare-card is-pro">
+                <div class="compare-card-head">
+                  <h4>Popup-Based Creation Flow</h4>
+                  <span class="compare-badge">&#10003; Kept</span>
+                </div>
+                <p>My design. Users create emails without leaving the landing page, cutting a full screen transition out of the most repeated action in the product.</p>
+                <p>&rarr; Grounded in Finding 3 (users needed simplicity, not extra steps).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="placeholder-media has-image natural-media">
+            <img src="media/automail-landing-pop-up.gif" alt="Automail popup creation flow">
+          </div>
+
+          <h4>Organizing at Scale</h4>
+          <p>Phase 2 also added filters, tags, and viewing options to the mailing list experience, giving users a way to narrow thousands of contacts down to the group they actually needed for a given send.</p>
+          <p>&rarr; Grounded in Finding 2 (large lists needed real structure, not a workaround).</p>
+
+          <a href="https://codelabdavis.medium.com/automail-2a3cd3d8b868" class="btn-outline outcome-cta cta-spaced" target="_blank" rel="noopener">Read the design process on Medium &rarr;</a>
+
+          <p><strong>A note on usability testing:</strong> with developer bandwidth limited late in the timeline, the team prioritized getting a high-functioning prototype into developers&rsquo; hands over running usability tests on the final designs &mdash; a tradeoff we flagged for the next team to pick up.</p>
         </div>
       </div>
 
@@ -222,38 +312,69 @@
           <div class="usability-list">
             <div class="usability-card">
               <p class="usability-card-title"><span class="usability-num">01</span> Contact Groups Page</p>
-              <p>Designed solely by me. Organizes large Airtable datasets into selectable recipient groups.</p>
-              <div class="placeholder-media">Contact Groups Page mockup</div>
+              <p>Designed and built solely by me. Organizes large Airtable datasets into selectable recipient groups.</p>
+              <p>&rarr; Grounded in Finding 2.</p>
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/contact-group.gif" alt="Automail Contact Groups page">
+              </div>
             </div>
 
             <div class="usability-card">
-              <p class="usability-card-title"><span class="usability-num">02</span> HTML Template Editor</p>
-              <p>Custom HTML, variable insertion, and real-time preview for power users.</p>
-              <div class="placeholder-media">HTML Template Editor GIF</div>
+              <p class="usability-card-title"><span class="usability-num">02</span> Landing Page</p>
+              <p>Designed and assembled solely by me. Automail&rsquo;s main landing page, listing users&rsquo; sent and drafted emails, built on the same component pattern as Contact Groups. Email creation happens through a popup instead of a full screen navigation, cutting a step out of the product&rsquo;s most repeated action.</p>
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/contact-page.gif" alt="Automail landing page">
+              </div>
             </div>
 
             <div class="usability-card">
-              <p class="usability-card-title"><span class="usability-num">03</span> Airtable Sync</p>
-              <p>One-click sync, replacing the manual re-export/re-upload cycle.</p>
-              <div class="placeholder-media">Airtable Sync GIF</div>
+              <p class="usability-card-title"><span class="usability-num">03</span> HTML Template Editor</p>
+              <p>Designed by another designer on the team, grounded in research I helped conduct. Custom HTML, variable insertion, and real-time preview for power users.</p>
+              <p>&rarr; Grounded in Finding 3.</p>
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/automail-html-template.gif" alt="Automail HTML template editor with variable insertion and live preview">
+              </div>
             </div>
 
             <div class="usability-card">
-              <p class="usability-card-title"><span class="usability-num">04</span> Regular Template Builder</p>
-              <p>A simplified editor for non-technical users.</p>
-              <div class="placeholder-media">Regular Template Builder GIF</div>
+              <p class="usability-card-title"><span class="usability-num">04</span> Airtable Sync</p>
+              <p>Designed by another designer on the team, grounded in research I helped conduct. One-click sync, replacing the manual re-export/re-upload cycle.</p>
+              <p>&rarr; Grounded in Finding 1.</p>
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/airtable-sync.gif" alt="Automail one-click Airtable sync">
+              </div>
+            </div>
+
+            <div class="usability-card">
+              <p class="usability-card-title"><span class="usability-num">05</span> Regular Template Builder</p>
+              <p>Designed by another designer on the team, grounded in research I helped conduct. A simplified editor for non-technical users.</p>
+              <p>&rarr; Grounded in Finding 3.</p>
+              <div class="placeholder-media has-image natural-media">
+                <img src="media/regular-template.gif" alt="Automail regular email template builder">
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <a href="https://codelabdavis.medium.com/automated-email-tool-6523a2850cf8" class="btn-outline outcome-cta" target="_blank" rel="noopener">Read about the final product on Medium &rarr;</a>
+      <div class="step" id="outcome">
+        <span class="step-index">06</span>
+        <div>
+          <h3>Outcome</h3>
+          <p>At final presentations, the team demoed Automail live: <strong>100+ personalized emails sent in under 5 minutes</strong>, replacing a process that previously took board members <strong>roughly 8 hours of manual work</strong> per recruitment cycle. The team presented the finished product to <strong>around 100 CodeLab members</strong>.</p>
+          <div class="placeholder-media has-image">
+            <img src="media/codelab-team.JPG" alt="The CodeLab Automail team">
+          </div>
+          <a href="https://codelabdavis.medium.com/automated-email-tool-6523a2850cf8" class="btn-outline outcome-cta" target="_blank" rel="noopener">Read the Medium article &rarr;</a>
         </div>
       </div>
 
       <div class="step" id="next-steps">
-        <span class="step-index">06</span>
+        <span class="step-index">07</span>
         <div>
           <h3>Next Steps</h3>
           <ul>
+            <li>Conduct usability testing with CodeLab board members, cut this round due to developer bandwidth, and the first thing I&rsquo;d prioritize with more time</li>
             <li>Interview CodeLab board members to surface edge cases</li>
             <li>Add microinteractions confirming key actions (syncs, sends)</li>
             <li>Add status indicators for large sends</li>
@@ -263,7 +384,7 @@
       </div>
 
       <div class="step" id="reflection">
-        <span class="step-index">07</span>
+        <span class="step-index">08</span>
         <div>
           <h3>Reflection</h3>
           <h4>01 &mdash; Understanding B2B Design</h4>
@@ -272,7 +393,6 @@
           <p>Learned to translate decisions like Contact Groups into terms that held up against real data constraints, and to catch misalignments early enough to still change course.</p>
           <h4>03 &mdash; Simple on the Surface, Complex Underneath</h4>
           <p>Strengthened my ability to lead design direction on tools that look simple but carry real complexity underneath.</p>
-          <div class="placeholder-media">Team photo</div>
         </div>
       </div>
     </div>
