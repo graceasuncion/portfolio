@@ -54,6 +54,60 @@
     nav.classList.add('is-visible');
   }
 
+  var osDate = document.querySelector('[data-os-date]');
+  var osClock = document.querySelector('[data-os-clock]');
+  if (osClock) {
+    var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+    var tick = function () {
+      var d = new Date();
+      if (osDate) osDate.textContent = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate());
+      osClock.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  var desktopQuery = window.matchMedia('(min-width: 901px)');
+  var topZ = 10;
+  document.querySelectorAll('.os-window[data-drag]').forEach(function (win) {
+    var bar = win.querySelector('.os-titlebar') || win;
+    var startX, startY, baseX, baseY;
+
+    bar.addEventListener('pointerdown', function (e) {
+      if (!desktopQuery.matches || e.button !== 0 || e.target.closest('a')) return;
+      e.preventDefault();
+      startX = e.clientX;
+      startY = e.clientY;
+      baseX = parseFloat(win.dataset.dx || 0);
+      baseY = parseFloat(win.dataset.dy || 0);
+      win.style.zIndex = ++topZ;
+      win.classList.add('is-dragging');
+      bar.setPointerCapture(e.pointerId);
+    });
+
+    bar.addEventListener('pointermove', function (e) {
+      if (!win.classList.contains('is-dragging')) return;
+      var dx = baseX + e.clientX - startX;
+      var dy = baseY + e.clientY - startY;
+      win.dataset.dx = dx;
+      win.dataset.dy = dy;
+      win.style.translate = dx + 'px ' + dy + 'px';
+    });
+
+    var endDrag = function () { win.classList.remove('is-dragging'); };
+    bar.addEventListener('pointerup', endDrag);
+    bar.addEventListener('pointercancel', endDrag);
+  });
+
+  desktopQuery.addEventListener('change', function (e) {
+    if (e.matches) return;
+    document.querySelectorAll('.os-window[data-drag]').forEach(function (win) {
+      win.style.translate = '';
+      delete win.dataset.dx;
+      delete win.dataset.dy;
+    });
+  });
+
   var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
   if (tocLinks.length && 'IntersectionObserver' in window) {
     var tocSteps = Array.prototype.map.call(tocLinks, function (link) {
@@ -95,4 +149,54 @@
 
     setTimeout(function () { star.remove(); }, LIFETIME_MS);
   });
+
+  var BURST_COUNT = 6;
+  var BURST_LIFETIME_MS = 500;
+
+  document.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+
+    for (var i = 0; i < BURST_COUNT; i++) {
+      var angle = (Math.PI * 2 * i) / BURST_COUNT + Math.random() * 0.4;
+      var dist = 22 + Math.random() * 16;
+
+      var spark = document.createElement('div');
+      spark.className = 'click-burst';
+      spark.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+      spark.style.left = e.clientX + 'px';
+      spark.style.top = e.clientY + 'px';
+      spark.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      document.body.appendChild(spark);
+
+      (function (el) {
+        setTimeout(function () { el.remove(); }, BURST_LIFETIME_MS);
+      })(spark);
+    }
+  });
+
+  var caseStudyCards = document.querySelectorAll('.project-card, .work-card');
+  if (caseStudyCards.length && !document.body.classList.contains('home-page')) {
+    var readMeBadge = document.createElement('div');
+    readMeBadge.className = 'read-me-follow';
+    readMeBadge.textContent = 'View Project';
+    document.body.appendChild(readMeBadge);
+
+    caseStudyCards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        readMeBadge.textContent = card.dataset.status === 'coming-soon'
+          ? 'Coming Soon'
+          : 'View Project';
+        readMeBadge.classList.add('is-visible');
+      });
+      card.addEventListener('mousemove', function (e) {
+        readMeBadge.style.left = (e.clientX + 18) + 'px';
+        readMeBadge.style.top = e.clientY + 'px';
+      });
+      card.addEventListener('mouseleave', function () {
+        readMeBadge.classList.remove('is-visible');
+      });
+    });
+  }
 })();

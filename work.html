@@ -7,7 +7,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <script src="script.js" defer></script>
@@ -16,13 +16,12 @@
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="portfolio.html" class="brand">
-      <img src="media/logo.png" alt="Grace Asuncion" class="brand-logo">
+    <a href="index.html" class="brand">
+      <img src="media/flower-logo.png" alt="Grace Asuncion" class="brand-logo">
     </a>
     <ul>
-      <li><a href="work.html" class="nav-link is-active">Work</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="portfolio.html#contact" class="nav-link">Resume</a></li>
+      <li><a href="work.html" class="nav-link is-active">Work()</a></li>
+      <li><a href="about.html" class="nav-link">About()</a></li>
     </ul>
   </div>
 </nav>
@@ -41,20 +40,21 @@
 
   <div class="work-grid">
     <a class="work-card" href="thread-it.html">
-      <div class="thumb"><span class="index">01</span>Cover image</div>
-      <p class="impact-line">Reducing Onboarding Friction for First-Time Thread.It Users</p>
+      <div class="thumb has-image"><span class="index">01</span><img src="media/thread.it-cover.png" alt="Thread.It app screens"></div>
+      <p class="impact-line">Turning Decision Fatigue Into a Structured 4-Step Planning Flow</p>
       <div class="card-top">
         <h3>Thread.It</h3>
       </div>
       <div class="tag-row">
-        <span class="tag">Product Design</span>
+        <span class="tag">Mobile App</span>
+        <span class="tag">0 &rarr; 1</span>
         <span class="tag">Case Study</span>
       </div>
       <span class="view-link">View case study &rarr;</span>
     </a>
 
     <a class="work-card" href="automail.html">
-      <div class="thumb"><span class="index">02</span>Cover image</div>
+      <div class="thumb has-image"><span class="index">02</span><img src="media/automail-cover.png" alt="AutoMail app screens"></div>
       <p class="impact-line">Streamlining Fragmented Email Workflows Into One Scalable Tool</p>
       <div class="card-top">
         <h3>Automail</h3>
@@ -67,8 +67,8 @@
       <span class="view-link">View case study &rarr;</span>
     </a>
 
-    <a class="work-card" href="paul-hom.html">
-      <div class="thumb"><span class="index">03</span>Cover image</div>
+    <div class="work-card" data-status="coming-soon">
+      <div class="thumb has-image"><span class="index">03</span><img src="media/paul%20hom-cover.png" alt="Paul Hom Asian Clinic website screens"></div>
       <p class="impact-line">Improving Accessibility for Elderly Patients in a Clinic Website Redesign</p>
       <div class="card-top">
         <h3>Paul Hom Asian Clinic</h3>
@@ -78,20 +78,31 @@
         <span class="tag">Accessibility</span>
         <span class="tag">Case Study</span>
       </div>
-      <span class="view-link">View case study &rarr;</span>
-    </a>
+      <span class="view-link">Coming soon</span>
+    </div>
 
-    <a class="work-card" href="game-on.html">
-      <div class="thumb"><span class="index">04</span>Cover image</div>
-      <p class="impact-line">Increasing Player Retention Through a Redesigned Onboarding Flow</p>
+    <a class="work-card" href="https://graceasuncion.github.io/des157b/capstone/version3/index.html" target="_blank" rel="noopener">
+      <div class="thumb has-image"><span class="index">04</span><img src="media/conversation-cover.gif" alt="The Conversations That We Can't Pick Up preview"></div>
       <div class="card-top">
-        <h3>Game On</h3>
+        <h3 class="impact-style">The Conversations That We Can&rsquo;t Pick Up</h3>
       </div>
       <div class="tag-row">
-        <span class="tag">Game Design</span>
+        <span class="tag">Front-End Development</span>
         <span class="tag">Case Study</span>
       </div>
-      <span class="view-link">View case study &rarr;</span>
+      <span class="view-link">View project &rarr;</span>
+    </a>
+
+    <a class="work-card" href="https://graceasuncion.github.io/des157a/game/v2-final-version/index.html" target="_blank" rel="noopener">
+      <div class="thumb has-image"><span class="index">05</span><img src="media/forest-brawl-cover.gif" alt="Forest Brawl gameplay"></div>
+      <div class="card-top">
+        <h3 class="impact-style">Forest Brawl</h3>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Front-End Development</span>
+        <span class="tag">Game</span>
+      </div>
+      <span class="view-link">View project &rarr;</span>
     </a>
   </div>
 </main>
