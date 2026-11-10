@@ -2,7 +2,7 @@
    Design tokens
 ================================ */
 :root {
-  --cream: #ffffff;
+  --cream: #F8F9FA;
   --paper: #fffcf6;
   --ink: #2a2a28;
   --ink-soft: #55524c;
@@ -98,39 +98,46 @@ a {
   left: 0;
   right: 0;
   z-index: 50;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  backdrop-filter: blur(0px);
-  transition: background-color 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
-}
-
-.site-nav.is-visible {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(6px);
-  border-bottom: var(--border);
+  background: var(--cream);
+  border-bottom: 1px solid #e2ddd6;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.5s ease;
 }
 
 .site-nav .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem clamp(1.5rem, 4vw, 4rem) 0.4rem;
+  padding: 1.3rem 2rem;
 }
 
+.site-nav .nav-left,
+.site-nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-nav .nav-right { color: #8c8780; }
+
 .site-nav .brand {
-  font-family: var(--font-script);
-  font-size: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
   text-decoration: none;
   color: var(--ink);
   cursor: url("media/cursor.svg") 16 16, auto;
 }
 
-.site-nav .brand span { color: var(--green-deep); }
-
 .brand-logo {
   display: block;
-  height: 3.5rem;
-  width: auto;
+  width: 60px;
+  height: 60px;
+  margin: -12px 0;
   mix-blend-mode: multiply;
   transition: transform 0.2s ease;
 }
@@ -150,37 +157,18 @@ a {
   100% { transform: scale(1) rotate(0deg); }
 }
 
-.site-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 0.7rem;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 .site-nav a.nav-link {
-  display: inline-block;
+  color: #8c8780;
   text-decoration: none;
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.9rem;
   cursor: url("media/cursor.svg") 16 16, auto;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.site-nav a.nav-link:hover {
-  background: var(--paper);
-  transform: translateY(-2px);
-  box-shadow: 3px 3px 0 var(--shadow);
-}
+.site-nav a.nav-link:hover,
+.site-nav a.nav-link.is-active { color: var(--ink); }
 
-.site-nav a.nav-link.is-active {
-  background: var(--ink);
-  color: var(--cream);
+@media (max-width: 900px) {
+  .site-nav .nav-inner { padding: 1rem 1.2rem; }
+  .site-nav .nav-right { gap: 1.2rem; }
 }
 
 /* ================================
@@ -267,7 +255,7 @@ a {
    Hero (desktop / OS layout)
 ================================ */
 .hero {
-  --os-bg: #f3efea;
+  --os-bg: #F8F9FA;
   --os-panel: #fbfaf8;
   --os-line: #e2ddd6;
   --os-muted: #8c8780;
@@ -286,11 +274,6 @@ a {
   border-bottom: 1px solid var(--os-line);
   font-family: var(--font-mono);
   color: var(--ink);
-}
-
-.home-page .site-nav:not(.is-visible) {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .os-script {
@@ -470,11 +453,29 @@ a {
   height: 18px;
 }
 
+/* Hero artwork — inverted + multiplied so the gif's black backdrop drops out on the light hero */
+.os-hero-art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(72vw, 900px);
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  /* brighten the lines before inverting so they come out darker; raise/lower to taste */
+  filter: brightness(4) invert(1);
+  mix-blend-mode: multiply;
+}
+
 /* Floating label */
 .os-label {
   position: absolute;
   top: 37%;
-  left: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
   z-index: 1;
 }
 
@@ -487,7 +488,7 @@ a {
 }
 
 .os-label-sub {
-  margin: -0.3rem 0 0 1.2rem;
+  margin: -0.3rem 0 0;
   font-size: 1.15rem;
   color: var(--ink-soft);
 }
@@ -810,6 +811,7 @@ a {
     transform: none;
     width: 100%;
     max-width: 24rem;
+    white-space: normal;
   }
 
   .os-window[data-drag] { touch-action: auto; }

@@ -54,14 +54,16 @@
     nav.classList.add('is-visible');
   }
 
-  var osDate = document.querySelector('[data-os-date]');
-  var osClock = document.querySelector('[data-os-clock]');
-  if (osClock) {
+  var osDates = document.querySelectorAll('[data-os-date]');
+  var osClocks = document.querySelectorAll('[data-os-clock]');
+  if (osClocks.length) {
     var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
     var tick = function () {
       var d = new Date();
-      if (osDate) osDate.textContent = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate());
-      osClock.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      var date = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate());
+      var time = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      osDates.forEach(function (el) { el.textContent = date; });
+      osClocks.forEach(function (el) { el.textContent = time; });
     };
     tick();
     setInterval(tick, 1000);
