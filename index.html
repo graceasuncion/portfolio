@@ -7,126 +7,126 @@
 <link rel="icon" href="media/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <script src="script.js" defer></script>
 </head>
 <body class="is-page-enter home-page">
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <div class="nav-left">
-      <a href="index.html" class="brand"><img src="media/flower-logo.png" alt="" class="brand-logo" aria-hidden="true">GRACE ASUNCION</a>
-    </div>
-    <div class="nav-right">
+<nav class="site-nav cosmos-nav">
+  <div class="cosmos-nav-inner">
+    <a href="index.html" class="brand cosmos-brand">
+      <img src="media/flower-logo.png" alt="" class="brand-logo" aria-hidden="true">
+      <span class="cosmos-brand-text">
+        <span class="cosmos-brand-name">GRACE ASUNCION</span>
+        <span class="cosmos-brand-role">PRODUCT DESIGNER</span>
+      </span>
+    </a>
+    <div class="cosmos-nav-links">
       <a href="work.html" class="nav-link">Work</a>
       <a href="about.html" class="nav-link">About</a>
+      <a href="play.html" class="nav-link">Play</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
+    <p class="cosmos-status"><span class="cosmos-status-dot" aria-hidden="true"></span>NOW DESIGNING &middot; PAUL HOM</p>
   </div>
 </nav>
 
-<header class="hero">
-  <span class="os-crosshair" style="top:5.4rem; left:1.5rem;" aria-hidden="true">+</span>
-  <span class="os-crosshair" style="top:5.4rem; right:1.5rem;" aria-hidden="true">+</span>
-  <span class="os-crosshair" style="bottom:1.2rem; left:1.5rem;" aria-hidden="true">+</span>
-  <span class="os-crosshair" style="bottom:1.2rem; right:1.5rem;" aria-hidden="true">+</span>
+<header class="hero cosmos">
+  <div class="cosmos-stage">
+    <p class="cosmos-hint" aria-hidden="true">[ HOVER ORBIT TO SLOW SYSTEM ]</p>
 
-  <div class="os-desktop">
-    <img class="os-hero-art" src="media/hero.gif" alt="" aria-hidden="true">
+    <div class="cosmos-frame">
+      <p class="cosmos-kicker">HI, I&rsquo;M GRACE.</p>
+      <h1 class="cosmos-title">I design with intentionality and care</h1>
 
-    <div class="os-label">
-      <p class="os-label-name">HI, I&rsquo;M GRACE</p>
-      <p class="os-script os-label-sub">I design for humans with intentionality and care</p>
+      <div class="cosmos-orbit" data-orbit>
+        <span class="cosmos-ring" style="--w:56%; --h:56%;" aria-hidden="true"></span>
+        <span class="cosmos-ring" style="--w:76%; --h:76%;" aria-hidden="true"></span>
+        <span class="cosmos-ring" style="--w:94%; --h:94%;" aria-hidden="true"></span>
+        <img src="media/hero.gif" alt="" class="cosmos-sun" aria-hidden="true">
+
+        <a href="about.html" class="cosmos-planet" style="--tint:#8b7fd4; --size:46px;" data-ring="0.28" data-speed="0.16" data-angle="140"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">About</span></a>
+        <a href="work.html" class="cosmos-planet" style="--tint:#4f7c9e; --size:58px;" data-ring="0.38" data-speed="0.11" data-angle="290"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Work</span></a>
+        <a href="#contact" class="cosmos-planet" style="--tint:#6b8a47; --size:50px;" data-ring="0.47" data-speed="0.07" data-angle="10"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Contact</span></a>
+        <a href="play.html" class="cosmos-planet" style="--tint:#d9694f; --size:40px;" data-ring="0.38" data-speed="0.11" data-angle="120"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Play</span></a>
+        <span class="cosmos-moon" style="--tint:#c9a440; --size:16px;" data-ring="0.47" data-speed="0.07" data-angle="180" aria-hidden="true"><span class="cosmos-globe"></span></span>
+      </div>
     </div>
 
-    <span class="os-script os-sparkle-note" aria-hidden="true">sparkle!</span>
-    <span class="os-sparkle" aria-hidden="true">&#10022; <small>&#9733;</small></span>
-  </div>
-
-  <div class="os-status">
-    <div class="os-status-row"><span>CURRENTLY_DESIGNING</span><span>87%</span></div>
-    <div class="os-status-bar"><span style="width:87%"></span></div>
-  </div>
-
-  <div class="os-project-id">
-    <p>PORTFOLIO ID</p>
-    <p>GA_2026</p>
+    <div class="cosmos-foot">
+      <p><span data-os-date></span><br>[LOCAL TIME] <span data-os-clock></span></p>
+      <a href="#work" class="cosmos-scroll">SCROLL FOR WORK</a>
+      <p class="cosmos-foot-right"><a href="mailto:gracehasuncion@gmail.com">gracehasuncion@gmail.com</a><br>PORTFOLIO_ID: GA_2026</p>
+    </div>
   </div>
 </header>
 
-<main class="wrap" id="work">
-  <div class="section-intro">
-    <h2 class="section-title">Case Studies</h2>
+<section class="stack-section" id="work" aria-labelledby="stack-title">
+  <div class="stack-head">
+    <h2 id="stack-title">Selected projects</h2>
+    <a href="work.html">All projects &rarr;</a>
   </div>
 
-  <div class="project-grid">
-    <a class="project-card" href="thread-it.html">
-      <div class="thumb has-image"><span class="index">01</span><img src="media/thread.it-cover.png" alt="Thread.It app screens"></div>
-      <div class="card-body">
-        <p class="impact-line">Turning Decision Fatigue Into a Structured 4-Step Planning Flow</p>
-        <div class="card-top">
-          <h3>Thread.It</h3>
+  <ol class="stack-list" style="--count:3;">
+    <li class="stack-item" style="--i:0;">
+      <a class="stack-card" href="thread-it.html">
+        <div class="pc-media"><img src="media/thread.it-cover.png" alt="Thread.It app screens"></div>
+        <div class="pc-text">
+          <div class="pc-head">
+            <p class="pc-num">01 / 03</p>
+            <h3>Thread.It</h3>
+            <p class="pc-meta">Mobile app &middot; Product Designer &middot; 2026</p>
+          </div>
+          <div class="pc-body">
+            <p class="pc-summary">Turning decision fatigue into a structured 4-step planning flow.</p>
+            <span class="pc-link">Read case study &rarr;</span>
+          </div>
         </div>
-        <div class="tag-row">
-          <span class="tag">Mobile App</span>
-          <span class="tag">0 &rarr; 1</span>
+      </a>
+    </li>
+
+    <li class="stack-item" style="--i:1;">
+      <a class="stack-card" href="automail.html">
+        <div class="pc-media"><img src="media/automail-cover.png" alt="AutoMail app screens"></div>
+        <div class="pc-text">
+          <div class="pc-head">
+            <p class="pc-num">02 / 03</p>
+            <h3>Automail</h3>
+            <p class="pc-meta">CodeLab &middot; Product Designer &middot; 2024</p>
+          </div>
+          <div class="pc-body">
+            <p class="pc-summary">Streamlining fragmented email workflows into one scalable tool.</p>
+            <span class="pc-link">Read case study &rarr;</span>
+          </div>
         </div>
-        <span class="view-link">View case study &rarr;</span>
+      </a>
+    </li>
+
+    <li class="stack-item" style="--i:2;">
+      <div class="stack-card" data-status="coming-soon">
+        <div class="pc-media"><img src="media/paul%20hom-cover.png" alt="Paul Hom Asian Clinic website screens"></div>
+        <div class="pc-text">
+          <div class="pc-head">
+            <p class="pc-num">03 / 03</p>
+            <h3>Paul Hom Asian Clinic</h3>
+            <p class="pc-meta">Paul Hom Asian Clinic &middot; Product Designer &middot; 2024</p>
+          </div>
+          <div class="pc-body">
+            <p class="pc-summary">Improving accessibility for elderly patients in a clinic website redesign.</p>
+            <span class="pc-link">Case study coming soon</span>
+          </div>
+        </div>
       </div>
-    </a>
+    </li>
+  </ol>
+</section>
 
-    <a class="project-card" href="automail.html">
-      <div class="thumb has-image"><span class="index">02</span><img src="media/automail-cover.png" alt="AutoMail app screens"></div>
-      <div class="card-body">
-        <p class="impact-line">Streamlining Fragmented Email Workflows Into One Scalable Tool</p>
-        <div class="card-top">
-          <h3>Automail</h3>
-        </div>
-        <div class="tag-row">
-          <span class="tag">Product Design</span>
-          <span class="tag">B2B Tool</span>
-        </div>
-        <span class="view-link">View case study &rarr;</span>
-      </div>
-    </a>
-
-    <div class="project-card" data-status="coming-soon">
-      <div class="thumb has-image"><span class="index">03</span><img src="media/paul%20hom-cover.png" alt="Paul Hom Asian Clinic website screens"></div>
-      <div class="card-body">
-        <p class="impact-line">Improving Accessibility for Elderly Patients in a Clinic Website Redesign</p>
-        <div class="card-top">
-          <h3>Paul Hom Asian Clinic</h3>
-        </div>
-        <div class="tag-row">
-          <span class="tag">Web Design</span>
-          <span class="tag">Accessibility</span>
-        </div>
-        <span class="view-link">Coming soon</span>
-      </div>
-    </div>
-  </div>
-
-  <a href="work.html" class="see-more-btn">See more work</a>
-
-</main>
-
+<div class="stack-end">
 <footer class="site-footer doodle-field" id="contact">
-  <div class="doodle" style="top:10%; right:10%; width:24px; height:24px; --r:-6deg;">
-    <svg viewBox="0 0 20 20" fill="none" stroke="var(--green-deep)" stroke-width="1.6"><circle cx="10" cy="10" r="7"/></svg>
-  </div>
-  <div class="doodle" style="top:30%; right:22%; width:22px; height:22px; --r:8deg; animation-delay:0.6s;">
-    <svg viewBox="0 0 20 20" fill="none" stroke="var(--pink-deep)" stroke-width="1.6" stroke-linecap="round"><path d="M10 2v16M2 10h16M4.5 4.5l11 11M15.5 4.5l-11 11"/></svg>
-  </div>
-  <div class="doodle" style="bottom:34%; right:6%; width:26px; height:26px; --r:4deg; animation-delay:1.1s;">
-    <svg viewBox="0 0 40 40" fill="var(--yellow-deep)"><path d="M20 2 C21 14 26 19 38 20 C26 21 21 26 20 38 C19 26 14 21 2 20 C14 19 19 14 20 2 Z"/></svg>
-  </div>
-  <div class="doodle" style="bottom:14%; right:16%; width:20px; height:20px; --r:-4deg; animation-delay:1.6s;">
-    <svg viewBox="0 0 20 20" fill="none" stroke="var(--ink)" stroke-width="1.6"><rect x="6" y="6" width="8" height="8" transform="rotate(45 10 10)"/></svg>
-  </div>
-  <div class="doodle" style="bottom:10%; left:6%; width:22px; height:22px; --r:6deg; animation-delay:0.3s;">
-    <svg viewBox="0 0 40 40" fill="var(--blue-deep)"><path d="M20 2 C21 14 26 19 38 20 C26 21 21 26 20 38 C19 26 14 21 2 20 C14 19 19 14 20 2 Z"/></svg>
+  <div class="doodle footer-ascii" style="top:12%; right:14%; --r:-4deg;">
+    <img src="media/hero.gif" alt="" aria-hidden="true">
   </div>
 
   <div class="wrap footer-inner">
@@ -141,11 +141,12 @@
     </div>
 
     <div class="footer-bottom-row">
-      <img src="media/logo.png" alt="Grace Asuncion" class="footer-logo">
+      <img src="media/flower-logo.png" alt="Grace Asuncion" class="footer-logo">
       <p class="footer-signature">Grace Asuncion &nbsp;&nbsp; &copy; 2026</p>
     </div>
   </div>
 </footer>
+</div>
 
 </body>
 </html>

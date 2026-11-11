@@ -128,55 +128,187 @@
     tocSteps.forEach(function (step) { tocObserver.observe(step); });
   }
 
+  var supportsCss = function (rule) { return window.CSS && CSS.supports && CSS.supports(rule); };
+  var stackItems = Array.prototype.slice.call(document.querySelectorAll('.stack-item'));
+  var stackEnd = document.querySelector('.stack-end');
+  var stage = document.querySelector('.cosmos-stage');
+  var wideQuery = window.matchMedia('(min-width: 721px)');
+
+  // Staggered card reveal for browsers without view() timelines.
+  if (stackItems.length && !reducedMotion && !supportsCss('animation-timeline: view()') && 'IntersectionObserver' in window) {
+    document.body.classList.add('stack-reveal-js');
+    var stackObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        stackObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -15% 0px' });
+    stackItems.forEach(function (item) { stackObserver.observe(item); });
+  }
+
+  if (stage && !reducedMotion) {
+    var fadeInJs = !supportsCss('animation-timeline: scroll()');
+    var scrollQueued = false;
+
+    var updateScrollEffects = function () {
+      scrollQueued = false;
+
+      // Galaxy fade fallback: 0 -> 90% of the viewport height.
+      if (fadeInJs) {
+        var p = Math.min(window.scrollY / (window.innerHeight * 0.9), 1);
+        stage.style.opacity = 1 - 0.82 * p;
+        stage.style.transform = 'scale(' + (1 - 0.12 * p) + ')';
+        stage.style.filter = p > 0 ? 'blur(' + (5 * p) + 'px)' : '';
+      }
+
+      // Shrink and dim each card as the next one (or the ending) slides over it.
+      stackItems.forEach(function (item, i) {
+        var card = item.firstElementChild;
+        var next = stackItems[i + 1] || stackEnd;
+        if (!wideQuery.matches || !next) {
+          card.style.transform = '';
+          card.style.filter = '';
+          return;
+        }
+        var rect = item.getBoundingClientRect();
+        var covered = Math.min(Math.max((rect.bottom - next.getBoundingClientRect().top) / rect.height, 0), 1);
+        card.style.transform = covered ? 'scale(' + (1 - 0.06 * covered) + ')' : '';
+        card.style.filter = covered ? 'brightness(' + (1 - 0.12 * covered) + ')' : '';
+      });
+    };
+
+    var queueScrollEffects = function () {
+      if (scrollQueued) return;
+      scrollQueued = true;
+      requestAnimationFrame(updateScrollEffects);
+    };
+
+    window.addEventListener('scroll', queueScrollEffects, { passive: true });
+    window.addEventListener('resize', queueScrollEffects);
+    updateScrollEffects();
+  }
+
+  var orbit = document.querySelector('[data-orbit]');
+  if (orbit) {
+    var bodies = Array.prototype.map.call(orbit.querySelectorAll('[data-ring]'), function (el) {
+      return {
+        el: el,
+        ring: parseFloat(el.dataset.ring),
+        speed: parseFloat(el.dataset.speed),
+        angle: parseFloat(el.dataset.angle) * Math.PI / 180
+      };
+    });
+    // Hovering eases the orbit down to a crawl instead of stopping it.
+    var SLOW_SPEED = 0.2;
+    var speedScale = 1;
+    var targetScale = 1;
+    var lastFrame = null;
+
+    var placeBodies = function () {
+      var w = orbit.offsetWidth;
+      var h = orbit.offsetHeight;
+      bodies.forEach(function (b) {
+        var x = w / 2 + Math.cos(b.angle) * b.ring * w;
+        var y = h / 2 + Math.sin(b.angle) * b.ring * h;
+        b.el.style.transform = 'translate(' + x + 'px, ' + y + 'px) translate(-50%, -50%)';
+        b.el.style.zIndex = Math.sin(b.angle) > 0 ? 2 : 0;
+        // Keep labels inside the frame by flipping them left on the right side of the orbit.
+        b.el.classList.toggle('is-flipped', x > w * 0.72);
+      });
+    };
+
+    var stepOrbit = function (now) {
+      if (lastFrame !== null) {
+        var dt = Math.min(now - lastFrame, 100) / 1000;
+        speedScale += (targetScale - speedScale) * Math.min(dt * 4, 1);
+        bodies.forEach(function (b) { b.angle += b.speed * speedScale * dt; });
+      }
+      lastFrame = now;
+      placeBodies();
+      requestAnimationFrame(stepOrbit);
+    };
+
+    orbit.addEventListener('mouseenter', function () { targetScale = SLOW_SPEED; });
+    orbit.addEventListener('mouseleave', function () { targetScale = 1; });
+    orbit.addEventListener('focusin', function () { targetScale = SLOW_SPEED; });
+    orbit.addEventListener('focusout', function () { targetScale = 1; });
+
+    if (reducedMotion) {
+      placeBodies();
+      window.addEventListener('resize', placeBodies);
+    } else {
+      requestAnimationFrame(stepOrbit);
+    }
+  }
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var COLORS = ['var(--pink-deep)', 'var(--green-deep)', 'var(--blue-deep)', 'var(--yellow-deep)'];
-  var CHARS = ['✦', '✧', '·'];
-  var THROTTLE_MS = 90;
-  var LIFETIME_MS = 900;
-  var lastSpawn = 0;
+  // Sparkle trail + click burst, landing page only. Shapes are drawn in currentColor.
+  var SPARKLE_COLOR = '#8ab1c3'; // matches the flower logo's petals
+  var STAR_PATH = 'M12 2.5l2.8 6.2 6.7.6-5.1 4.5 1.5 6.6L12 17l-5.9 3.4 1.5-6.6-5.1-4.5 6.7-.6z';
+  var SHAPES = [
+    '<path fill="currentColor" d="' + STAR_PATH + '"/>',
+    '<path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" d="' + STAR_PATH + '"/>',
+    '<circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="3.5"/>',
+    '<path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 12a1.5 1.5 0 1 1 1.5 1.5a3 3 0 1 1 -3 -3a4.5 4.5 0 1 1 4.5 4.5a6 6 0 1 1 -6 -6"/>',
+    '<circle cx="12" cy="12" r="4.5" fill="currentColor"/>',
+    '<rect x="7.5" y="7.5" width="9" height="9" rx="1.5" fill="currentColor"/>',
+    '<path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 3C12.6 9 15 11.4 21 12C15 12.6 12.6 15 12 21C11.4 15 9 12.6 3 12C9 11.4 11.4 9 12 3Z"/>',
+    '<path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 1v22M1 12h22M7.5 7.5l2 2M14.5 14.5l2 2M16.5 7.5l-2 2M7.5 16.5l2-2"/>',
+    '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 6v12M6 12h12"/>',
+    '<circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/>'
+  ];
 
-  document.addEventListener('mousemove', function (e) {
-    var now = Date.now();
-    if (now - lastSpawn < THROTTLE_MS) return;
-    lastSpawn = now;
+  var makeSparkle = function (className, x, y) {
+    var el = document.createElement('div');
+    var size = 9 + Math.random() * 13;
+    el.className = className;
+    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + SHAPES[Math.floor(Math.random() * SHAPES.length)] + '</svg>';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.color = SPARKLE_COLOR;
+    el.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+    document.body.appendChild(el);
+    return el;
+  };
 
-    var star = document.createElement('div');
-    star.className = 'cursor-star';
-    star.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-    star.style.left = (e.clientX + (Math.random() * 10 - 5)) + 'px';
-    star.style.top = (e.clientY + (Math.random() * 10 - 5)) + 'px';
-    star.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-    document.body.appendChild(star);
+  if (document.body.classList.contains('home-page')) {
+    var THROTTLE_MS = 70;
+    var LIFETIME_MS = 1100;
+    var lastSpawn = 0;
 
-    setTimeout(function () { star.remove(); }, LIFETIME_MS);
-  });
+    document.addEventListener('mousemove', function (e) {
+      var now = Date.now();
+      if (now - lastSpawn < THROTTLE_MS) return;
+      lastSpawn = now;
 
-  var BURST_COUNT = 6;
-  var BURST_LIFETIME_MS = 500;
+      var star = makeSparkle('cursor-star', e.clientX + (Math.random() * 24 - 12), e.clientY + (Math.random() * 24 - 12));
+      setTimeout(function () { star.remove(); }, LIFETIME_MS);
+    });
 
-  document.addEventListener('mousedown', function (e) {
-    if (e.button !== 0) return;
+    var BURST_COUNT = 7;
+    var BURST_LIFETIME_MS = 600;
 
-    for (var i = 0; i < BURST_COUNT; i++) {
-      var angle = (Math.PI * 2 * i) / BURST_COUNT + Math.random() * 0.4;
-      var dist = 22 + Math.random() * 16;
+    document.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return;
 
-      var spark = document.createElement('div');
-      spark.className = 'click-burst';
-      spark.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-      spark.style.left = e.clientX + 'px';
-      spark.style.top = e.clientY + 'px';
-      spark.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-      document.body.appendChild(spark);
+      for (var i = 0; i < BURST_COUNT; i++) {
+        var angle = (Math.PI * 2 * i) / BURST_COUNT + Math.random() * 0.4;
+        var dist = 26 + Math.random() * 20;
 
-      (function (el) {
-        setTimeout(function () { el.remove(); }, BURST_LIFETIME_MS);
-      })(spark);
-    }
-  });
+        var spark = makeSparkle('click-burst', e.clientX, e.clientY);
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+
+        (function (el) {
+          setTimeout(function () { el.remove(); }, BURST_LIFETIME_MS);
+        })(spark);
+      }
+    });
+  }
 
   var caseStudyCards = document.querySelectorAll('.project-card, .work-card');
   if (caseStudyCards.length && !document.body.classList.contains('home-page')) {
