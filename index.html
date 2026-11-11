@@ -47,18 +47,21 @@
         <span class="cosmos-ring" style="--w:94%; --h:94%;" aria-hidden="true"></span>
         <img src="media/hero.gif" alt="" class="cosmos-sun" aria-hidden="true">
 
-        <a href="about.html" class="cosmos-planet" style="--tint:#8b7fd4; --size:46px;" data-ring="0.28" data-speed="0.16" data-angle="140"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">About</span></a>
-        <a href="work.html" class="cosmos-planet" style="--tint:#4f7c9e; --size:58px;" data-ring="0.38" data-speed="0.11" data-angle="290"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Work</span></a>
-        <a href="#contact" class="cosmos-planet" style="--tint:#6b8a47; --size:50px;" data-ring="0.47" data-speed="0.07" data-angle="10"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Contact</span></a>
-        <a href="play.html" class="cosmos-planet" style="--tint:#d9694f; --size:40px;" data-ring="0.38" data-speed="0.11" data-angle="120"><span class="cosmos-globe" aria-hidden="true"></span><span class="cosmos-planet-label">Play</span></a>
-        <span class="cosmos-moon" style="--tint:#c9a440; --size:16px;" data-ring="0.47" data-speed="0.07" data-angle="180" aria-hidden="true"><span class="cosmos-globe"></span></span>
+        <a href="about.html" class="cosmos-planet" style="--tint:#8b7fd4; --size:46px;" data-ring="0.28" data-speed="0.16" data-angle="140"><span class="cosmos-globe" data-ascii="bands" aria-hidden="true"></span><span class="cosmos-planet-label">About</span></a>
+        <a href="work.html" class="cosmos-planet" style="--tint:#4f7c9e; --size:58px;" data-ring="0.38" data-speed="0.11" data-angle="290"><span class="cosmos-globe" data-ascii="ring" aria-hidden="true"></span><span class="cosmos-planet-label">Work</span></a>
+        <a href="#contact" class="cosmos-planet" style="--tint:#6b8a47; --size:50px;" data-ring="0.47" data-speed="0.07" data-angle="10"><span class="cosmos-globe" data-ascii="terra" aria-hidden="true"></span><span class="cosmos-planet-label">Contact</span></a>
+        <a href="play.html" class="cosmos-planet" style="--tint:#d9694f; --size:40px;" data-ring="0.38" data-speed="0.11" data-angle="120"><span class="cosmos-globe" data-ascii="craters" aria-hidden="true"></span><span class="cosmos-planet-label">Play</span></a>
+        <span class="cosmos-moon" style="--tint:#c9a440; --size:16px;" data-ring="0.47" data-speed="0.07" data-angle="180" aria-hidden="true"><span class="cosmos-globe" data-ascii="plain"></span></span>
+
+        <!-- Top half of the galactic core, drawn over planets on the far side of the orbit -->
+        <img src="media/hero.gif" alt="" class="cosmos-sun cosmos-sun--front" aria-hidden="true">
       </div>
     </div>
 
     <div class="cosmos-foot">
       <p><span data-os-date></span><br>[LOCAL TIME] <span data-os-clock></span></p>
       <a href="#work" class="cosmos-scroll">SCROLL FOR WORK</a>
-      <p class="cosmos-foot-right"><a href="mailto:gracehasuncion@gmail.com">gracehasuncion@gmail.com</a><br>PORTFOLIO_ID: GA_2026</p>
+      <p class="cosmos-foot-right"><span class="cosmos-last-push" hidden>[LAST PUSH] <time data-last-push></time></span></p>
     </div>
   </div>
 </header>
@@ -76,11 +79,15 @@
         <div class="pc-text">
           <div class="pc-head">
             <p class="pc-num">01 / 03</p>
-            <h3>Thread.It</h3>
+            <h3>Turning decision fatigue into a structured 4-step planning flow.</h3>
+            <p class="pc-project">Thread.It</p>
             <p class="pc-meta">Mobile app &middot; Product Designer &middot; 2026</p>
           </div>
           <div class="pc-body">
-            <p class="pc-summary">Turning decision fatigue into a structured 4-step planning flow.</p>
+            <div class="tag-row">
+              <span class="tag">Mobile</span>
+              <span class="tag">B2C</span>
+            </div>
             <span class="pc-link">Read case study &rarr;</span>
           </div>
         </div>
@@ -93,11 +100,16 @@
         <div class="pc-text">
           <div class="pc-head">
             <p class="pc-num">02 / 03</p>
-            <h3>Automail</h3>
+            <h3>Streamlining fragmented email workflows into one scalable tool.</h3>
+            <p class="pc-project">Automail</p>
             <p class="pc-meta">CodeLab &middot; Product Designer &middot; 2024</p>
           </div>
           <div class="pc-body">
-            <p class="pc-summary">Streamlining fragmented email workflows into one scalable tool.</p>
+            <div class="tag-row">
+              <span class="tag">B2B</span>
+              <span class="tag">Internal Tool</span>
+              <span class="tag">Desktop</span>
+            </div>
             <span class="pc-link">Read case study &rarr;</span>
           </div>
         </div>
@@ -110,11 +122,16 @@
         <div class="pc-text">
           <div class="pc-head">
             <p class="pc-num">03 / 03</p>
-            <h3>Paul Hom Asian Clinic</h3>
+            <h3>Improving accessibility for elderly patients in a clinic website redesign.</h3>
+            <p class="pc-project">Paul Hom Asian Clinic</p>
             <p class="pc-meta">Paul Hom Asian Clinic &middot; Product Designer &middot; 2024</p>
           </div>
           <div class="pc-body">
-            <p class="pc-summary">Improving accessibility for elderly patients in a clinic website redesign.</p>
+            <div class="tag-row">
+              <span class="tag">Web Responsive</span>
+              <span class="tag">Accessibility</span>
+              <span class="tag">Nonprofit</span>
+            </div>
             <span class="pc-link">Case study coming soon</span>
           </div>
         </div>
@@ -142,6 +159,7 @@
 
     <div class="footer-bottom-row">
       <img src="media/flower-logo.png" alt="Grace Asuncion" class="footer-logo">
+      <p class="footer-credit">Designed and vibecoded with lots of endless nights and Alanis</p>
       <p class="footer-signature">Grace Asuncion &nbsp;&nbsp; &copy; 2026</p>
     </div>
   </div>

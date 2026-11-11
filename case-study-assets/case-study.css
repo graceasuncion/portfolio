@@ -357,3 +357,13 @@ img,video{max-width:100%;display:block}
   .cs-screens > *{width:72%;flex:none}
   .cs-compare-new .cs-screen{max-width:72%;margin:0 auto;width:72%}
 }
+
+/* Page entrance: the cover rises into place first, then the story follows.
+   `backwards` fill only holds the start state during the delay, so no transform
+   lingers afterwards (keeps the sticky cover and scroll effects untouched). */
+@keyframes cs-enter{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+.cs-cover{animation:cs-enter .9s cubic-bezier(.2,.7,.2,1) .15s backwards}
+.cs-story{animation:cs-enter 1s cubic-bezier(.2,.7,.2,1) .35s backwards}
+@media (prefers-reduced-motion: reduce){
+  .cs-cover,.cs-story{animation:none}
+}

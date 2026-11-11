@@ -130,12 +130,13 @@
 
   var supportsCss = function (rule) { return window.CSS && CSS.supports && CSS.supports(rule); };
   var stackItems = Array.prototype.slice.call(document.querySelectorAll('.stack-item'));
+  var revealItems = Array.prototype.slice.call(document.querySelectorAll('.stack-item, .work-item'));
   var stackEnd = document.querySelector('.stack-end');
   var stage = document.querySelector('.cosmos-stage');
   var wideQuery = window.matchMedia('(min-width: 721px)');
 
   // Staggered card reveal for browsers without view() timelines.
-  if (stackItems.length && !reducedMotion && !supportsCss('animation-timeline: view()') && 'IntersectionObserver' in window) {
+  if (revealItems.length && !reducedMotion && !supportsCss('animation-timeline: view()') && 'IntersectionObserver' in window) {
     document.body.classList.add('stack-reveal-js');
     var stackObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -144,10 +145,10 @@
         stackObserver.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -15% 0px' });
-    stackItems.forEach(function (item) { stackObserver.observe(item); });
+    revealItems.forEach(function (item) { stackObserver.observe(item); });
   }
 
-  if (stage && !reducedMotion) {
+  if ((stage || stackItems.length) && !reducedMotion) {
     var fadeInJs = !supportsCss('animation-timeline: scroll()');
     var scrollQueued = false;
 
@@ -155,25 +156,24 @@
       scrollQueued = false;
 
       // Galaxy fade fallback: 0 -> 90% of the viewport height.
-      if (fadeInJs) {
+      if (fadeInJs && stage) {
         var p = Math.min(window.scrollY / (window.innerHeight * 0.9), 1);
         stage.style.opacity = 1 - 0.82 * p;
         stage.style.transform = 'scale(' + (1 - 0.12 * p) + ')';
         stage.style.filter = p > 0 ? 'blur(' + (5 * p) + 'px)' : '';
       }
 
-      // Shrink and dim each card as the next one (or the ending) slides over it.
+      // Dim each card as the next one (or the ending) slides over it. Cards keep their
+      // full width so the stacked edges stay lined up with the card in front.
       stackItems.forEach(function (item, i) {
         var card = item.firstElementChild;
         var next = stackItems[i + 1] || stackEnd;
         if (!wideQuery.matches || !next) {
-          card.style.transform = '';
           card.style.filter = '';
           return;
         }
         var rect = item.getBoundingClientRect();
         var covered = Math.min(Math.max((rect.bottom - next.getBoundingClientRect().top) / rect.height, 0), 1);
-        card.style.transform = covered ? 'scale(' + (1 - 0.06 * covered) + ')' : '';
         card.style.filter = covered ? 'brightness(' + (1 - 0.12 * covered) + ')' : '';
       });
     };
@@ -188,6 +188,67 @@
     window.addEventListener('resize', queueScrollEffects);
     updateScrollEffects();
   }
+
+  // ASCII planets: each [data-ascii] globe is drawn as a character sphere,
+  // lit from the upper-left (denser glyphs = shadow side), with a surface per kind.
+  var asciiPlanet = function (kind, rows, cols) {
+    var pal = ['.', ':', ':', '-', '=', '+', '*', '#'];
+    var ringed = kind === 'ring';
+    var W = ringed ? Math.round(cols * 1.9) : cols;
+    var H = ringed ? rows + 2 : rows;
+    var cx = (W - 1) / 2, cy = (H - 1) / 2, rc = cols / 2, rr = rows / 2;
+    var a = -16 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+    var craters = [[0.28, -0.3, 0.3], [-0.34, 0.22, 0.26], [0.22, 0.42, 0.18]];
+    var lines = [];
+    for (var r = 0; r < H; r++) {
+      var line = '';
+      for (var c = 0; c < W; c++) {
+        var px = (c - cx) / rc, py = (r - cy) / rr, d = px * px + py * py, ch = ' ';
+        if (d <= 1) {
+          var shade = 0.45 * px + 0.45 * py + 0.6 * Math.sqrt(1 - d);
+          var idx = Math.max(0, Math.min(pal.length - 1, Math.floor(shade * pal.length)));
+          ch = d > 0.82 ? ':' : pal[idx];
+          if (d <= 0.82) {
+            if (kind === 'bands' || kind === 'ring') {
+              var bands = ['=', '~', '-', '=', '~', '-'];
+              ch = idx < 2 ? '.' : bands[r % bands.length];
+            } else if (kind === 'terra') {
+              var land = Math.sin(c * 1.1 + r * 0.6) + Math.sin(c * 0.45 - r * 1.3) + 0.6 * Math.cos(r * 0.9);
+              if (land > 0.7) { ch = idx < 3 ? '%' : '#'; } else { ch = pal[Math.max(0, idx - 2)]; }
+            } else if (kind === 'craters') {
+              for (var k = 0; k < craters.length; k++) {
+                var cr = craters[k];
+                var dd = Math.sqrt((px - cr[0]) * (px - cr[0]) + (py - cr[1]) * (py - cr[1]));
+                if (dd < cr[2]) { ch = dd < cr[2] * 0.55 ? pal[Math.max(0, idx - 3)] : 'o'; break; }
+              }
+            }
+          }
+        }
+        if (ringed) {
+          var qx = px * ca + py * sa, qy = -px * sa + py * ca;
+          var e = (qx / 1.8) * (qx / 1.8) + (qy / 0.42) * (qy / 0.42);
+          // Draw the ring everywhere off the globe, and over the globe only on its near (lower) half.
+          if (Math.abs(e - 1) < 0.22 && (d > 1 || qy > 0)) { ch = (c % 2) ? ':' : '='; }
+        }
+        line += ch;
+      }
+      lines.push(line);
+    }
+    return { text: lines.join('\n'), w: W, h: H };
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ascii]'), function (globe) {
+    var size = parseFloat(getComputedStyle(globe.parentNode).getPropertyValue('--size')) || 40;
+    var cols = Math.max(7, Math.round(size / 4.2));
+    var rows = Math.max(5, Math.round(cols * 0.7));
+    var art = asciiPlanet(globe.dataset.ascii, rows, cols);
+    var pre = document.createElement('span');
+    pre.className = 'cosmos-ascii';
+    pre.textContent = art.text;
+    globe.style.setProperty('--cols', cols);
+    globe.style.setProperty('--rows', rows);
+    globe.appendChild(pre);
+  });
 
   var orbit = document.querySelector('[data-orbit]');
   if (orbit) {
@@ -205,6 +266,30 @@
     var targetScale = 1;
     var lastFrame = null;
 
+    // Label side swap: fade the label in toward its planet, switch sides while it's
+    // hidden, then let it slide back out on the new side. A short cooldown stops it
+    // flickering if a planet lingers near the switch point (e.g. while the orbit is slowed).
+    var LABEL_FADE_MS = 260;
+    var setLabelSide = function (b, flip) {
+      if (b.flipped === undefined || reducedMotion) {
+        b.flipped = flip;
+        b.el.classList.toggle('is-flipped', flip);
+        return;
+      }
+      if (flip === b.flipped || b.flipping) return;
+      b.flipping = true;
+      b.el.classList.add('is-label-hidden');
+      setTimeout(function () {
+        b.flipped = !b.flipped;
+        b.el.classList.toggle('is-flipped', b.flipped);
+        // Let the hidden label settle on its new side before revealing it.
+        requestAnimationFrame(function () {
+          b.el.classList.remove('is-label-hidden');
+          setTimeout(function () { b.flipping = false; }, LABEL_FADE_MS);
+        });
+      }, LABEL_FADE_MS);
+    };
+
     var placeBodies = function () {
       var w = orbit.offsetWidth;
       var h = orbit.offsetHeight;
@@ -214,7 +299,7 @@
         b.el.style.transform = 'translate(' + x + 'px, ' + y + 'px) translate(-50%, -50%)';
         b.el.style.zIndex = Math.sin(b.angle) > 0 ? 2 : 0;
         // Keep labels inside the frame by flipping them left on the right side of the orbit.
-        b.el.classList.toggle('is-flipped', x > w * 0.72);
+        setLabelSide(b, x > w * 0.72);
       });
     };
 
@@ -241,6 +326,46 @@
       requestAnimationFrame(stepOrbit);
     }
   }
+
+  /* Hero "Last push": date of the latest commit on main, from GitHub.
+     Cached per session so page hops don't hit GitHub's rate limit.
+     Stays hidden if the request fails. */
+  (function lastPush() {
+    var KEY = 'last-push-date';
+    var API = 'https://api.github.com/repos/graceasuncion/portfolio/commits?sha=main&per_page=1';
+
+    function show(iso) {
+      var date = new Date(iso);
+      if (isNaN(date)) return;
+      var label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      document.querySelectorAll('[data-last-push]').forEach(function (el) {
+        el.setAttribute('datetime', iso);
+        el.textContent = label;
+        var wrap = el.closest('.cosmos-last-push');
+        if (wrap) wrap.hidden = false;
+      });
+    }
+
+    // case-study.js draws its footer after this file runs, so wait for the DOM
+    function whenReady(fn) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+      else fn();
+    }
+
+    var cached = null;
+    try { cached = sessionStorage.getItem(KEY); } catch (err) {}
+    if (cached) { whenReady(function () { show(cached); }); return; }
+
+    fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); })
+      .then(function (commits) {
+        var iso = commits[0] && commits[0].commit.committer.date;
+        if (!iso) return;
+        try { sessionStorage.setItem(KEY, iso); } catch (err) {}
+        whenReady(function () { show(iso); });
+      })
+      .catch(function () {});
+  })();
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 

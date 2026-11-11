@@ -247,6 +247,7 @@
         '</div>' +
         '<div class="footer-bottom-row">' +
           '<img src="media/flower-logo.png" alt="Grace Asuncion" class="footer-logo">' +
+          '<p class="footer-credit">Designed and vibecoded with lots of endless nights and Alanis</p>' +
           '<p class="footer-signature">Grace Asuncion &nbsp;&nbsp; © ' + SITE.year + '</p>' +
         '</div>' +
       '</div>';
