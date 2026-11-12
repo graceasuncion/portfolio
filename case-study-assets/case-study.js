@@ -12,7 +12,7 @@
      The header and footer copy the landing page (index.html). If you
      change the nav, status line or contact links there, change them here too. */
   var SITE = {
-    status: 'NOW DESIGNING · PAUL HOM',
+    status: 'LOOKING FOR FULL-TIME ROLES',
     email: 'gracehasuncion@gmail.com',
     linkedin: 'https://www.linkedin.com/in/gracehasuncion/',
     year: 2026,
@@ -20,8 +20,8 @@
     titleSuffix: ' — Grace Asuncion',
     nav: [
       { label: 'Work', href: 'work.html', current: true },
-      { label: 'About', href: 'about.html' },
       { label: 'Play', href: 'play.html' },
+      { label: 'About', href: 'about.html' },
       { label: 'Contact', href: '#contact' }
     ]
   };
@@ -247,7 +247,7 @@
         '</div>' +
         '<div class="footer-bottom-row">' +
           '<img src="media/flower-logo.png" alt="Grace Asuncion" class="footer-logo">' +
-          '<p class="footer-credit">Designed and vibecoded with lots of endless nights and Alanis</p>' +
+          '<p class="footer-credit">Designed and vibecoded with lots of Alanis ₊˚⊹♡</p>' +
           '<p class="footer-signature">Grace Asuncion &nbsp;&nbsp; © ' + SITE.year + '</p>' +
         '</div>' +
       '</div>';

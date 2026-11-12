@@ -1,0 +1,1211 @@
+/* =====================================================================
+   Playground page (play.html)
+   Windows are rendered from content/playground.js by playground.js.
+   Uses the portfolio system from styles.css: cosmos nav, .work-hero,
+   .work-main panel, .stack-head, cream cards, mono labels, .tag pills.
+===================================================================== */
+
+/* ---------- Tokens ---------- */
+.playground-page {
+  /* page + card background = var(--cream), text = var(--ink) from styles.css */
+  --pg-muted: #8c8780;                       /* same muted grey as .pc-num / .work-lede */
+  --pg-line: rgba(21, 23, 28, 0.1);          /* card border */
+  --pg-line-strong: rgba(21, 23, 28, 0.28);
+  --pg-dotted: rgba(42, 42, 40, 0.24);       /* .stack-head divider */
+  --pg-soft: rgba(21, 23, 28, 0.06);         /* hover background */
+  --pg-media: #eceef1;                       /* .pc-media */
+  --pg-media-3d: linear-gradient(180deg, #e4e6e9 0%, #f7f8f9 100%);
+  --pg-oval: rgba(21, 23, 28, 0.26);
+  --pg-shadow: 0 10px 36px rgba(21, 23, 28, 0.07);
+  --pg-shadow-hover: 0 18px 44px rgba(21, 23, 28, 0.11);
+  --pg-white: #ffffff;
+}
+
+.pg-hint {
+  max-width: 1240px;
+  margin: 0 auto 1.5rem;
+  padding-top: 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+.playground-page .pg-control:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---------- Stage: 6-column grid ---------- */
+.pg-stage {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  /* At least 280px; a row grows when a window keeps a fixed shape (videos with a ratio) */
+  grid-auto-rows: minmax(280px, auto);
+  gap: 24px;
+}
+
+/* Videos with a set ratio, and fitted photos, keep their own shape in the grid,
+   so they're never cropped; the row grows to the tallest one */
+.pg-stage .pg-has-ratio {
+  flex: none;
+  aspect-ratio: var(--ratio);
+}
+
+.pg-stage .pg-media-image--extend {
+  flex: none;
+  aspect-ratio: var(--ratio, 4 / 5);
+}
+
+/* fillGrid photos: on the desktop grid the window takes its height from its
+   rows (not the photo), and the photo covers it, cropping a little backdrop */
+@media (min-width: 861px) {
+  .pg-stage .pg-media-image--fill-grid {
+    flex: 1;
+    aspect-ratio: auto;
+  }
+
+  .pg-stage .pg-media-image--fill-grid .pg-fill {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* A shorter window in a tall row sits at the top instead of stretching */
+.pg-stage .pg-window:has(.pg-has-ratio) { align-self: start; }
+
+/* ---------- Window = portfolio card ---------- */
+.pg-window {
+  --accent: var(--ink);
+
+  position: relative;
+  grid-column: var(--col);
+  grid-row: var(--row);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0 12px 12px;
+  overflow: hidden;
+  border: 1px solid var(--pg-line);
+  border-radius: 24px;
+  background: var(--cream);
+  box-shadow: var(--pg-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .pg-window:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--pg-shadow-hover);
+  }
+}
+
+
+.pg-window:has(.pg-hit:focus-visible) {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* Title bar */
+.pg-titlebar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 48px;
+  padding: 0 0 0 8px;
+  font-family: var(--font-mono);
+}
+
+.pg-tb-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.pg-tb-right {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pg-tb-star {
+  flex: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.pg-file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+/* Narrow cards tighten the title bar so longer filenames fit.
+   (Only grid cards are containers; the focus view sizes to its content.) */
+.pg-stage .pg-window { container-type: inline-size; }
+
+@container (max-width: 420px) {
+  .pg-stage .pg-tb-left { gap: 0.45rem; }
+  .pg-stage .pg-file { letter-spacing: 0.02em; }
+  .pg-stage .pg-control { width: 22px; }
+}
+
+/* Very narrow cards drop the kind tag (it's still in the label and the focus view) */
+@container (max-width: 360px) {
+  .pg-stage .pg-kinds { display: none; }
+}
+
+/* Kind tags: small .tag pills (one or more) */
+.pg-kinds {
+  flex: none;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.pg-kind {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.6rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.pg-kind-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Decorative window controls (aria-hidden). They sit above the window
+   button so they can show hover states; clicks still toggle the window. */
+.pg-controls {
+  position: relative;
+  z-index: 4;
+  flex: none;
+  display: flex;
+  gap: 2px;
+}
+
+.pg-control {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 26px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--pg-muted);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pg-control:hover {
+  background: var(--pg-soft);
+  color: var(--ink);
+}
+
+.pg-control--close:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Body: the card's media area (.pc-media) */
+.pg-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--pg-media);
+}
+
+.pg-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+
+.pg-fill--contain {
+  object-fit: contain;
+  object-position: center bottom; /* any spare space goes on top, where photos are usually just backdrop */
+}
+
+/* Behind a contained image: the photo stretched 40x tall and pinned to the top,
+   so the space above the image shows its top row of pixels, continuing the backdrop */
+.pg-media-image--extend {
+  background-position: center top;
+  background-size: 100% 4000%;
+  background-repeat: no-repeat;
+}
+
+/* Videos with a set ratio keep their shape in the focus view */
+.pg-focus .pg-body.pg-has-ratio {
+  height: auto;
+  max-height: min(62dvh, 620px);
+  aspect-ratio: var(--ratio);
+}
+
+/* The focus view sizes to the image, so it doesn't need that */
+.pg-focus .pg-media-image--extend { background-image: none !important; } /* beats the inline style */
+
+.pg-todo {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+/* 3D: soft grey sweep, floating object, blurred oval shadow */
+.pg-media-3d {
+  display: grid;
+  place-items: center;
+  background: var(--pg-media-3d);
+}
+
+.pg-oval {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  width: 36%;
+  height: 7%;
+  border-radius: 50%;
+  background: var(--pg-oval);
+  filter: blur(14px);
+  transform: translateX(-50%);
+  animation: pg-oval 6s ease-in-out infinite;
+}
+
+/* Placeholder object; a real video/embed replaces it */
+.pg-object {
+  position: relative;
+  top: -6%;
+  width: min(34%, 220px);
+  aspect-ratio: 1;
+  border-radius: 46% 54% 52% 48% / 55% 45% 55% 45%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.95) 0 6%, transparent 30%),
+    radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--accent) 55%, #fff) 0%, var(--accent) 55%, color-mix(in srgb, var(--accent) 55%, #000) 100%);
+  box-shadow: inset -10px -14px 30px rgba(0, 0, 0, 0.12);
+  animation: pg-float 6s ease-in-out infinite;
+}
+
+@keyframes pg-float {
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+@keyframes pg-oval {
+  50% { transform: translateX(-50%) scale(0.86); opacity: 0.75; }
+}
+
+/* Phone frame */
+.pg-media-phone {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 55%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%),
+    var(--pg-media-3d);
+}
+
+.pg-phone {
+  position: relative;
+  height: 88%;
+  max-width: 92%;
+  aspect-ratio: 9 / 19.5;
+  padding: 9px;
+  border-radius: 40px;
+  background: #121316;
+  box-shadow: 0 24px 50px rgba(21, 23, 28, 0.25), inset 0 0 0 1.5px #2c2d33;
+}
+
+.pg-phone::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  z-index: 1;
+  width: 30%;
+  height: 20px;
+  border-radius: 999px;
+  background: #121316;
+  transform: translateX(-50%);
+}
+
+.pg-phone-screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #fbfaf7;
+}
+
+/* Fake app UI while there's no screenshot */
+.pg-fake {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 58px 14px 14px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 22%, #fff), #fbfaf7 45%);
+}
+
+.pg-fake span {
+  display: block;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 22%, #fff);
+}
+
+.pg-fake .pg-fake-title { width: 62%; height: 18px; border-radius: 6px; background: #2a2a28; opacity: 0.8; }
+.pg-fake .pg-fake-sub { width: 40%; height: 8px; border-radius: 4px; background: #2a2a28; opacity: 0.3; margin-bottom: 8px; }
+.pg-fake .pg-fake-hero { height: 32%; background: color-mix(in srgb, var(--accent) 50%, #fff); }
+.pg-fake .pg-fake-card { height: 12%; }
+.pg-fake .pg-fake-tab { margin-top: auto; height: 34px; border-radius: 999px; background: #2a2a28; opacity: 0.85; }
+
+/* Chat UI (AI) */
+.pg-media-chat {
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--accent) 7%, var(--pg-media));
+}
+
+.pg-chat-log {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 0;
+  margin: 0;
+  padding: 14px 14px 10px;
+  overflow: hidden;
+  list-style: none;
+}
+
+.pg-msg {
+  max-width: 78%;
+  padding: 7px 12px;
+  border-radius: 16px;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.pg-msg--user {
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.pg-msg--ai {
+  align-self: flex-start;
+  border: 1px solid var(--pg-line);
+  border-bottom-left-radius: 4px;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.pg-msg--ai::before {
+  content: "✦ ";
+  color: var(--accent);
+}
+
+.pg-chat-input {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 12px 12px;
+  padding: 7px 7px 7px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--pg-muted);
+}
+
+.pg-chat-send {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.75rem;
+}
+
+/* Image placeholder */
+.pg-ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--accent) 14%, transparent) 10px 11px),
+    color-mix(in srgb, var(--accent) 7%, var(--pg-media));
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+  text-align: center;
+}
+
+/* ASCII generator placeholder */
+.pg-media-ascii {
+  display: grid;
+  place-items: center;
+  background: var(--pg-white);
+}
+
+.pg-ascii {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(7px, 0.62vw, 10px);
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--accent) 75%, var(--ink));
+  white-space: pre;
+  user-select: none;
+}
+
+/* Sketch grid */
+.pg-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 8px;
+  padding: 8px;
+}
+
+.pg-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--cream);
+}
+
+.pg-cell img { width: 100%; height: 100%; object-fit: cover; }
+
+.pg-cell .pg-ph { font-size: 0.55rem; }
+
+/* ---------- Group tag: frosted ◆ pill at the top-left of the body ---------- */
+.pg-group {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--pg-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cream) 80%, transparent); /* frosted, like .cosmos-nav */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-group-mark { color: var(--accent); }
+
+/* ---------- Kit: three columns split by dashed dividers ---------- */
+.pg-media-kit {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 52px 0 18px; /* top clears the group tag */
+  background: var(--cream);
+  border: 1px solid var(--pg-line);
+}
+
+.pg-kit-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 20px;
+}
+
+.pg-kit-col + .pg-kit-col { border-left: 1.5px dashed var(--pg-dotted); }
+
+.pg-kit-label {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+.pg-kit-num { color: var(--accent); }
+
+.pg-kit-meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+/* 01 Brand */
+.pg-kit-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pg-kit-logo {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pg-kit-logo--ph {
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed var(--pg-dotted);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  color: var(--pg-muted);
+}
+
+.pg-kit-org {
+  margin: 0 0 0.2rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.05;
+}
+
+.pg-kit-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pg-kit-swatches li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pg-kit-swatches .pg-kit-meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+.pg-kit-swatch {
+  aspect-ratio: 1;
+  border: 1px solid var(--pg-line);
+  border-radius: var(--radius);
+}
+
+/* 02 Posts */
+.pg-kit-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.pg-kit-avatar {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.pg-kit-handle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.pg-kit-posts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pg-kit-post {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--pg-media);
+}
+
+.pg-kit-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pg-kit-post .pg-ph { font-size: 0.5rem; }
+
+.pg-kit-likes {
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* 03 Results */
+.pg-kit-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.pg-kit-stat {
+  display: flex;
+  flex-direction: row-reverse; /* number left, label right (dt comes first in the markup) */
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 8px 14px;
+  border: 1.5px dashed var(--pg-dotted);
+  border-radius: 12px;
+}
+
+.pg-kit-stat-value {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pg-kit-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+  text-align: right;
+}
+
+.pg-chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 110px;
+  margin: 0;
+}
+
+.pg-chart-plot {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.pg-chart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pg-chart-grid {
+  stroke: var(--pg-line);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.pg-chart-line {
+  fill: none;
+  stroke: var(--pg-chart, var(--accent));
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.pg-chart-area {
+  fill: var(--pg-chart, var(--accent));
+  fill-opacity: 0.12;
+}
+
+.pg-chart-ends {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ---------- Shirts: front + back on the soft card ---------- */
+.pg-media-shirts {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 16px 14px;
+}
+
+.pg-shirts-pair {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+
+.pg-shirt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  margin: 0;
+}
+
+.pg-shirt-img {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.pg-shirt-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pg-shirt-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  color: var(--pg-muted);
+}
+
+/* Dot pagination: real buttons, above the window's click layer */
+.pg-dots {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.pg-dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.pg-dot::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+}
+
+.pg-dot[aria-pressed="true"]::before { background: var(--ink); }
+.pg-dot:hover::before { background: var(--pg-muted); }
+.pg-dot[aria-pressed="true"]:hover::before { background: var(--ink); }
+
+.playground-page .pg-dot:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+/* ---------- Ticket: centered on the soft card ---------- */
+.pg-media-ticket {
+  display: grid;
+  place-items: center;
+  padding: 48px 20px 20px;
+}
+
+.pg-ticket-scan {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: var(--pg-shadow);
+}
+
+/* drop-shadow on a wrapper, since the notches are cut with a mask */
+.pg-ticket-wrap {
+  width: min(100%, 480px);
+  filter: drop-shadow(var(--pg-shadow));
+}
+
+.pg-ticket {
+  --stub: 24%;
+  --notch: 9px;
+  --tear: calc(100% - var(--stub));
+
+  display: flex;
+  aspect-ratio: 2.4 / 1;
+  border-radius: 12px;
+  background: var(--cream);
+  /* two half-circle notches at the top and bottom of the tear line */
+  -webkit-mask:
+    radial-gradient(circle at var(--tear) 0, transparent var(--notch), #000 calc(var(--notch) + 0.5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--tear) 100%, transparent var(--notch), #000 calc(var(--notch) + 0.5px)) bottom / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle at var(--tear) 0, transparent var(--notch), #000 calc(var(--notch) + 0.5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--tear) 100%, transparent var(--notch), #000 calc(var(--notch) + 0.5px)) bottom / 100% 51% no-repeat;
+}
+
+.pg-ticket-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0 7%;
+}
+
+.pg-ticket-main p { margin: 0; }
+
+.pg-ticket-admit {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
+
+.pg-ticket-event {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1;
+}
+
+.pg-ticket-meta {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+/* Stub, past the dashed tear line */
+.pg-ticket-stub {
+  flex: none;
+  width: var(--stub);
+  display: grid;
+  place-items: center;
+  border-left: 1.5px dashed var(--pg-dotted);
+}
+
+.pg-ticket-no {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Focus view: the kit scrolls if it doesn't fit */
+.pg-focus .pg-media-kit { overflow-y: auto; }
+
+/* ---------- Focus view: a <dialog> that brings one window forward ---------- */
+.pg-focus {
+  width: fit-content;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+/* The page behind goes soft and out of focus */
+.pg-focus::backdrop {
+  background: rgba(244, 245, 247, 0.45);
+  -webkit-backdrop-filter: blur(14px) saturate(0.9);
+  backdrop-filter: blur(14px) saturate(0.9);
+}
+
+html:has(.pg-focus[open]) { overflow: hidden; }
+
+/* Keep the scrollbar's space when scrolling is locked, so the page doesn't jump sideways */
+html:has(.playground-page) { scrollbar-gutter: stable; }
+
+/* The blur strength itself animates (not opacity), so there's no double image
+   of blurred + sharp page. The window's own motion is in playground.js. */
+.pg-focus[open]::backdrop { animation: pg-blur-in 0.4s ease-out; }
+.pg-focus.is-closing::backdrop { animation: pg-blur-out 0.4s ease-in-out forwards; }
+
+@keyframes pg-blur-in {
+  from {
+    background: rgba(244, 245, 247, 0);
+    -webkit-backdrop-filter: blur(0) saturate(1);
+    backdrop-filter: blur(0) saturate(1);
+  }
+}
+
+@keyframes pg-blur-out {
+  to {
+    background: rgba(244, 245, 247, 0);
+    -webkit-backdrop-filter: blur(0) saturate(1);
+    backdrop-filter: blur(0) saturate(1);
+  }
+}
+
+.pg-focus .pg-focus-window {
+  height: auto; /* beats the fixed card heights on small screens */
+  max-height: calc(100dvh - 32px);
+  box-shadow: 0 40px 100px rgba(21, 23, 28, 0.22);
+}
+
+.pg-focus-window:hover { transform: none; }
+
+/* Media gets a large fixed stage... */
+.pg-focus .pg-body {
+  flex: none;
+  width: min(880px, calc(100vw - 58px));
+  height: min(62dvh, 620px);
+}
+
+/* ...except single images, which size to the picture so nothing is cropped */
+.pg-focus .pg-media-image:has(img) { width: auto; }
+
+.pg-focus .pg-media-image img {
+  position: static;
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 58px);
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Close button: the real × */
+.pg-focus .pg-control--close {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.pg-focus .pg-control--close:hover,
+.pg-focus .pg-control--close:focus-visible {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.pg-focus .pg-control--close:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+
+/* Notes under the media, dotted divider like .stack-head */
+.pg-notes {
+  /* width 0 + min-width 100%: long text wraps instead of widening the window */
+  width: 0;
+  min-width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 12px;
+  padding: 16px 8px 6px;
+  border-top: 1.5px dotted var(--pg-dotted);
+}
+
+.pg-notes-title {
+  margin: 0 0 0.35rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  line-height: 1.06;
+}
+
+.pg-notes-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* Tools section: its own row under the description */
+.pg-tools {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1.5px dotted var(--pg-dotted);
+}
+
+.pg-tools-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pg-muted);
+}
+
+.pg-tools-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pg-tools-empty {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--pg-muted);
+}
+
+/* Invisible button that makes the whole window clickable */
+.pg-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.playground-page .pg-hit:focus-visible { outline: none; }
+
+/* Interactive Spline scenes keep pointer events; only the title bar toggles notes */
+.pg-window.is-interactive .pg-hit {
+  bottom: auto;
+  height: 48px;
+}
+
+/* ---------- Small screens: one stacked column ---------- */
+@media (max-width: 860px) {
+  .pg-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .pg-window { height: 440px; }
+
+  .pg-window--phone { height: 660px; }
+
+  /* Fitted photos: the window takes the photo's shape, so nothing is cropped or padded */
+  .pg-window:has(.pg-media-image--extend),
+  .pg-window:has(.pg-has-ratio) { height: auto; }
+
+  /* In the stacked column, every window is full width */
+  .pg-stage .pg-window:has(.pg-has-ratio) { align-self: stretch; }
+
+
+  .pg-ascii { font-size: 7px; }
+
+  /* Kit: columns stack with dashed tops, and the window grows to fit */
+  .pg-window--kit { height: auto; }
+  .pg-media-kit { flex: none; grid-template-columns: minmax(0, 1fr); }
+  .pg-kit-col { padding: 18px 18px 0; }
+  .pg-kit-col:first-of-type { padding-top: 0; } /* the group tag <p> comes first */
+  .pg-kit-col + .pg-kit-col {
+    margin-top: 18px;
+    border-left: 0;
+    border-top: 1.5px dashed var(--pg-dotted);
+  }
+  .pg-chart { flex: none; height: 160px; }
+  .pg-focus .pg-media-kit { height: min(52dvh, 560px); }
+
+  .pg-focus .pg-body { height: min(52dvh, 560px); }
+
+}
+
+@media (max-width: 520px) {
+  .pg-control { width: 24px; }
+  .pg-kinds { display: none; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .pg-window,
+  .pg-control,
+  .pg-dot::before { transition: none; }
+
+  .pg-window:hover { transform: none; }
+
+  .pg-object,
+  .pg-oval { animation: none; }
+
+  .pg-focus[open]::backdrop,
+  .pg-focus.is-closing::backdrop { animation: none; }
+}

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
+<!-- Playground page. Window data lives in content/playground.js. Layout: playground-assets/ -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Play — Grace Asuncion</title>
+<meta name="description" content="Playground: 3D renders, side-project apps, AI experiments, tools and sketches by Grace Asuncion.">
 <link rel="icon" href="media/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="playground-assets/playground.css">
 
 <script src="script.js" defer></script>
+<script src="content/playground.js" defer></script>
+<script src="playground-assets/playground.js" defer></script>
 </head>
-<body class="is-page-enter">
+<body class="is-page-enter work-page playground-page">
 
 <nav class="site-nav cosmos-nav">
   <div class="cosmos-nav-inner">
@@ -25,36 +30,27 @@
     </a>
     <div class="cosmos-nav-links">
       <a href="work.html" class="nav-link">Work</a>
-      <a href="about.html" class="nav-link">About</a>
       <a href="play.html" class="nav-link is-active" aria-current="page">Play</a>
+      <a href="about.html" class="nav-link">About</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
-    <p class="cosmos-status"><span class="cosmos-status-dot" aria-hidden="true"></span>NOW DESIGNING &middot; PAUL HOM</p>
+    <p class="cosmos-status"><span class="cosmos-status-dot" aria-hidden="true"></span>LOOKING FOR FULL-TIME ROLES</p>
   </div>
 </nav>
 
-<main class="wrap doodle-field">
-  <div class="doodle" style="top:5rem; right:6%; width:26px; height:26px; --r:8deg;">
-    <svg viewBox="0 0 40 40" fill="var(--yellow-deep)"><path d="M20 2 C21 14 26 19 38 20 C26 21 21 26 20 38 C19 26 14 21 2 20 C14 19 19 14 20 2 Z"/></svg>
-  </div>
-  <div class="doodle" style="top:9rem; right:16%; width:20px; height:20px; --r:-6deg; animation-delay:0.6s;">
-    <svg viewBox="0 0 20 20" fill="none" stroke="var(--pink-deep)" stroke-width="1.6"><circle cx="10" cy="10" r="7"/></svg>
-  </div>
+<header class="work-hero">
+  <h1 class="work-title">Playground</h1>
+  <p class="work-lede">Side quests, 3D renders &amp; half-finished ideas</p>
+</header>
 
-  <div class="section-intro work-intro">
-    <h2 class="section-title">Play</h2>
-    <p class="play-intro">Experiments, side projects, and things I make just for fun.</p>
-  </div>
+<main class="work-main">
+  <section class="work-section" aria-label="Playground projects">
+    <p class="pg-hint">Click a window for a closer look</p>
 
-  <div class="work-grid">
-    <div class="work-card" data-status="coming-soon">
-      <div class="thumb"><span class="index">01</span><span>New experiments landing soon</span></div>
-      <div class="card-top">
-        <h3 class="impact-style">Coming soon</h3>
-      </div>
-      <span class="view-link">Check back soon</span>
-    </div>
-  </div>
+    <!-- Windows are rendered from content/playground.js -->
+    <div class="pg-stage" data-stage></div>
+    <noscript><p class="pg-hint">The playground needs JavaScript to load its windows.</p><style>body.is-page-enter{opacity:1}</style></noscript>
+  </section>
 </main>
 
 <div class="stack-end home-page page-footer-wrap">
@@ -75,7 +71,7 @@
 
     <div class="footer-bottom-row">
       <img src="media/flower-logo.png" alt="Grace Asuncion" class="footer-logo">
-      <p class="footer-credit">Designed and vibecoded with lots of endless nights and Alanis</p>
+      <p class="footer-credit">Designed and vibecoded with lots of Alanis ₊˚⊹♡</p>
       <p class="footer-signature">Grace Asuncion &nbsp;&nbsp; &copy; 2026</p>
     </div>
   </div>

@@ -39,7 +39,7 @@ Open its content file and change the text. The `.html` page files hold no conten
 
 | File | What it's for |
 | --- | --- |
-| `case-study-assets/case-study.js` | Header and footer markup (copied from `index.html`), the nav links, "Now designing" status, email and LinkedIn, plus planet art and scroll behaviour |
+| `case-study-assets/case-study.js` | Header and footer markup (copied from `index.html`), the nav links, "Looking for full-time roles" status, email and LinkedIn, plus planet art and scroll behaviour |
 | `case-study-assets/components.js` | Section components (KeyInsight, DecisionCards, UsabilityFinding, …) |
 | `case-study-assets/case-study.css` | Case study styles. Header and footer styles come from the site's `styles.css` |
 

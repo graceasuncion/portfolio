@@ -1481,43 +1481,6 @@ p.scrapbook-greeting {
   }
 }
 
-.about-page .back-link,
-.about-page .project-title,
-.about-page .hero-tagline,
-.about-page .scrapbook-board {
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.about-page.is-page-enter .back-link,
-.about-page.is-page-enter .project-title,
-.about-page.is-page-enter .hero-tagline,
-.about-page.is-page-enter .scrapbook-board {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.about-page .back-link { transition-delay: 0.05s; }
-.about-page .project-title { transition-delay: 0.15s; }
-.about-page .hero-tagline { transition-delay: 0.25s; }
-.about-page .scrapbook-board { transition-delay: 0.35s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .about-page .back-link,
-  .about-page .project-title,
-  .about-page .hero-tagline,
-  .about-page .scrapbook-board {
-    transition: none;
-  }
-
-  .about-page.is-page-enter .back-link,
-  .about-page.is-page-enter .project-title,
-  .about-page.is-page-enter .hero-tagline,
-  .about-page.is-page-enter .scrapbook-board {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .contact-list {
   list-style: none;
   margin: 0;
@@ -2445,6 +2408,12 @@ ul.judges-list {
   gap: 0.5rem;
   margin: 0;
   color: #8c8780;
+  white-space: nowrap;
+}
+
+/* Hide the status before it crowds the centered tabs */
+@media (max-width: 1100px) {
+  .cosmos-status { display: none; }
 }
 
 .cosmos-status-dot {
@@ -3146,7 +3115,6 @@ a.stack-card:hover .pc-link { letter-spacing: 0.2em; }
   background-size: auto;
 }
 
-.work-kicker,
 .work-lede,
 .work-count {
   margin: 0;
@@ -3176,6 +3144,30 @@ a.stack-card:hover .pc-link { letter-spacing: 0.2em; }
   padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
+/* "All projects" stays pinned while the project panel scrolls up over it,
+   the same rounded, shadowed panel the footer uses */
+.work-page .work-hero,
+.about-page .work-hero {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+.work-page .work-main,
+.about-page .work-main {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(0.5rem, 2vw, 1.5rem);
+  background: var(--cream);
+  border-top: 1px solid rgba(21, 23, 28, 0.1);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -16px 48px rgba(21, 23, 28, 0.08);
+  /* Keep the last section's bottom margin inside the panel, and run the
+     panel under the footer's rounded corners so the title never peeks through */
+  display: flow-root;
+  padding-bottom: 28px;
+}
+
 .work-section {
   max-width: 1240px;
   margin: 0 auto clamp(3rem, 6vw, 5rem);
@@ -3197,8 +3189,10 @@ a.stack-card:hover .pc-link { letter-spacing: 0.2em; }
 
 .work-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-/* Footer follows the last section directly (the section already leaves room below) */
-.work-page .stack-end.page-footer-wrap { margin-top: 0; }
+/* Footer tucks 28px over the bottom of the project panel, so its rounded
+   corners sit on the panel rather than on the pinned title behind it */
+.work-page .stack-end.page-footer-wrap,
+.about-page .stack-end.page-footer-wrap { margin-top: -28px; }
 
 /* Cards in the same row match heights, with the tags and link pinned to the bottom */
 .work-grid-2 > li { display: flex; }
@@ -3231,9 +3225,103 @@ a.work-mini:hover {
 
 }
 
+/* ================================
+   About page: same cards as the Work grid
+================================ */
+.about-card {
+  margin: 0;
+  width: 100%;
+  padding: 20px;
+  background: var(--cream);
+  border: 1px solid rgba(21, 23, 28, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 10px 36px rgba(21, 23, 28, 0.07);
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
+}
+
+.about-intro > .about-card { display: flex; }
+
+.about-photo .pc-media {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.about-bio {
+  align-items: center;
+  padding: clamp(24px, 4vw, 48px);
+}
+
+.about-bio .pc-num { margin-bottom: 1.4rem; }
+
+.about-bio-text {
+  margin: 0 0 1rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.about-bio-text:last-child { margin-bottom: 0; }
+
+.about-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-grid-3 > li { display: flex; }
+
+.about-grid-3 .pc-media { aspect-ratio: 4 / 3; }
+
+.about-caption {
+  margin-top: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 960px) {
+  .about-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .about-intro,
+  .about-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Entrance: title, lede, then each project section fade up in turn.
+   Runs on every load and refresh. Sections (not cards) animate, so the
+   cards' hover lift isn't affected. */
+@keyframes work-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+}
+
+.work-title,
+.work-lede,
+.work-section {
+  animation: work-fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.work-title { animation-delay: 0.1s; }
+.work-lede { animation-delay: 0.25s; }
+.work-section:nth-of-type(1) { animation-delay: 0.4s; }
+.work-section:nth-of-type(2) { animation-delay: 0.55s; }
+
 @media (prefers-reduced-motion: reduce) {
   .work-mini { transition: none; }
   a.work-mini:hover { transform: none; }
+
+  .work-title,
+  .work-lede,
+  .work-section { animation: none; }
 }
 
 /* ================================
