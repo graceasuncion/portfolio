@@ -111,8 +111,7 @@
           name: 'Mga Kapatid',
           logo: { src: '', alt: 'PCN 38 logo' },          // TODO: logo file (square or round PNG/SVG)
           typeface: 'TODO',                              // TODO: display typeface name
-          // TODO: swap for the real PCN 38 palette (placeholder: Philippine flag colours)
-          colors: ['#0038a8', '#ce1126', '#fcd116', '#ffffff', '#1a1a1a']
+          colors: ['#f0d074', '#6dab1e', '#edf2fd', '#e5e4e4', '#61961e', '#105213']
         },
         posts: {
           handle: '@TODO',                               // TODO: Instagram handle
