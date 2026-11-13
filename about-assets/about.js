@@ -250,7 +250,7 @@
     list.innerHTML = items.map(function (item) {
       var tint = CATEGORY[item.category] || TINT.blue;
       var desc = item.desc && item.desc !== '—'
-        ? ' · <span class="ab-xp-desc">' + esc(item.desc) + '</span>'
+        ? ' <span class="ab-sep" aria-hidden="true">·</span> <span class="ab-xp-desc">' + esc(item.desc) + '</span>'
         : '';
       var link = item.link && item.link.href
         ? '<a class="pc-link ab-xp-link" href="' + esc(item.link.href) + '">' + esc(item.link.text) + '</a>'

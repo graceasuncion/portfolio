@@ -17,7 +17,7 @@
     linkedin: 'https://www.linkedin.com/in/gracehasuncion/',
     year: 2026,
     workHref: 'work.html',
-    titleSuffix: ' — Grace Asuncion',
+    titleSuffix: ' | Grace Asuncion',
     nav: [
       { label: 'Work', href: 'work.html', current: true },
       { label: 'Play', href: 'play.html' },

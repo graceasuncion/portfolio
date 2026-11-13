@@ -2,7 +2,7 @@
    About page content (about.html). Layout lives in about-assets/.
    Edit the text here; the page re-renders from it on load.
 
-   rightNow   — the "Right now." card. Update `month` and the three items.
+   rightNow   — the "Right now." card: the three items.
    experience — "Where I've been", newest first.
                 category: 'Leadership' | 'Work' | 'Student org' | 'Education'
                 logo (optional): square image path; empty shows an initials placeholder
@@ -11,8 +11,6 @@
 ===================================================================== */
 window.ABOUT = {
   rightNow: {
-    month: 'NOV 2026',
-
     playing: {
       title: 'Final Fantasy VII Rebirth',
       image: 'media/ff7-rebirth.jpg',  // optional; leave '' for the ASCII planet scene

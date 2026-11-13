@@ -125,6 +125,11 @@
   color: var(--ab-muted);
 }
 
+/* the · between two values; wider gap than a plain space */
+.ab-sep {
+  margin: 0 0.45em;
+}
+
 .ab-facts dd {
   margin: 0;
   font-size: 0.95rem;
