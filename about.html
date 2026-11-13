@@ -1,18 +1,23 @@
 <!DOCTYPE html>
+<!-- About page. Text for "Right now", "Where I've been" and skills lives in content/about.js. Layout: about-assets/ -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Grace Asuncion</title>
+<meta name="description" content="Grace Asuncion is a product designer with a background in Cognitive Science and Design from UC Davis, designing human-centered experiences for people and AI.">
 <link rel="icon" href="media/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="about-assets/about.css">
 
 <script src="script.js" defer></script>
+<script src="content/about.js" defer></script>
+<script src="about-assets/about.js" defer></script>
 </head>
-<body class="is-page-enter about-page">
+<body class="is-page-enter work-page about-page">
 
 <nav class="site-nav cosmos-nav">
   <div class="cosmos-nav-inner">
@@ -39,55 +44,82 @@
 </header>
 
 <main class="work-main">
-  <section class="work-section" aria-labelledby="hello-title">
-    <div class="stack-head">
-      <h2 id="hello-title">Hello, I&rsquo;m Grace</h2>
+
+  <!-- Hello -->
+  <section class="work-section ab-hello" aria-labelledby="hello-title">
+    <!-- Faint ASCII stars, placed by about-assets/about.js (seeded, so they stay put) -->
+    <div class="ab-stars" aria-hidden="true" data-stars></div>
+
+    <!-- Floating planets behind the cards. Globes are drawn by the landing page's
+         ASCII renderer (script.js, [data-ascii]); position/float in about.css "Floating planets".
+         --size: globe size · --glow: glow circle · --dur / --delay: float loop -->
+    <div class="ab-planets" aria-hidden="true">
+      <span class="ab-fp ab-fp--blue"       style="--tint:#4f7c9e; --size:68px; --glow:100px; --dur:12s;   --delay:-3s;"><span class="cosmos-globe" data-ascii="ring"></span></span>
+      <span class="ab-fp ab-fp--gold"       style="--tint:#c9a440; --size:22px; --glow:70px;  --dur:9.5s;  --delay:-6s;"><span class="cosmos-globe" data-ascii="plain"></span></span>
+      <span class="ab-fp ab-fp--lavender"   style="--tint:#8b7fd4; --size:52px; --glow:90px;  --dur:13.5s; --delay:-1s;"><span class="cosmos-globe" data-ascii="bands"></span></span>
+      <span class="ab-fp ab-fp--terracotta" style="--tint:#d9694f; --size:46px; --glow:85px;  --dur:11s;   --delay:-8s;"><span class="cosmos-globe" data-ascii="craters"></span></span>
+      <span class="ab-fp ab-fp--green"      style="--tint:#6b8a47; --size:40px; --glow:80px;  --dur:10.5s; --delay:-4.5s;"><span class="cosmos-globe" data-ascii="terra"></span></span>
     </div>
 
-    <div class="about-intro">
-      <div class="work-item about-card about-photo">
-        <div class="pc-media"><img src="media/grac-smiling-grad.jpg" alt="Grace Asuncion smiling at graduation"></div>
-      </div>
+    <div class="stack-head ab-hello-head">
+      <h2 id="hello-title"><span class="ab-star ab-twinkle" aria-hidden="true">&#10022;</span>Hello! I&rsquo;m Grace<span class="ab-gold">.</span></h2>
+    </div>
 
-      <div class="work-item about-card about-bio">
-        <div class="pc-body">
-          <p class="pc-num">Product Designer</p>
-          <p class="about-bio-text">I am a product designer who leads with strategy, taking the time to understand the human and technical forces shaping a problem before deciding what to build.</p>
-          <p class="about-bio-text">Growing up in Los Angeles, I was constantly surrounded by different perspectives, backgrounds, and ways of seeing the world. That shaped how I pay attention to context, to what&rsquo;s unspoken, to the details people assume you&rsquo;ll just notice. It&rsquo;s a habit I still rely on whenever I&rsquo;m designing for real people today.</p>
+    <div class="ab-intro">
+      <div class="ab-card ab-bio-card">
+        <p class="ab-lead">
+          A product designer with a background in <strong>Cognitive Science and Design</strong> from UC Davis.
+          I design human-centered experiences at the intersection of <mark class="ab-hl">people and AI</mark>.
+        </p>
+
+        <div class="ab-bio">
+          <p class="ab-dropcap">I believe the best design comes from connection. I care about building communities and creating work that brings people together, whether it&rsquo;s a product that helps someone feel more confident or a space where people feel they belong.</p>
+          <p>At UC Davis, I spent much of my time in leadership roles, connecting with people across many communities. Those connections shaped how I see people, and how I design for them.</p>
+          <p>As AI changes how we use technology, I want to make sure it stays human, with experiences that feel personal, thoughtful, and made for the people using them.</p>
         </div>
+
+        <dl class="ab-facts">
+          <div><dt>Based in</dt><dd>Los Angeles, CA · Open to relocation</dd></div>
+          <div><dt>Education</dt><dd>B.A. Cognitive Science &amp; Design, UC Davis &rsquo;26</dd></div>
+          <div><dt>Focus</dt><dd>Human-centered design · people + AI</dd></div>        </dl>
       </div>
+
+      <figure class="ab-card ab-photo-card">
+        <div class="ab-photo-frame">
+          <img class="ab-photo" src="media/grac-smiling-grad.jpg" alt="Grace Asuncion smiling at graduation">
+        </div>
+      </figure>
     </div>
   </section>
 
-  <section class="work-section" aria-labelledby="off-clock-title">
+  <!-- Right now -->
+  <section class="work-section" aria-labelledby="now-title">
     <div class="stack-head">
-      <h2 id="off-clock-title">Off the clock</h2>
-      <span class="work-count">03</span>
+      <h2 id="now-title">Right now</h2>
+      <span class="work-count ab-now-date"><span class="cosmos-status-dot ab-blink" aria-hidden="true"></span><span data-now-month></span></span>
+    </div>
+    <!-- Cards are rendered from content/about.js -->
+    <ul class="ab-grid-3" data-now-list></ul>
+  </section>
+
+  <!-- Where I've been -->
+  <section class="work-section" aria-labelledby="path-title">
+    <div class="stack-head">
+      <h2 id="path-title">Where I&rsquo;ve been</h2>
+      <span class="work-count" data-experience-count></span>
     </div>
 
-    <ul class="about-grid-3">
-      <li class="work-item">
-        <figure class="about-card">
-          <div class="pc-media"><img src="media/concert.jpg" alt="Grace at a concert"></div>
-          <figcaption class="pc-body about-caption">I love going to concerts and seeing my fav artists live!</figcaption>
-        </figure>
-      </li>
+    <div class="ab-path">
+      <ol class="ab-xp-list" data-experience aria-labelledby="path-title"></ol>
 
-      <li class="work-item">
-        <figure class="about-card">
-          <div class="pc-media"><img src="media/ff7.jpg" alt="Final Fantasy VII"></div>
-          <figcaption class="pc-body about-caption">Recently, I&rsquo;ve been into playing the Final Fantasy VII games.</figcaption>
-        </figure>
-      </li>
-
-      <li class="work-item">
-        <figure class="about-card">
-          <div class="pc-media"><img src="media/pokemon.jpg" alt="Pokemon"></div>
-          <figcaption class="pc-body about-caption">I like exploring my niches, one side quest at a time. (I am a big Pokemon fan!)</figcaption>
-        </figure>
-      </li>
-    </ul>
+      <aside class="ab-card ab-skills" aria-labelledby="skills-title">
+        <h3 class="pc-num" id="skills-title">What I bring</h3>
+        <ul class="tag-row ab-skill-list" data-skills></ul>
+      </aside>
+    </div>
   </section>
+
+  <noscript><style>body.is-page-enter{opacity:1}</style></noscript>
 </main>
 
 <div class="stack-end home-page page-footer-wrap">

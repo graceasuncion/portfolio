@@ -3146,15 +3146,13 @@ a.stack-card:hover .pc-link { letter-spacing: 0.2em; }
 
 /* "All projects" stays pinned while the project panel scrolls up over it,
    the same rounded, shadowed panel the footer uses */
-.work-page .work-hero,
-.about-page .work-hero {
+.work-page .work-hero {
   position: sticky;
   top: 0;
   z-index: 0;
 }
 
-.work-page .work-main,
-.about-page .work-main {
+.work-page .work-main {
   position: relative;
   z-index: 1;
   padding-top: clamp(0.5rem, 2vw, 1.5rem);
@@ -3191,8 +3189,7 @@ a.stack-card:hover .pc-link { letter-spacing: 0.2em; }
 
 /* Footer tucks 28px over the bottom of the project panel, so its rounded
    corners sit on the panel rather than on the pinned title behind it */
-.work-page .stack-end.page-footer-wrap,
-.about-page .stack-end.page-footer-wrap { margin-top: -28px; }
+.work-page .stack-end.page-footer-wrap { margin-top: -28px; }
 
 /* Cards in the same row match heights, with the tags and link pinned to the bottom */
 .work-grid-2 > li { display: flex; }
@@ -3223,78 +3220,6 @@ a.work-mini:hover {
 @media (max-width: 720px) {
   .work-grid-2 { grid-template-columns: 1fr; }
 
-}
-
-/* ================================
-   About page: same cards as the Work grid
-================================ */
-.about-card {
-  margin: 0;
-  width: 100%;
-  padding: 20px;
-  background: var(--cream);
-  border: 1px solid rgba(21, 23, 28, 0.1);
-  border-radius: 24px;
-  box-shadow: 0 10px 36px rgba(21, 23, 28, 0.07);
-}
-
-.about-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 24px;
-}
-
-.about-intro > .about-card { display: flex; }
-
-.about-photo .pc-media {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-}
-
-.about-bio {
-  align-items: center;
-  padding: clamp(24px, 4vw, 48px);
-}
-
-.about-bio .pc-num { margin-bottom: 1.4rem; }
-
-.about-bio-text {
-  margin: 0 0 1rem;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  line-height: 1.7;
-}
-
-.about-bio-text:last-child { margin-bottom: 0; }
-
-.about-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.about-grid-3 > li { display: flex; }
-
-.about-grid-3 .pc-media { aspect-ratio: 4 / 3; }
-
-.about-caption {
-  margin-top: 1.1rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  line-height: 1.6;
-  color: var(--ink-soft);
-}
-
-@media (max-width: 960px) {
-  .about-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 720px) {
-  .about-intro,
-  .about-grid-3 { grid-template-columns: 1fr; }
 }
 
 /* Entrance: title, lede, then each project section fade up in turn.

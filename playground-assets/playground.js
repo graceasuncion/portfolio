@@ -8,6 +8,7 @@
 
   var stage = document.querySelector('[data-stage]');
   var data = window.PLAYGROUND || [];
+  var kindColors = window.PLAYGROUND_KIND_COLORS || {};
   if (!stage) return;
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -413,7 +414,7 @@
       el('div', { class: 'pg-tb-right' }, [
         el('span', { class: 'pg-kinds', 'aria-hidden': closeBtn ? null : 'true' }, kinds(item).map(function (kind) {
           return el('span', { class: 'pg-kind' }, [
-            el('span', { class: 'pg-kind-dot', 'aria-hidden': 'true' }),
+            el('span', { class: 'pg-kind-dot', 'aria-hidden': 'true', style: kindColors[kind] ? 'background:' + kindColors[kind] : null }),
             el('span', { text: kind })
           ]);
         })),
@@ -434,6 +435,46 @@
 
   var current = null; // { win, hit }
 
+  /* Focus-view gallery: the main image plus item.extra, switched with thumbnails.
+     The frame keeps the main image's size, so switching photos doesn't resize the window. */
+  function gallery(body, m, item) {
+    var img = body.querySelector('img');
+    var slides = [{ src: m.src, alt: m.alt || '' }].concat(item.extra);
+    var ph = null;
+    var thumbs = [];
+
+    var lockSize = function () { if (img.naturalWidth) body.style.width = body.offsetWidth + 'px'; };
+    if (img.complete) requestAnimationFrame(lockSize); else img.addEventListener('load', lockSize);
+
+    var show = function (i) {
+      var s = slides[i];
+      if (ph) { ph.remove(); ph = null; }
+      if (s.src) {
+        img.src = s.src;
+        img.alt = s.alt || '';
+        img.style.visibility = '';
+      } else {
+        img.style.visibility = 'hidden';
+        ph = placeholder('TODO · ' + (s.label || 'extra photo'));
+        ph.classList.add('pg-gallery-ph');
+        body.appendChild(ph);
+      }
+      thumbs.forEach(function (t, j) { t.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+    };
+
+    var list = el('ul', { class: 'pg-thumbs', 'aria-label': 'Photos' }, slides.map(function (s, i) {
+      var btn = el('button', { type: 'button', class: 'pg-thumb', 'aria-label': 'Photo ' + (i + 1) + ' of ' + slides.length }, [
+        s.src ? el('img', { src: s.src, alt: '' }) : placeholder('TODO')
+      ]);
+      btn.addEventListener('click', function () { show(i); });
+      thumbs.push(btn);
+      return el('li', {}, [btn]);
+    }));
+
+    show(0);
+    return el('div', { class: 'pg-gallery' }, [body, list]);
+  }
+
   function openFocus(item, win, hit) {
     if (focus.open) return;
     var m = item.media || {};
@@ -444,9 +485,12 @@
     focusWin.style.setProperty('--accent', item.accent || '');
     focusWin.textContent = '';
     focusWin.appendChild(titlebar(item, closeBtn));
-    focusWin.appendChild(buildBody(m, item));
+    var mediaEl = buildBody(m, item);
+    // Extra photos only appear here in the focus view, as a thumbnail gallery
+    if ((item.extra || []).length && m.type === 'image' && m.src) mediaEl = gallery(mediaEl, m, item);
     var tools = item.tools || [];
-    focusWin.appendChild(el('div', { class: 'pg-notes' }, [
+    // Media on the left, notes on the right (stacked on small screens, see CSS)
+    focusWin.appendChild(el('div', { class: 'pg-focus-content' }, [mediaEl, el('div', { class: 'pg-notes' }, [
       el('div', {}, [
         el('h3', { class: 'pg-notes-title', id: 'pg-focus-title', text: item.title }),
         el('p', { class: 'pg-notes-desc', text: item.desc })
@@ -458,7 +502,7 @@
           ? el('ul', { class: 'tag-row pg-tools-list' }, tools.map(function (tool) { return el('li', { class: 'tag', text: tool }); }))
           : el('p', { class: 'pg-tools-empty', text: 'TODO: add tools in content/playground.js' })
       ])
-    ]));
+    ])]));
 
     current = { win: win, hit: hit };
     focus.classList.remove('is-closing');

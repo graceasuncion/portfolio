@@ -795,14 +795,14 @@
 .pg-media-shirts {
   display: flex;
   flex-direction: column;
-  padding: 48px 16px 14px;
+  padding: 40px 6px 10px;
 }
 
 .pg-shirts-pair {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 4px;
   min-height: 0;
 }
 
@@ -828,6 +828,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* the mockups have empty margin around the shirt; zoom past it */
+  transform: scale(1.12);
 }
 
 .pg-shirt-label {
@@ -1030,7 +1032,7 @@ html:has(.playground-page) { scrollbar-gutter: stable; }
 /* Media gets a large fixed stage... */
 .pg-focus .pg-body {
   flex: none;
-  width: min(880px, calc(100vw - 58px));
+  width: min(880px, var(--pg-media-max));
   height: min(62dvh, 620px);
 }
 
@@ -1041,10 +1043,70 @@ html:has(.playground-page) { scrollbar-gutter: stable; }
   position: static;
   display: block;
   width: auto;
-  max-width: calc(100vw - 58px);
+  max-width: var(--pg-media-max);
   height: 100%;
   object-fit: contain;
 }
+
+/* Gallery (item.extra): focus view only. Big image + a row of thumbnails */
+.pg-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--pg-media-max);
+}
+
+.pg-gallery > .pg-body { max-width: 100%; }
+
+/* Shown in place of the photo when an empty extra slot is selected */
+.pg-gallery-ph { z-index: 1; }
+
+.pg-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0 0;
+  padding: 12px 0 0;
+  border-top: 1.5px dotted var(--pg-dotted);
+  list-style: none;
+}
+
+.pg-thumb {
+  position: relative;
+  display: block;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  background: var(--pg-media);
+  cursor: pointer;
+  opacity: 0.7;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: opacity 0.15s, outline-color 0.15s;
+}
+
+.pg-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pg-thumb .pg-ph { font-size: 0.45rem; }
+
+.pg-thumb:hover { opacity: 1; }
+
+.pg-thumb[aria-current="true"] {
+  opacity: 1;
+  outline-color: var(--accent);
+}
+
+.pg-thumb:focus-visible { outline-color: var(--ink); }
 
 /* Close button: the real × */
 .pg-focus .pg-control--close {
@@ -1082,7 +1144,7 @@ html:has(.playground-page) { scrollbar-gutter: stable; }
 }
 
 .pg-notes-title {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.9rem;
   font-family: "Instrument Serif", Georgia, serif;
   font-style: italic;
   font-weight: 400;
@@ -1093,7 +1155,7 @@ html:has(.playground-page) { scrollbar-gutter: stable; }
 .pg-notes-desc {
   margin: 0;
   font-size: 0.95rem;
-  line-height: 1.45;
+  line-height: 1.6;
   color: var(--ink-soft);
 }
 
@@ -1129,6 +1191,45 @@ html:has(.playground-page) { scrollbar-gutter: stable; }
   margin: 0;
   font-size: 0.85rem;
   color: var(--pg-muted);
+}
+
+/* Media + notes. Stacked by default; side by side on desktop (below) */
+.pg-focus {
+  --pg-media-max: calc(100vw - 58px);
+}
+
+.pg-focus-content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 861px) {
+  .pg-focus {
+    --pg-notes-w: 300px;
+    /* room left for the image after the notes column and its gap */
+    --pg-media-max: calc(100vw - 58px - var(--pg-notes-w) - 20px);
+  }
+
+  .pg-focus-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .pg-focus-content > .pg-body,
+  .pg-focus-content > .pg-gallery { flex: none; }
+
+  .pg-focus .pg-notes {
+    flex: none;
+    align-self: stretch;
+    align-content: start;
+    width: var(--pg-notes-w);
+    min-width: 0;
+    margin-top: 0;
+    padding: 14px 8px 6px 20px;
+    border-top: 0;
+    border-left: 1.5px dotted var(--pg-dotted);
+  }
 }
 
 /* Invisible button that makes the whole window clickable */
