@@ -547,7 +547,8 @@
 /* ---------- Kit: three columns split by dashed dividers ---------- */
 .pg-media-kit {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* posts column gets double width so the posts are readable */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
   padding: 52px 0 18px; /* top clears the group tag */
   background: var(--cream);
   border: 1px solid var(--pg-line);
@@ -599,6 +600,13 @@
   height: 64px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* Transparent artwork logos: show the whole mark instead of a circle crop */
+img.pg-kit-logo {
+  border-radius: 0;
+  object-fit: contain;
+  mix-blend-mode: multiply; /* drops a white JPG background onto the cream window */
 }
 
 .pg-kit-logo--ph {
@@ -664,6 +672,16 @@
   background: var(--ink);
 }
 
+/* Real profile picture: whole logo inside a light circle */
+img.pg-kit-avatar {
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+  object-fit: contain;
+  background: var(--pg-white, #fff);
+  border: 1px solid var(--pg-line);
+}
+
 .pg-kit-handle {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -683,7 +701,7 @@
 
 .pg-kit-post {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5; /* Instagram portrait posts, shown uncropped */
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--pg-media);

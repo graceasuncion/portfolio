@@ -176,9 +176,11 @@
       var postsCol = el('section', { class: 'pg-kit-col' }, [
         label('02', 'Posts'),
         el('div', { class: 'pg-kit-profile' }, [
-          el('span', { class: 'pg-kit-avatar', 'aria-hidden': 'true' }),
+          posts.avatar
+            ? el('img', { class: 'pg-kit-avatar', src: posts.avatar, alt: '', loading: 'lazy' })
+            : el('span', { class: 'pg-kit-avatar', 'aria-hidden': 'true' }),
           el('strong', { class: 'pg-kit-handle', text: posts.handle || '' }),
-          el('span', { class: 'pg-kit-meta', text: posts.count || '' })
+          posts.count ? el('span', { class: 'pg-kit-meta', text: posts.count }) : null
         ]),
         el('ul', { class: 'pg-kit-posts' }, (posts.items || []).slice(0, 8).map(function (post, i) {
           return el('li', { class: 'pg-kit-post' }, [

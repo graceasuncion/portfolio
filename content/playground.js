@@ -114,24 +114,43 @@
       accent: PLANET.star,
       title: 'PCN 38 media kit',
       desc: 'TODO: one line about the role, e.g. ran the brand, socials and print for PCN 38 as Media Director.',
-      tools: ['Illustrator', 'Photoshop', 'Instagram'],  // TODO: confirm tools
+      tools: ['Canva', 'Procreate'],
       media: {
         type: 'kit',
         brand: {
           name: 'Mga Kapatid',
-          logo: { src: '', alt: 'PCN 38 logo' },          // TODO: logo file (square or round PNG/SVG)
+          logo: {
+            src: 'media/logos/mga-kapatid.jpg',
+            alt: 'Mga Kapatid logo: the letters MK beneath a rising Philippine sun'
+          },
           typeface: 'TODO',                              // TODO: display typeface name
           colors: ['#f0d074', '#6dab1e', '#edf2fd', '#e5e4e4', '#61961e', '#105213']
         },
         posts: {
-          handle: '@TODO',                               // TODO: Instagram handle
-          count: 'TODO posts',                           // TODO: e.g. '48 posts'
+          avatar: 'media/pcn38-logo.png',                // profile picture next to the handle
+          handle: '@mgakapatidpcn',
           // TODO: 8 post / reel screenshots (square crops), with real like counts
           items: [
-            { src: '', alt: 'PCN 38 announcement post', likes: '—' },
-            { src: '', alt: 'PCN 38 ticket sale post', likes: '—' },
-            { src: '', alt: 'PCN 38 cast reveal reel', likes: '—' },
-            { src: '', alt: 'PCN 38 rehearsal reel', likes: '—' },
+            {
+              src: 'media/pcn38-post-title.png',
+              alt: 'PCN 38 announcement post: "Mga Kapatid\'s Philippine Culture Night 38" over a scrapbook collage, with the sea turtle, sun and sampaguita theme art on a dark green stamp',
+              likes: '—'
+            },
+            {
+              src: 'media/pcn38-post-tickets.png',
+              alt: 'PCN 38 ticket sale post: show times April 11 and 12, 2026, ticket prices, pre-sale links and a QR code, with the theme art and the UC Davis Wright Hall address',
+              likes: '—'
+            },
+            {
+              src: 'media/pcn38-post-team.png',
+              alt: 'PCN 38 team introductions post: "PCN Coords + PCNterns" in green script over a scrapbook collage, with a film strip of the three coordinators in Filipiniana tops',
+              likes: '—'
+            },
+            {
+              src: 'media/pcn38-post-heaven-week.png',
+              alt: 'PCN 38 Heaven Week post: "Heaven Week" in green on torn kraft paper, with a clipped checklist of reminders, schedule and rideshare, sampaguita flowers and the turtle line art',
+              likes: '—'
+            },
             { src: '', alt: 'PCN 38 shirt drop post', likes: '—' },
             { src: '', alt: 'PCN 38 countdown post', likes: '—' },
             { src: '', alt: 'PCN 38 show night reel', likes: '—' },
