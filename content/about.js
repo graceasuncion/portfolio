@@ -33,11 +33,11 @@ window.ABOUT = {
     },
 
     onRepeat: {
-      title: 'Hot & talking',
+      title: 'Money man',
       artist: 'Say Now',
-      cover: 'media/hot-and-talking.jpg',   // square album art; leave '' for a drawn record
+      cover: 'media/money-man.jpg',   // square album art; leave '' for a drawn record
       // Spotify track link (or embed link): clicking ▶ plays it on the page
-      spotify: 'https://open.spotify.com/track/2P9AVxACR93BZDs3l79cfl'
+      spotify: 'https://open.spotify.com/track/1buBNHMiswpds3luIMALtj'
     }
   },
 
