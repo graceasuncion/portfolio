@@ -218,7 +218,7 @@
 
     var playing = card(TINT.blue, 'Playing', gameScene,
       p.title,
-      esc(p.platform) + ' · ' + esc(p.hours) + ' hrs played');
+      esc(p.hours) + ' hrs played');
 
     var showProgress = '<span class="ab-scene-progress" style="width:' + pct(w.episode, w.episodes) + '%"></span>';
     var showScene = w.image
@@ -229,7 +229,7 @@
 
     var watching = card(TINT.lavender, 'Watching', showScene,
       w.title,
-      'Season ' + esc(w.season) + ' · episode ' + esc(w.episode) + ' of ' + esc(w.episodes));
+      'Season ' + esc(w.season));
 
     var ref = spotifyRef(r.spotify);
 
