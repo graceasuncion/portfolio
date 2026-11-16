@@ -40,6 +40,61 @@
     }
   });
 
+  /* Mobile nav: a menu button that drops the links down below the bar.
+     Runs on DOMContentLoaded so case-study pages (whose nav is rendered
+     by case-study.js) are covered too. */
+  function setupMobileNav() {
+    var bar = document.querySelector('.site-nav');
+    if (!bar || bar.querySelector('.nav-toggle')) return;
+    var inner = bar.querySelector('.cosmos-nav-inner, .nav-inner');
+    var links = bar.querySelector('.cosmos-nav-links, .nav-right');
+    if (!inner || !links) return;
+
+    if (!links.id) links.id = 'site-nav-links';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'nav-toggle';
+    btn.setAttribute('aria-controls', links.id);
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+    btn.innerHTML = '<span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>';
+    inner.appendChild(btn);
+
+    function setOpen(open) {
+      bar.classList.toggle('is-menu-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(!bar.classList.contains('is-menu-open'));
+    });
+    links.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && bar.classList.contains('is-menu-open')) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!bar.contains(e.target)) setOpen(false);
+    });
+    window.matchMedia('(min-width: 621px)').addEventListener('change', function (mq) {
+      if (mq.matches) setOpen(false);
+    });
+  }
+
+  /* Pages that render their nav later (case-study.js) call this again. */
+  window.setupMobileNav = setupMobileNav;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNav);
+  } else {
+    setupMobileNav();
+  }
+
   var hero = document.querySelector('.hero');
   var nav = document.querySelector('.site-nav');
   if (hero && 'IntersectionObserver' in window) {

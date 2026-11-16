@@ -3300,3 +3300,88 @@ a.work-mini:hover {
   .home-page .cosmos-hint,
   .home-page .cosmos-foot { animation: none; }
 }
+
+/* ================================
+   Mobile nav: menu button + dropdown
+   (button is injected by script.js)
+================================ */
+.nav-toggle { display: none; }
+
+@media (max-width: 620px) {
+  .site-nav .nav-inner,
+  .cosmos-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    padding: 0 11px;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.25s ease;
+  }
+
+  .is-menu-open .nav-toggle-bar:first-child { transform: translateY(3.75px) rotate(45deg); }
+  .is-menu-open .nav-toggle-bar:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+
+  /* Links become a dropdown panel under the bar */
+  .site-nav .cosmos-nav-links,
+  .site-nav .nav-right {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.4rem 1.2rem 1rem;
+    background: var(--cream);
+    border-bottom: 1px solid #e2ddd6;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+
+  .cosmos-nav .cosmos-nav-links { background: rgba(248, 249, 250, 0.97); }
+
+  .site-nav.is-menu-open .cosmos-nav-links,
+  .site-nav.is-menu-open .nav-right {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .site-nav .cosmos-nav-links a.nav-link,
+  .site-nav .nav-right a.nav-link {
+    padding: 0.85rem 0;
+    border-top: 1px solid #e2ddd6;
+  }
+
+  .site-nav .cosmos-nav-links a.nav-link:first-child,
+  .site-nav .nav-right a.nav-link:first-child { border-top: 0; }
+}
+
+@media (max-width: 620px) and (prefers-reduced-motion: reduce) {
+  .nav-toggle-bar,
+  .site-nav .cosmos-nav-links,
+  .site-nav .nav-right { transition: none; }
+}

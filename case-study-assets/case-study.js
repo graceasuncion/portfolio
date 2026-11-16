@@ -348,6 +348,7 @@
 
   function init() {
     renderShell();
+    if (window.setupMobileNav) window.setupMobileNav();   // mobile menu button (script.js)
     trackHeader();
     scrollFallback();
 
