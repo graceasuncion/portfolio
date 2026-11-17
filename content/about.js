@@ -57,7 +57,8 @@ window.ABOUT = {
       logo: 'media/logos/ucd-career-center.jpg',
       role: 'Design & Marketing Student Assistant',
       desc: '',
-      category: 'Work'
+      category: 'Work',
+      link: { text: 'Learn more about the UC Davis Career Center ↗', href: 'https://careercenter.ucdavis.edu/' }
     },
     {
       dates: 'Jun 2025 – Apr 2026',
@@ -66,7 +67,7 @@ window.ABOUT = {
       role: 'Media Director',
       desc: '',
       category: 'Leadership',
-      link: { text: 'see it in my playground →', href: 'play.html' }
+      link: { text: 'Check out my work in my playground →', href: 'play.html' }
     },
     {
       dates: 'Mar 2025 – Mar 2026',
@@ -74,7 +75,17 @@ window.ABOUT = {
       logo: 'media/logos/design-interactive.jpg',
       role: 'Vice President of Operations',
       desc: '',
-      category: 'Leadership'
+      category: 'Leadership',
+      link: { text: 'Learn more about Design Interactive ↗', href: 'https://davisdi.org/' }
+    },
+    {
+      dates: 'Oct – Dec 2025',
+      org: 'Design Interactive',
+      logo: 'media/logos/design-interactive.jpg',
+      role: 'Project Manager',
+      desc: 'Recollection',
+      category: 'Student org',
+      link: { text: 'read the Recollection case study on Medium ↗', href: 'https://davisdesigninteractive.medium.com/recollection-a-ux-case-study-b3a9e75a5908' }
     },
     {
       dates: 'Jun 2024 – Jun 2025',
@@ -82,7 +93,8 @@ window.ABOUT = {
       logo: 'media/logos/mga-kapatid.jpg',
       role: 'Public Relations Chair',
       desc: '',
-      category: 'Leadership'
+      category: 'Leadership',
+      link: { text: 'Learn more about Mga Kapatid ↗', href: 'https://www.instagram.com/mgakapatid/' }
     },
     {
       dates: 'Oct 2023 – Jun 2024',

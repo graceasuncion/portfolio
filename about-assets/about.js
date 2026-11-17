@@ -253,7 +253,9 @@
         ? ' <span class="ab-sep" aria-hidden="true">·</span> <span class="ab-xp-desc">' + esc(item.desc) + '</span>'
         : '';
       var link = item.link && item.link.href
-        ? '<a class="pc-link ab-xp-link" href="' + esc(item.link.href) + '">' + esc(item.link.text) + '</a>'
+        ? '<a class="pc-link ab-xp-link" href="' + esc(item.link.href) + '"' +
+            (/^https?:\/\//.test(item.link.href) ? ' target="_blank" rel="noopener"' : '') +
+            '>' + esc(item.link.text) + '</a>'
         : '';
       // Logo square; until a file is set, a dashed placeholder with the org's initials
       var initials = item.org.replace(/\(.*?\)/g, '').split(/\s+/)
