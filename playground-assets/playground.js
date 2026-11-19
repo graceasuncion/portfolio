@@ -375,7 +375,7 @@
     var m = item.media || {};
 
     var win = el('article', {
-      class: 'pg-window pg-window--' + (m.type || 'image') + (m.interactive ? ' is-interactive' : ''),
+      class: 'pg-window pg-window--' + (m.type || 'image') + (m.interactive ? ' is-interactive' : '') + (item.comingSoon ? ' is-soon' : ''),
       'data-id': item.id
     });
 
@@ -383,6 +383,26 @@
     win.style.setProperty('--accent', item.accent || '');
     win.style.setProperty('--col', tidy.col || 'auto');
     win.style.setProperty('--row', tidy.row || 'auto');
+
+    // Coming soon: the content shows blurred under a label, and the window doesn't open
+    if (item.comingSoon) {
+      var soonBody = buildBody(m, item);
+      soonBody.setAttribute('aria-hidden', 'true');
+      win.appendChild(titlebar(item));
+      win.appendChild(el('div', { class: 'pg-soon-wrap' }, [
+        soonBody,
+        el('div', { class: 'pg-soon' }, [
+          el('span', { class: 'pg-soon-label' }, [
+            el('span', { class: 'pg-group-mark', text: '✦', 'aria-hidden': 'true' }),
+            el('span', { text: 'Coming soon' })
+          ])
+        ])
+      ]));
+      win.setAttribute('aria-label', item.title + ', coming soon');
+      stage.appendChild(win);
+      windows[item.id] = win;
+      return;
+    }
 
     var hit = el('button', {
       type: 'button',

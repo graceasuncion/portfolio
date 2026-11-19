@@ -544,6 +544,59 @@
 
 .pg-group-mark { color: var(--accent); }
 
+/* ---------- Coming soon: blurred content under a frosted label, not clickable ---------- */
+.pg-window.is-soon { cursor: default; }
+
+@media (hover: hover) {
+  .pg-window.is-soon:hover {
+    transform: none;
+    box-shadow: var(--pg-shadow);
+  }
+}
+
+.pg-soon-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.pg-soon-wrap > .pg-body {
+  filter: blur(6px) saturate(0.8);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pg-soon {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.pg-soon-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--pg-line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cream) 85%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
 /* ---------- Kit: three columns split by dashed dividers ---------- */
 .pg-media-kit {
   display: grid;

@@ -72,13 +72,12 @@ window.CASE_STUDY = {
 
         { type: 'headline', text: 'Low-fidelity sketches' },
         { type: 'text', text: 'We started by simplifying navigation and improving readability. I focused on how to present team roles and information clearly across desktop and mobile.' },
-        /* TODO: add the low-fi sketches */
-        { type: 'figures', items: [{ src: '', alt: 'Low-fi sketches', placeholder: 'Low-fi sketches' }] },
+        { type: 'figures', items: [{ src: 'media/paul_hom_lofi_desktop.png', width: 2388, height: 1180, alt: 'Hand-drawn low-fi sketches of the desktop Home, Committees, Get Involved, Services, and About Us pages, each with a simplified top navigation' }] },
+        { type: 'figures', items: [{ src: 'media/paul_hom_lofi_mobile.png', width: 1780, height: 1370, alt: 'Hand-drawn low-fi sketches of the mobile Committee page: a two-column grid of committee cards leading to a Cardiopulmonary Committee detail page with a back arrow' }] },
 
         { type: 'headline', text: 'Mid-fidelity wireframes' },
         { type: 'text', text: 'We introduced cards to break up dense information and improve scannability. I structured the Committee page around a card-based layout so users could browse team roles without feeling overwhelmed.' },
-        /* TODO: add the mid-fi wireframes */
-        { type: 'figures', items: [{ src: '', alt: 'Mid-fi wireframes', placeholder: 'Mid-fi wireframes' }] },
+        { type: 'figures', items: [{ src: 'media/paul_hom_midfi.png', width: 5422, height: 3050, alt: 'Grayscale mid-fi wireframes of the Committees page: mobile committee card grid and Cardiopulmonary detail page, plus a desktop layout with a featured H.L.U.B. card above a three-column grid of committee cards and a footer with sponsors, links, and contact icons' }] },
 
         { type: 'headline', text: 'High-fidelity design' },
         {
@@ -112,12 +111,11 @@ window.CASE_STUDY = {
       id: 'final-product', label: 'Final Product', title: 'Final Product',
       blocks: [
         { type: 'headline', text: 'Clarity Without Losing Warmth' },
-        /* TODO: add the final Committee page screens (desktop + mobile) */
         {
-          type: 'figures',
+          type: 'figures', equalHeight: true,
           items: [
-            { src: '', alt: 'Final Committee page, desktop', placeholder: 'Final Committee page — desktop' },
-            { src: '', alt: 'Final Committee page, mobile', placeholder: 'Final Committee page — mobile' }
+            { src: 'media/paul_hom_committees_video.mp4', alt: 'Screen recording of the final desktop Committees page, scrolling through the committee cards' },
+            { src: 'media/paul-hom-mobile.mp4', alt: 'Screen recording of the final mobile Committees page, browsing committee cards and opening a committee’s details' }
           ]
         }
       ]

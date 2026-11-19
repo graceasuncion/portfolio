@@ -97,7 +97,8 @@ window.CASE_STUDY = {
             { title: 'Airtable Sync', text: 'One-click sync replaces manual export and re-upload.' },
             { title: 'Template Editors', text: 'An HTML editor for power users, and a simple builder for everyone else.' }
           ]
-        }
+        },
+        { type: 'link', text: 'Read more about the design process on Medium', href: 'https://codelabdavis.medium.com/automail-2a3cd3d8b868' }
       ]
     },
     {
@@ -126,8 +127,7 @@ window.CASE_STUDY = {
         },
         { type: 'text', text: 'No more all-nighters for the President.' },
         { type: 'figures', items: [{ src: 'media/codelab-team.JPG', width: 6960, height: 4640, alt: 'The CodeLab Automail team' }] },
-        { type: 'link', text: 'Read the Medium article', href: 'https://codelabdavis.medium.com/automated-email-tool-6523a2850cf8' },
-        { type: 'link', text: 'Read the design process on Medium', href: 'https://codelabdavis.medium.com/automail-2a3cd3d8b868' }
+        { type: 'link', text: 'Read more about Automail on our Medium', href: 'https://codelabdavis.medium.com/automated-email-tool-6523a2850cf8' }
       ]
     },
     {

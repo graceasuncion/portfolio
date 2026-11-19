@@ -47,7 +47,9 @@
     if (isVideo) {
       var auto = reduceMotion ? ' controls' : ' autoplay muted loop playsinline';
       return '<video src="' + esc(m.src) + '"' + auto + (m.poster ? ' poster="' + esc(m.poster) + '"' : '') +
-        (alt ? ' aria-label="' + esc(alt) + '"' : ' aria-hidden="true"') + ' preload="metadata"></video>';
+        (alt ? ' aria-label="' + esc(alt) + '"' : ' aria-hidden="true"') + ' preload="metadata"' +
+        /* Expose the aspect ratio so equal-height rows (is-equal-h) can size each column */
+        ' onloadedmetadata="var f=this.closest(\'.cs-figure\');if(f&&this.videoHeight)f.style.setProperty(\'--ar\',this.videoWidth/this.videoHeight)"></video>';
     }
     /* width/height let the browser reserve space before a lazy image loads,
        so the page (and side-menu jumps) don't shift around. */
@@ -184,9 +186,16 @@
   /* Figures — numbering continues through the whole page. */
   function Figures(p, ctx) {
     return (p.label ? '<p class="cs-list-label">' + esc(p.label) + '</p>' : '') +
-      '<div class="cs-figures' + (list(p.items).length === 1 ? ' is-single' : '') + '">' + list(p.items).map(function (f) {
+      /* columns (e.g. '3fr 1fr') sets custom column widths; equalHeight lines items up at
+         the same height using each one's aspect ratio. Both stack on small screens. */
+      '<div class="cs-figures' + (list(p.items).length === 1 ? ' is-single' : '') + (p.equalHeight ? ' is-equal-h' : '') +
+        (p.columns ? ' has-cols" style="--cs-cols:' + esc(p.columns) : '') + '">' + list(p.items).map(function (f) {
         ctx.figIndex = (ctx.figIndex || 0) + 1;
-        return '<figure class="cs-figure"><div class="cs-figure-media' + hasMedia(f) + '">' + Media(f, 'IMAGE') + '</div>' +
+        /* maxWidth (px) caps a figure and centres it, e.g. for tall phone recordings */
+        var css = (f.maxWidth ? 'width:100%;max-width:' + (+f.maxWidth) + 'px;justify-self:center;' : '') +
+          (f.width && f.height ? '--ar:' + (f.width / f.height) + ';' : '');
+        var cap = css ? ' style="' + css + '"' : '';
+        return '<figure class="cs-figure"' + cap + '><div class="cs-figure-media' + hasMedia(f) + '">' + Media(f, 'IMAGE') + '</div>' +
           (f.caption ? '<figcaption>FIG. ' + pad(ctx.figIndex) + ' — ' + esc(f.caption) + '</figcaption>' : '') + '</figure>';
       }).join('') + '</div>';
   }

@@ -23,6 +23,16 @@
       { label: 'Play', href: 'play.html' },
       { label: 'About', href: 'about.html' },
       { label: 'Contact', href: '#contact' }
+    ],
+    /* Shown as "More case studies" at the bottom of each case study (the
+       current one is left out). Keep in sync with the cards on work.html. */
+    caseStudies: [
+      { name: 'Thread.It', href: 'thread-it.html', cover: 'media/thread.it-cover.png', alt: 'Thread.It app screens',
+        headline: 'Turning decision fatigue into a structured 4-step planning flow.', meta: 'Product Designer · 2026' },
+      { name: 'Automail', href: 'automail.html', cover: 'media/automail-cover.png', alt: 'AutoMail app screens',
+        headline: 'Streamlining fragmented email workflows into one scalable tool.', meta: 'Product Designer · 2024' },
+      { name: 'Paul Hom Asian Clinic', href: 'paul-hom.html', cover: 'media/paul%20hom-cover.png', alt: 'Paul Hom Asian Clinic website screens',
+        headline: 'Improving accessibility for elderly patients in a clinic website redesign.', meta: 'Product Designer · 2024' }
     ]
   };
 
@@ -185,15 +195,30 @@
       '</dl>' + (data.tldrLink ? C.BLOCKS.link(data.tldrLink) : '') + '</div></section>';
   }
 
+  /* "More case studies": every other case study, starting with this page's `next` */
   function renderNext(data) {
-    var n = data.next;
-    if (!n) return '';
-    return '<section class="cs-next" aria-label="Next project"><div class="cs-next-inner">' +
-      '<a class="cs-next-card" href="' + esc(n.href) + '"><span class="cs-next-copy">' +
-        '<span class="cs-next-eyebrow">NEXT CASE STUDY →</span>' +
-        '<span class="cs-next-name">' + esc(n.name) + '</span>' +
-        (n.company || n.year ? '<span class="cs-next-sub">' + esc([n.company, n.year].filter(Boolean).join(' · ')) + '</span>' : '') +
-      '</span><span class="ascii cs-next-planet" data-planet="next" aria-hidden="true"></span></a>' +
+    var all = SITE.caseStudies;
+    var at = -1;
+    all.forEach(function (c, i) { if (c.name === data.projectName) at = i; });
+    var others = all.filter(function (c) { return c.name !== data.projectName; });
+    /* Start with data.next if set, otherwise the one after this page in the list */
+    var start = 0;
+    others.forEach(function (c, i) { if (data.next && c.href === data.next.href) start = i; });
+    if (!(data.next && data.next.href) && at >= 0) start = at % others.length;
+    others = others.slice(start).concat(others.slice(0, start)).slice(0, 2);
+    if (!others.length) return '';
+    return '<section class="cs-next" aria-labelledby="cs-more-title"><div class="cs-next-inner">' +
+      '<h2 class="cs-more-title" id="cs-more-title">More case studies</h2>' +
+      '<ul class="cs-more-grid">' + others.map(function (c) {
+        return '<li><a class="cs-more-card" href="' + esc(c.href) + '">' +
+          '<span class="cs-more-media"><img src="' + esc(c.cover) + '" alt="' + esc(c.alt) + '" loading="lazy" decoding="async"></span>' +
+          '<span class="cs-more-copy">' +
+            '<span class="cs-more-name">' + esc(c.name) + '</span>' +
+            '<span class="cs-more-headline">' + esc(c.headline) + '</span>' +
+            '<span class="cs-more-meta">' + esc(c.meta) + '</span>' +
+            '<span class="cs-more-link">READ CASE STUDY →</span>' +
+          '</span></a></li>';
+      }).join('') + '</ul>' +
       '<a class="cs-back" href="' + esc(SITE.workHref) + '">← BACK TO ALL WORK</a></div></section>';
   }
 
@@ -335,8 +360,186 @@
       '<a class="cs-back" href="' + esc(SITE.workHref) + '">← BACK TO ALL WORK</a></div>';
   }
 
+  /* ---------- Lightbox: click an image or video to view it up close ----------
+     Images: first click opens them fitted to the screen; clicking the enlarged
+     image toggles full resolution (scrollable). Videos open fitted to the
+     screen with playback controls, picking up where the inline one was.
+     Esc / ✕ / backdrop closes. */
+  function setupLightbox() {
+    var items = document.querySelectorAll('.cs-article img, .cs-article video');
+    if (!items.length) return;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'cs-lightbox';
+    dlg.setAttribute('aria-label', 'Media viewer');
+    dlg.innerHTML =
+      '<div class="cs-lightbox-stage"><img alt=""><video controls muted loop playsinline></video></div>' +
+      '<button type="button" class="cs-lightbox-close" aria-label="Close viewer">✕</button>' +
+      '<p class="cs-lightbox-hint" aria-hidden="true"></p>';
+    document.body.appendChild(dlg);
+
+    var stage = dlg.querySelector('.cs-lightbox-stage');
+    var big = stage.querySelector('img');
+    var bigVid = stage.querySelector('video');
+    var hint = dlg.querySelector('.cs-lightbox-hint');
+    var closeBtn = dlg.querySelector('.cs-lightbox-close');
+    var opener = null, openerWasPlaying = false, closing = false;
+
+    /* ---- Motion: the media grows out of / shrinks back into its spot on the page ---- */
+    var DUR = 340, EASE = 'cubic-bezier(.2,.8,.2,1)';
+    var animate = !reduceMotion && typeof dlg.animate === 'function';
+    /* Transform that makes an element sitting at `base` look like it sits at `target` */
+    function tf(target, base) {
+      return 'translate(' + (target.left - base.left) + 'px,' + (target.top - base.top) + 'px) ' +
+        'scale(' + (target.width / base.width) + ',' + (target.height / base.height) + ')';
+    }
+    /* FLIP: element has already moved to its new box; animate it in from `from` */
+    function flip(el, from) {
+      if (!animate) return;
+      var to = el.getBoundingClientRect();
+      if (!to.width || !to.height || !from.width || !from.height) return;
+      el.animate([
+        { transformOrigin: '0 0', transform: tf(from, to) },
+        { transformOrigin: '0 0', transform: 'none' }
+      ], { duration: DUR, easing: EASE });
+    }
+    function fadeChrome(show) {
+      if (!animate) return;
+      var o = { duration: DUR, easing: EASE, fill: 'forwards' };
+      var clear = 'rgba(10,11,14,0)', dark = 'rgba(10,11,14,0.94)';
+      dlg.animate({ backgroundColor: show ? [clear, dark] : [dark, clear] }, o);
+      [closeBtn, hint].forEach(function (n) { n.animate({ opacity: show ? [0, 1] : [1, 0] }, o); });
+    }
+    function whenReady(media, cb) {
+      if (media === bigVid) {
+        if (bigVid.readyState >= 1) cb();
+        else {
+          var done = function () { bigVid.removeEventListener('loadedmetadata', done); bigVid.removeEventListener('error', done); cb(); };
+          bigVid.addEventListener('loadedmetadata', done);
+          bigVid.addEventListener('error', done);
+        }
+      } else if (big.complete && big.naturalWidth) cb();
+      else big.onload = big.onerror = function () { big.onload = big.onerror = null; cb(); };
+    }
+
+    function canZoom() { return big.naturalWidth > big.clientWidth + 8 || big.naturalHeight > big.clientHeight + 8; }
+    function refresh() {
+      if (stage.classList.contains('is-video')) { hint.textContent = 'ESC TO CLOSE'; return; }
+      var zoomed = stage.classList.contains('is-zoomed');
+      stage.classList.toggle('no-zoom', !zoomed && !canZoom());
+      hint.textContent = zoomed ? 'CLICK TO FIT · ESC TO CLOSE'
+        : canZoom() ? 'CLICK IMAGE TO ZOOM · ESC TO CLOSE' : 'ESC TO CLOSE';
+    }
+
+    function open(el) {
+      if (dlg.open) return;
+      opener = el;
+      closing = false;
+      stage.classList.remove('is-zoomed');
+      var isVideo = el.tagName === 'VIDEO';
+      stage.classList.toggle('is-video', isVideo);
+      document.documentElement.classList.add('cs-lightbox-open');
+      if (isVideo) {
+        openerWasPlaying = !el.paused;
+        el.pause();
+        bigVid.src = el.currentSrc || el.src;
+        if (el.poster) bigVid.poster = el.poster; else bigVid.removeAttribute('poster');
+        bigVid.setAttribute('aria-label', el.getAttribute('aria-label') || 'Video');
+        var t = el.currentTime || 0;
+        bigVid.addEventListener('loadedmetadata', function () { bigVid.currentTime = t; }, { once: true });
+        if (!reduceMotion) { var p = bigVid.play(); if (p && p.catch) p.catch(function () {}); }
+      } else {
+        big.src = el.currentSrc || el.src;
+        big.alt = el.alt;
+      }
+      var media = isVideo ? bigVid : big;
+      var from = el.getBoundingClientRect();
+      /* Keep the media invisible until it has a real size, then fly it in */
+      media.style.opacity = '0';
+      dlg.showModal();
+      fadeChrome(true);
+      whenReady(media, function () {
+        if (!dlg.open || closing || opener !== el) return;
+        media.style.opacity = '';
+        refresh();
+        el.style.visibility = 'hidden'; /* the copy in the viewer stands in for it */
+        flip(media, from);
+      });
+    }
+    function close() {
+      if (!dlg.open || closing) return;
+      closing = true;
+      var media = stage.classList.contains('is-video') ? bigVid : big;
+      var from = media.getBoundingClientRect();
+      var to = opener ? opener.getBoundingClientRect() : null;
+      if (!animate || !to || !to.width || !from.width || media.style.opacity === '0') { dlg.close(); return; }
+      fadeChrome(false);
+      media.animate([
+        { transformOrigin: '0 0', transform: 'none' },
+        { transformOrigin: '0 0', transform: tf(to, from) }
+      ], { duration: DUR, easing: EASE, fill: 'forwards' }).onfinish = function () { dlg.close(); };
+    }
+    /* Esc: run the closing animation instead of vanishing instantly */
+    dlg.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+
+    dlg.addEventListener('close', function () {
+      closing = false;
+      if (dlg.getAnimations) dlg.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
+      big.style.opacity = bigVid.style.opacity = '';
+      if (opener) opener.style.visibility = '';
+      document.documentElement.classList.remove('cs-lightbox-open');
+      big.removeAttribute('src');
+      if (stage.classList.contains('is-video')) {
+        if (opener) {
+          /* Hand the playback position back to the inline video */
+          try { opener.currentTime = bigVid.currentTime; } catch (err) {}
+          if (openerWasPlaying) { var p = opener.play(); if (p && p.catch) p.catch(function () {}); }
+        }
+        bigVid.pause();
+        bigVid.removeAttribute('src');
+        bigVid.load();
+      }
+      if (opener) opener.focus();
+    });
+
+    big.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (!stage.classList.contains('is-zoomed') && !canZoom()) return;
+      /* Keep the clicked spot under the cursor when zooming in */
+      var r = big.getBoundingClientRect();
+      var fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+      var zoomIn = !stage.classList.contains('is-zoomed');
+      stage.classList.toggle('is-zoomed', zoomIn);
+      if (zoomIn) {
+        stage.scrollLeft = big.offsetLeft + fx * big.offsetWidth - stage.clientWidth / 2;
+        stage.scrollTop = big.offsetTop + fy * big.offsetHeight - stage.clientHeight / 2;
+      }
+      refresh();
+      flip(big, r); /* glide between fitted and full size */
+    });
+    stage.addEventListener('click', function (e) { if (e.target === stage) close(); });
+    closeBtn.addEventListener('click', close);
+    window.addEventListener('resize', function () { if (dlg.open) refresh(); });
+
+    Array.prototype.forEach.call(items, function (el) {
+      var isVideo = el.tagName === 'VIDEO';
+      var label = isVideo ? (el.getAttribute('aria-label') || 'video') : (el.alt || 'image');
+      el.classList.add('cs-zoomable');
+      el.removeAttribute('aria-hidden'); /* it's interactive now, so it must be exposed */
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', 'View larger: ' + label);
+      el.addEventListener('click', function (e) { e.preventDefault(); open(el); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); }
+      });
+    });
+  }
+
   function boot(data) {
     render(data);
+    setupLightbox();
     applyAccent(data.accent || '#2F5F7C');
     drawPlanets(data);
     sectionSpy();

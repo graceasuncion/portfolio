@@ -18,6 +18,8 @@
              image gets a thumbnail row underneath to switch between them:
              [{ src: '', alt: '', label: '' }]. Empty src shows a placeholder
              (label names it, e.g. 'shirt photo').
+   - comingSoon  optional; true blurs the window under a "Coming soon" label
+             and stops it from opening the focus view
    - group   optional; shows a small ◆ tag at the top-left of the window body
    - messy   optional; free placement for a messy/overlapping layout:
              { left, top, width, height, z }. top is measured from the top
@@ -108,11 +110,82 @@
 
     /* ---------- PCN 38 · Media Director ---------- */
     {
+      id: 'pcn38-shirt',
+      file: 'pcn38-shirts',
+      kind: 'MERCH',
+      accent: PLANET.star,
+      title: 'PCN 38 shirts',
+      desc: 'TODO: one line about the shirts, e.g. cast and crew shirts for PCN 38.',
+      tools: ['Procreate'],
+      media: {
+        type: 'shirts',
+        event: 'PCN 38',
+        // One entry per design; more than one shows dot pagination.
+        designs: [
+          {
+            name: 'Cast',
+            front: {
+              src: 'media/pcn38-shirt-front.png',
+              alt: 'Front of the dark green PCN 38 shirt: a patterned sea turtle over a Philippine flag sun with white sampaguita flowers, framed by the script "Lakas ng Nakaraan, Liwanag ng Kinabukasan"'
+            },
+            back: {
+              src: 'media/pcn38-shirt-back.png',
+              alt: 'Back of the dark green PCN 38 shirt: "Philippine Culture Night, Mga Kapatid 38, 2026" with a sun, sampaguita flowers, a line of Baybayin script and a list of the night\'s dances, from Arnis to Waray Waray'
+            }
+          }
+        ]
+      },
+      tidy: { col: '3 / 7', row: '3 / 4' },
+      messy: { left: '36%', top: '660px', width: '40%', height: '330px', z: 1 }
+    },
+    {
+      id: 'pcn38-ticket',
+      file: 'pcn38-ticket.png',
+      kind: 'PRINT',
+      accent: PLANET.star,
+      title: 'PCN 38 tickets',
+      desc: 'TODO: one line about the tickets, e.g. printed show tickets for PCN 38.',
+      tools: ['Procreate', 'Canva'],
+      media: {
+        type: 'ticket',
+        src: 'media/pcn38-ticket.png',
+        alt: 'PCN 38 ticket: Mga Kapatid presents the 38th Annual Philippine Culture Night, Lakas ng Nakaraan, Liwanag ng Kinabukasan, April 11 and 12',
+        event: 'PCN 38',    // TODO: full show name
+        date: 'TODO DATE',  // TODO: e.g. 'APR 12 2026'
+        venue: 'TODO VENUE',
+        time: 'TODO TIME',  // TODO: e.g. '7 PM'
+        number: 'No. 0038'  // TODO: real ticket number format
+      },
+      tidy: { col: '4 / 7', row: '2 / 3' },
+      messy: { left: '60%', top: '180px', width: '34%', height: '380px', z: 2 }
+    },
+
+    /* ---------- Coursework ---------- */
+    {
+      id: 'avatar-poster',
+      file: 'atla-poster.pdf',
+      kind: 'POSTER',
+      accent: PLANET.work,
+      title: 'Avatar: The Last Airbender in Concert tour poster',
+      desc: 'TODO: one line about this piece, e.g. a world tour poster for Avatar: The Last Airbender in Concert, made for DES 16.',
+      tools: ['Illustrator'],  // TODO: confirm tools
+      media: {
+        type: 'image',
+        src: 'media/avatar-concert-poster.png',
+        fit: 'contain',
+        alt: 'Poster for Avatar: The Last Airbender in Concert, World Tour 2024–2025: the show logo over a starry dusk sky, three columns of tour dates and cities, and Appa the sky bison floating in front of a setting sun'
+      },
+      tidy: { col: '1 / 3', row: '3 / 4' }
+    },
+
+    /* ---------- PCN 38 media kit (coming soon, kept at the bottom) ---------- */
+    {
       id: 'pcn38-kit',
       file: 'pcn38-branding.pdf',
       kind: ['BRANDING', 'SOCIAL MEDIA'],
       accent: PLANET.star,
       title: 'PCN 38 media kit',
+      comingSoon: true,  // TODO: remove once the details are filled in
       desc: 'TODO: one line about the role, e.g. ran the brand, socials and print for PCN 38 as Media Director.',
       tools: ['Canva', 'Procreate'],
       media: {
@@ -179,76 +252,8 @@
           }
         }
       },
-      tidy: { col: '1 / 7', row: '3 / 5' },
+      tidy: { col: '1 / 7', row: '4 / 6' },
       messy: { left: '5%', top: '0', width: '58%', height: '620px', z: 3 }
-    },
-    {
-      id: 'pcn38-shirt',
-      file: 'pcn38-shirts',
-      kind: 'MERCH',
-      accent: PLANET.star,
-      title: 'PCN 38 shirts',
-      desc: 'TODO: one line about the shirts, e.g. cast and crew shirts for PCN 38.',
-      tools: ['Procreate'],
-      media: {
-        type: 'shirts',
-        event: 'PCN 38',
-        // One entry per design; more than one shows dot pagination.
-        designs: [
-          {
-            name: 'Cast',
-            front: {
-              src: 'media/pcn38-shirt-front.png',
-              alt: 'Front of the dark green PCN 38 shirt: a patterned sea turtle over a Philippine flag sun with white sampaguita flowers, framed by the script "Lakas ng Nakaraan, Liwanag ng Kinabukasan"'
-            },
-            back: {
-              src: 'media/pcn38-shirt-back.png',
-              alt: 'Back of the dark green PCN 38 shirt: "Philippine Culture Night, Mga Kapatid 38, 2026" with a sun, sampaguita flowers, a line of Baybayin script and a list of the night\'s dances, from Arnis to Waray Waray'
-            }
-          }
-        ]
-      },
-      tidy: { col: '3 / 7', row: '5 / 6' },
-      messy: { left: '36%', top: '660px', width: '40%', height: '330px', z: 1 }
-    },
-    {
-      id: 'pcn38-ticket',
-      file: 'pcn38-ticket.png',
-      kind: 'PRINT',
-      accent: PLANET.star,
-      title: 'PCN 38 tickets',
-      desc: 'TODO: one line about the tickets, e.g. printed show tickets for PCN 38.',
-      tools: ['Procreate', 'Canva'],
-      media: {
-        type: 'ticket',
-        src: 'media/pcn38-ticket.png',
-        alt: 'PCN 38 ticket: Mga Kapatid presents the 38th Annual Philippine Culture Night, Lakas ng Nakaraan, Liwanag ng Kinabukasan, April 11 and 12',
-        event: 'PCN 38',    // TODO: full show name
-        date: 'TODO DATE',  // TODO: e.g. 'APR 12 2026'
-        venue: 'TODO VENUE',
-        time: 'TODO TIME',  // TODO: e.g. '7 PM'
-        number: 'No. 0038'  // TODO: real ticket number format
-      },
-      tidy: { col: '4 / 7', row: '2 / 3' },
-      messy: { left: '60%', top: '180px', width: '34%', height: '380px', z: 2 }
-    },
-
-    /* ---------- Coursework ---------- */
-    {
-      id: 'avatar-poster',
-      file: 'atla-poster.pdf',
-      kind: 'POSTER',
-      accent: PLANET.work,
-      title: 'Avatar: The Last Airbender in Concert tour poster',
-      desc: 'TODO: one line about this piece, e.g. a world tour poster for Avatar: The Last Airbender in Concert, made for DES 16.',
-      tools: ['Illustrator'],  // TODO: confirm tools
-      media: {
-        type: 'image',
-        src: 'media/avatar-concert-poster.png',
-        fit: 'contain',
-        alt: 'Poster for Avatar: The Last Airbender in Concert, World Tour 2024–2025: the show logo over a starry dusk sky, three columns of tour dates and cities, and Appa the sky bison floating in front of a setting sun'
-      },
-      tidy: { col: '1 / 3', row: '5 / 6' }
     }
   ];
 })();
