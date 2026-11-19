@@ -2377,9 +2377,9 @@ ul.judges-list {
 .cosmos-nav .cosmos-brand { gap: 0.6rem; }
 
 .cosmos-nav .brand-logo {
-  width: 34px;
-  height: 34px;
-  margin: 0;
+  width: 72px;
+  height: 72px;
+  margin: -19px 0;
 }
 
 .cosmos-brand-text {

@@ -32,8 +32,15 @@ window.CASE_STUDY = {
       id: 'problem', label: 'Problem', title: 'Problem',
       blocks: [
         { type: 'headline', text: 'A Mission the Website Couldn’t Communicate' },
-        { type: 'text', text: 'The clinic’s website hadn’t kept pace with its mission. It looked outdated, was hard to navigate, and didn’t convey the professionalism or warmth the organization stands for. Unclear navigation, inconsistent branding, and poor accessibility created barriers for three groups:' },
-        { type: 'bullets', items: ['Patients trying to find care', 'Volunteers trying to get involved', 'Donors trying to give'] },
+        { type: 'text', text: 'The clinic’s website hadn’t kept pace with its mission. It looked outdated, was hard to navigate, and didn’t convey the professionalism or warmth the organization stands for. **Unclear navigation, inconsistent branding, and poor accessibility** created barriers for three groups:' },
+        {
+          type: 'cards',
+          items: [
+            { label: '01', title: 'Patients', text: 'Trying to find care' },
+            { label: '02', title: 'Volunteers', text: 'Trying to get involved' },
+            { label: '03', title: 'Donors', text: 'Trying to give' }
+          ]
+        },
         { type: 'text', text: 'These barriers hit hardest for the clinic’s older patients, who make up a large share of the people the site needs to serve.' }
       ]
     },
@@ -49,9 +56,9 @@ window.CASE_STUDY = {
             { title: 'Design', text: 'Unclear hierarchy and confusing navigation' }
           ]
         },
-        { type: 'text', text: 'To see how others solved similar problems, we analyzed student-run and professional clinics: Imani Clinic, Bayanihan Clinic, Shifa Community Clinic, and Stanford Medicine. This surfaced patterns in navigation and readability, and most importantly, in how clinics build trust through design.' },
-        /* TODO: add the competitor analysis visuals (src, alt, width, height) */
-        { type: 'figures', items: [{ src: '', alt: 'Competitor analysis visuals', placeholder: 'Competitor analysis visuals' }] },
+        { type: 'figures', items: [{ src: 'media/paul_hom_original_website.mp4', alt: 'Screen recording scrolling through the clinic’s original website, showing small text, low contrast, and cluttered navigation' }] },
+        { type: 'text', text: 'To see how others solved similar problems, we analyzed student-run and professional clinics: **Imani Clinic**, **Bayanihan Clinic**, **Shifa Community Clinic**, and **Stanford Medicine**. This surfaced patterns in navigation and readability, and most importantly, in how clinics build trust through design.' },
+        { type: 'figures', items: [{ src: 'media/paul_hom_competitor_analysis.png', width: 1075, height: 764, alt: 'Competitor analysis matrix comparing Imani Clinic, Stanford Medicine, Bayanihan Clinic, and Shifa Community Clinic on testimonials, content chunking, consistent color palette, and cohesive typography. Bayanihan Clinic is the only one with cohesive typography; no clinic meets all four.' }] },
         { type: 'keyInsight', text: 'The site’s problems weren’t cosmetic. For an elderly visitor, small text and confusing navigation can be the difference between finding care and giving up, which is the gap I focused on closing.' }
       ]
     },
@@ -75,11 +82,11 @@ window.CASE_STUDY = {
 
         { type: 'headline', text: 'High-fidelity design' },
         {
-          type: 'bullets', label: 'With the design system in place, I strengthened readability and hierarchy:',
+          type: 'cards', label: 'With the design system in place, I strengthened readability and hierarchy:',
           items: [
-            'Larger, high-contrast typography for elderly users',
-            'Consistent spacing for a clearer information flow',
-            'A responsive card structure that adapts across desktop and mobile'
+            { label: '01', title: 'Typography', text: 'Larger, high-contrast type for elderly users' },
+            { label: '02', title: 'Spacing', text: 'Consistent spacing for a clearer information flow' },
+            { label: '03', title: 'Responsive cards', text: 'A card structure that adapts across desktop and mobile' }
           ]
         }
       ]
@@ -96,7 +103,9 @@ window.CASE_STUDY = {
             { title: 'Typography', text: 'A slightly curved sans-serif for an approachable, elegant feel' },
             { title: 'Components', text: 'Card layouts, buttons, spacing rules, and iconography optimized for readability and accessibility' }
           ]
-        }
+        },
+        { type: 'figures', items: [{ src: 'media/paul_hom_colors_type.png', width: 1920, height: 1080, alt: 'Colors and typeface: base colors of charcoal, deep red, gold, beige, and cream, with Be Vietnam type styles for mobile and desktop plus Malayalam MN title headers and Jost body text' }] },
+        { type: 'figures', items: [{ src: 'media/paul_hom_design_system.png', width: 1920, height: 1080, alt: 'Design system components: desktop and mobile header and footer, language dropdowns, mobile navigation menu, image card, icons, Sign Up and Details buttons, and an expanded info card' }] }
       ]
     },
     {

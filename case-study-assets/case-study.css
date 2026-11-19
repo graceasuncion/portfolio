@@ -24,6 +24,9 @@
 html{background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);-webkit-text-size-adjust:100%}
 img,video{max-width:100%;display:block}
+/* Hide the browser's big centered play button that flashes before autoplay starts */
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 #cs-main a{color:var(--fg)}
 #cs-main a:hover{color:var(--hover)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
@@ -105,7 +108,7 @@ img,video{max-width:100%;display:block}
 .cs-num{flex:0 0 72px;font-size:36px;font-weight:700;line-height:1;color:var(--accent)}
 .cs-section-body{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:20px}
 .cs-section-body.is-wide{gap:24px}
-.cs-h2{margin:0;font-size:18px;font-weight:700;letter-spacing:.08em;line-height:1.5;text-transform:uppercase}
+.cs-h2{margin:0;font-size:13px;font-weight:700;letter-spacing:.14em;line-height:1.5;text-transform:uppercase}
 .cs-guide{align-self:flex-start;padding:6px 12px;border:1px dashed var(--accent);border-radius:6px;font-size:10px;letter-spacing:.14em;line-height:1.5;color:var(--muted2)}
 .cs-h3{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:34px;line-height:1.15}
 .cs-text{margin:0;font-family:var(--serif);font-size:21px;line-height:1.55;color:var(--body)}
